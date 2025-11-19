@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+
+.roboto_condensed {
+  font-family: "Roboto Condensed", sans-serif;
+  font-optical-sizing: auto;
+
+  font-style: normal;
+}
+
+.montserrat {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+
+  font-style: normal;
+}
+
+.raleway {
+  font-family: "Raleway", sans-serif;
+  font-optical-sizing: auto;
+
+  font-style: normal;
+}
+
+.playfair-display {
+  font-family: "Playfair Display", serif;
+  font-optical-sizing: auto;
+
+  font-style: normal;
+}
