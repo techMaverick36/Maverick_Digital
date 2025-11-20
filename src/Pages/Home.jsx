@@ -33,17 +33,73 @@ import Hero from "../components/Hero";
 import Services from "../components/Services";
 import Footer from "../components/Footer";
 import { testimonials } from "../utils/constants";
+import emailjs from "@emailjs/browser";
+
+const service_id = import.meta.env.VITE_SERVICE_ID;
+const template_id = import.meta.env.VITE_TEMPLATE_ID;
+const public_key = import.meta.env.VITE_PUBLIC_KEY;
 
 export default function AgencyWebsite() {
 	const [activeTestimonial, setActiveTestimonial] = useState(0);
+	const [formData, setFormData] = useState({
+		fullname: "",
+		email: "",
+		phone: "",
+		service: "",
+		budget: "",
+		details: "",
+	});
 
-	useEffect(() => {
-		const handleScroll = () => {
-			setScrolled(window.scrollY > 50);
+	const onChange = (e) => {
+		const { name, value } = e.target;
+		setFormData((prev) => ({ ...prev, [name]: value }));
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		const { fullname, email, phone, service, budget, details } = formData;
+
+		// basic required-field validation
+		if (!fullname?.trim() || !email?.trim() || !details?.trim()) {
+			alert("Please fill in Full Name, Email and Project Details.");
+			return;
+		}
+
+		console.log("Form submitted:", formData);
+		alert(
+			"Thank you for your inquiry! Our team will get back to you within 24 hours."
+		);
+
+		// prepare template parameters for EmailJS
+		const templateParams = {
+			fullname,
+			email,
+			phone,
+			service,
+			budget,
+			details,
 		};
-		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
-	}, []);
+
+		// send using emailjs.send with template params, then reset form on success
+		emailjs.send(service_id, template_id, templateParams, public_key).then(
+			(response) => {
+				console.log("SUCCESS!", response.status);
+				// reset form to sensible defaults after successful send
+				setFormData({
+					fullname: "",
+					email: "",
+					phone: "",
+					service: "Web Design & Development",
+					budget: "Under $500",
+					details: "",
+				});
+			},
+			(error) => {
+				console.log("FAILED...", error);
+				alert("Failed to send message. Please try again later.");
+			}
+		);
+	};
 
 	useEffect(() => {
 		const interval = setInterval(() => {
@@ -56,14 +112,10 @@ export default function AgencyWebsite() {
 		<div className="bg-white text-gray-900 min-h-screen montserrat">
 			{/* Navigation */}
 			<Navbar />
-
 			{/* Hero Section */}
-
 			<Hero />
-
 			{/* Services Section */}
 			<Services />
-
 			<style>
 				{`
 @keyframes float {
@@ -73,7 +125,6 @@ export default function AgencyWebsite() {
 }
 `}
 			</style>
-
 			{/* Why Choose Us */}
 			<section
 				id="about"
@@ -209,7 +260,6 @@ export default function AgencyWebsite() {
 					</div>
 				</div>
 			</section>
-
 			{/* Process Section */}
 			<section id="process" className="py-24 px-6 bg-white">
 				<div className="max-w-7xl mx-auto">
@@ -286,7 +336,6 @@ export default function AgencyWebsite() {
 					</div>
 				</div>
 			</section>
-
 			{/* CTA Section */}
 			<section className="py-24 px-6 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 text-white">
 				<div className="max-w-4xl mx-auto text-center">
@@ -306,7 +355,6 @@ export default function AgencyWebsite() {
 					</a>
 				</div>
 			</section>
-
 			{/* Contact Section */}
 			<section id="contact" className="py-24 px-6 bg-white">
 				<div className="max-w-7xl mx-auto">
@@ -388,7 +436,6 @@ export default function AgencyWebsite() {
 									{/* Glow backdrop */}
 									<div className="  inset-0 bg-blue-600/30 blur-3xl rounded-3xl opacity-70 group-hover:opacity-90 transition-all"></div>
 
-									{/* Main Image */}
 									<img
 										src="./person5.png"
 										alt="portrait"
@@ -399,7 +446,7 @@ export default function AgencyWebsite() {
 						</div>
 
 						<div className="lg:col-span-3 bg-gradient-to-br from-gray-50 to-blue-50 border-2 border-gray-200 rounded-2xl p-8 shadow-xl">
-							<form className="space-y-6">
+							<form className="space-y-6" onSubmit={handleSubmit}>
 								<div className="grid md:grid-cols-2 gap-6">
 									<div>
 										<label className="block text-sm font-bold mb-2 text-gray-900">
@@ -407,8 +454,11 @@ export default function AgencyWebsite() {
 										</label>
 										<input
 											type="text"
+											name="fullname"
 											className="w-full bg-white border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-blue-600 focus:outline-none transition text-gray-900"
 											placeholder="John Doe"
+											value={formData?.fullname || ""}
+											onChange={onChange}
 										/>
 									</div>
 									<div>
@@ -417,8 +467,11 @@ export default function AgencyWebsite() {
 										</label>
 										<input
 											type="email"
+											name="email"
 											className="w-full bg-white border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-blue-600 focus:outline-none transition text-gray-900"
 											placeholder="john@company.com"
+											value={formData?.email || ""}
+											onChange={onChange}
 										/>
 									</div>
 								</div>
@@ -430,15 +483,24 @@ export default function AgencyWebsite() {
 										</label>
 										<input
 											type="tel"
+											name="phone"
 											className="w-full bg-white border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-blue-600 focus:outline-none transition text-gray-900"
 											placeholder="+256 XXX XXX XXX"
+											value={formData?.phone || ""}
+											onChange={onChange}
 										/>
 									</div>
 									<div>
 										<label className="block text-sm font-bold mb-2 text-gray-900">
 											Service Required *
 										</label>
-										<select className="w-full bg-white border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-blue-600 focus:outline-none transition text-gray-900">
+										<select
+											name="service"
+											className="w-full bg-white border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-blue-600 focus:outline-none transition text-gray-900"
+											value={formData?.service || "--- select ---"}
+											onChange={onChange}
+										>
+											<option>--- select ---</option>
 											<option>Web Design & Development</option>
 											<option>IT & Tech Solutions</option>
 											<option>Social Media Management</option>
@@ -453,12 +515,18 @@ export default function AgencyWebsite() {
 									<label className="block text-sm font-bold mb-2 text-gray-900">
 										Project Budget
 									</label>
-									<select className="w-full bg-white border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-blue-600 focus:outline-none transition text-gray-900">
-										<option>Under $5,000</option>
-										<option>$5,000 - $10,000</option>
-										<option>$10,000 - $25,000</option>
-										<option>$25,000 - $50,000</option>
-										<option>$50,000+</option>
+									<select
+										name="budget"
+										className="w-full bg-white border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-blue-600 focus:outline-none transition text-gray-900"
+										value={formData?.budget || "--- select ---"}
+										onChange={onChange}
+									>
+										<option>--- select ---</option>
+										<option>Under UGX 300,000</option>
+										<option>UGX 300,000 - 800,000</option>
+										<option>UGX 800,000 - 2,000,000</option>
+										<option>UGX 2,000,000 - 5,000,000</option>
+										<option>UGX 5,000,000+</option>
 									</select>
 								</div>
 
@@ -467,21 +535,18 @@ export default function AgencyWebsite() {
 										Project Details *
 									</label>
 									<textarea
+										name="details"
 										rows="5"
 										className="w-full bg-white border-2 border-gray-200 rounded-lg px-4 py-3 focus:border-blue-600 focus:outline-none transition text-gray-900"
 										placeholder="Tell us about your project, goals, and timeline..."
+										value={formData?.details || ""}
+										onChange={onChange}
 									></textarea>
 								</div>
 
 								<button
-									type="button"
-									onClick={(e) => {
-										e.preventDefault();
-										alert(
-											"Thank you for your inquiry! Our team will get back to you within 24 hours."
-										);
-									}}
-									className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold hover:shadow-2xl hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2 group"
+									type="submit"
+									className="w-full bg-linear-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold hover:shadow-2xl hover:shadow-blue-500/30 transition-all flex items-center justify-center gap-2 group"
 								>
 									Send Message
 									<FiArrowRight className="group-hover:translate-x-1 transition-transform" />
@@ -491,7 +556,6 @@ export default function AgencyWebsite() {
 					</div>
 				</div>
 			</section>
-
 			{/* Footer */}
 			<Footer />
 		</div>
