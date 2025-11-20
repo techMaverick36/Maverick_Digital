@@ -99,25 +99,32 @@ export const stats = [
 
 export const testimonials = [
 	{
-		name: "Sarah Mitchell",
-		role: "CEO, TechVenture Inc",
+		name: "Aine Joram Jones",
+		role: "CEO, Jope Forwarders",
 		content:
 			"Maverick Digital Hub transformed our digital presence completely. Their technical expertise and design sensibility are unmatched.",
-		avatar: "SM",
+		avatar: "AJ",
 	},
 	{
-		name: "David Chen",
-		role: "Founder, InnovateLabs",
+		name: "Aine Joram Jones",
+		role: "MD, Kainiu Investments Limited",
 		content:
 			"The team's ability to understand complex business requirements and translate them into elegant solutions is impressive.",
 		avatar: "DC",
 	},
 	{
-		name: "Emily Rodriguez",
-		role: "Marketing Director, GrowthCo",
+		name: "Byoreko",
+		role: "Byoreko Holding Limited",
 		content:
 			"Working with Maverick was a game-changer. They delivered beyond expectations and continue to support our growth.",
-		avatar: "ER",
+		avatar: "B",
+	},
+	{
+		name: "Akandwanaho Ceaser",
+		role: "CEO, Azalea cleaning and Property Management",
+		content:
+			"Working with Maverick was a game-changer. They delivered beyond expectations and continue to support our growth.",
+		avatar: "B",
 	},
 ];
 
