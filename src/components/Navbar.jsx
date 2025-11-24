@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiMenu } from "react-icons/fi";
+import { Link, Links } from "react-router-dom";
 
 const Navbar = () => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -49,12 +50,12 @@ const Navbar = () => {
 						>
 							Process
 						</a>
-						<a
-							href="#portfolio"
+						<Link
+							to="/portfolio"
 							className="text-gray-700 hover:text-blue-600 transition font-medium"
 						>
 							Portfolio
-						</a>
+						</Link>
 						<a
 							href="#contact"
 							className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-lg hover:shadow-lg hover:shadow-blue-500/30 transition font-medium"

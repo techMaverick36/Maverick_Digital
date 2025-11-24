@@ -7,6 +7,7 @@ import {
 	FiUsers,
 	FiZap,
 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export const services = [
 	{
@@ -147,4 +148,71 @@ export const techStack = [
 	"AWS",
 	"Docker",
 	"GraphQL",
+];
+
+export const projects = [
+	{
+		id: 1,
+		title: "Kainiu Investments Limited",
+		category: "web",
+		tags: ["Web Design", "Development", "UI/UX"],
+		description:
+			"A website redesign and development project for a sales company dealing in motorcycle and tricycle assembling.",
+		image: "./kainiu.png",
+		color: "from-red-500 to-white-500",
+		stats: {
+			duration: "3 months",
+			tech: "React, Node.js",
+			impact: "+250% Sales",
+		},
+		link: "https://www.kainiuinvestmentsltd.com/",
+	},
+	{
+		id: 2,
+		title: "JOPE Forwarders Limited",
+		category: "web",
+		tags: ["Web Design", "Development", "UI/UX"],
+		description:
+			"A clearing and forwarding company website showcasing their services and client testimonials.",
+		image: "./jope.png",
+		color: "from-blue-500 to-white-500",
+		stats: {
+			duration: "2 months",
+			tech: "Figma, React, Tailwindcss",
+			impact: "10k+ Users",
+		},
+		link: "https://jopeforwarders.com/",
+	},
+	{
+		id: 3,
+		title: "Azalea Cleaning & Property Management",
+		category: "web",
+		tags: ["Web Design", "Development", "UI/UX"],
+		description:
+			"Complete brand identity and website for a cleaning and property management company.",
+		image: "./azalea.png",
+		color: "from-white-500 to-blue-500",
+		stats: {
+			duration: "1 month",
+			deliverables: "Logo, Guidelines",
+			impact: "Award Winner",
+		},
+		link: "https://azalea-flame.vercel.app/",
+	},
+	{
+		id: 4,
+		title: "Byoreko Holdings Limited",
+		category: "web",
+		tags: ["Web Design", "UI/UX"],
+		description:
+			"Kainiu Esteemed dealer website for motorcycle and tricycle sales and services.",
+		image: "./byoreko.png",
+		color: "from-amber-500 to-blue-500",
+		stats: {
+			duration: "4 months",
+			tech: "Vue.js, D3.js",
+			impact: "95% User Satisfaction",
+		},
+		link: "https://byoreko.com/",
+	},
 ];
