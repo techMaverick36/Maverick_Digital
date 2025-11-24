@@ -26,6 +26,7 @@ import {
 import {
 	AiOutlineInstagram,
 	AiOutlineLinkedin,
+	AiOutlineTikTok,
 	AiOutlineTwitter,
 } from "react-icons/ai";
 import Navbar from "../components/Navbar";
@@ -422,7 +423,7 @@ export default function AgencyWebsite() {
 									href="#"
 									className="bg-gray-100 p-4 rounded-xl hover:bg-blue-600 hover:text-white transition-all group"
 								>
-									<AiOutlineTwitter className="w-6 h-6" />
+									<AiOutlineTikTok className="w-6 h-6" />
 								</a>
 								<a
 									href="#"
