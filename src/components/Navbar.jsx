@@ -26,12 +26,21 @@ const Navbar = () => {
 						<div className="w-10 h-10 bg-linear-to-br from-blue-600 via-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
 							<span className="text-white font-bold text-xl">M</span>
 						</div>
-						<span className="text-2xl font-bold tracking-tight robot_condensed">
+						<Link
+							to={"/"}
+							className="text-2xl font-bold tracking-tight robot_condensed"
+						>
 							Maverick Digital Hub
-						</span>
+						</Link>
 					</div>
 
 					<div className="hidden lg:flex items-center space-x-8">
+						<Link
+							to={"/"}
+							className="text-gray-700 hover:text-blue-600 transition font-medium"
+						>
+							Home
+						</Link>
 						<a
 							href="#services"
 							className="text-gray-700 hover:text-blue-600 transition font-medium"
