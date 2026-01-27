@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FiMenu } from "react-icons/fi";
+import { FiMenu, FiX } from "react-icons/fi";
 import { Link, Links } from "react-router-dom";
 
 const Navbar = () => {
