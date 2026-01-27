@@ -1,6 +1,7 @@
 import React from "react";
 import { stats, techStack } from "../utils/constants";
 import { FiArrowRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
 	return (
@@ -72,12 +73,12 @@ const Hero = () => {
 							<FiArrowRight className="group-hover:translate-x-1 transition-transform" />
 						</a>
 
-						<a
-							href="#portfolio"
+						<Link
+							to="/portfolio"
 							className="border-2 border-slate-300 bg-white px-8 py-4 rounded-lg font-semibold hover:border-blue-700 hover:text-blue-700 transition-all text-slate-700"
 						>
 							View Our Work
-						</a>
+						</Link>
 					</div>
 				</div>
 
