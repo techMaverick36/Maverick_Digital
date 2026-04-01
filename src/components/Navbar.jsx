@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { FiMenu, FiX } from "react-icons/fi";
-import { Link, Links } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ lightBg = false }) => {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const location = useLocation();
+	const isHome = location.pathname === "/";
+
+	const navItems = [
+		{ label: "Home", href: "/", type: "link" },
+		{ label: "Services", href: isHome ? "#services" : "/#services", type: "anchor" },
+		{ label: "About", href: isHome ? "#about" : "/#about", type: "anchor" },
+		{ label: "Process", href: isHome ? "#process" : "/#process", type: "anchor" },
+		{ label: "Portfolio", href: "/portfolio", type: "link" },
+	];
+
+	const useDarkText = scrolled || lightBg;
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -16,108 +27,97 @@ const Navbar = () => {
 
 	return (
 		<nav
-			className={`fixed w-full z-50 transition-all duration-300 ${
-				scrolled ? "bg-white/98 backdrop-blur-xl shadow-md" : "bg-transparent"
-			}`}
+			className={`fixed w-full z-50 transition-all duration-300 backdrop-blur-xl ${scrolled ? "shadow-lg" : "bg-transparent"}`}
+			style={
+				scrolled
+					? {
+							background: "rgba(22, 26, 32, 0.94)",
+							borderBottom: "1px solid rgba(69, 105, 168, 0.18)",
+						}
+					: { borderBottom: "1px solid rgba(69, 105, 168, 0.08)" }
+			}
 		>
 			<div className="max-w-7xl mx-auto px-6 py-5">
 				<div className="flex items-center justify-between">
 					<div className="flex items-center gap-3">
-						<div className="w-10 h-10 bg-linear-to-br from-blue-600 via-purple-600 to-pink-600 rounded-lg flex items-center justify-center">
-							<span className="text-white font-bold text-xl">M</span>
+						<div className="w-10 h-10 rounded-lg flex items-center justify-center border border-[var(--border-strong)] bg-[rgba(33,74,132,0.18)]">
+							<span className="text-white font-semibold text-base">M</span>
 						</div>
 						<Link
 							to={"/"}
-							className="text-2xl font-bold tracking-tight robot_condensed"
+							className={`text-xl md:text-2xl font-semibold tracking-tight roboto_condensed ${useDarkText ? "text-white" : "text-white"}`}
 						>
 							Maverick Digital Hub
 						</Link>
 					</div>
 
 					<div className="hidden lg:flex items-center space-x-8">
-						<Link
-							to={"/"}
-							className="text-gray-700 hover:text-blue-600 transition font-medium"
-						>
-							Home
-						</Link>
+						{navItems.map((item) =>
+							item.type === "link" ? (
+								<Link
+									key={item.label}
+									to={item.href}
+									className="transition font-medium text-slate-300 hover:text-white"
+								>
+									{item.label}
+								</Link>
+							) : (
+								<a
+									key={item.label}
+									href={item.href}
+									className="transition font-medium text-slate-300 hover:text-white"
+								>
+									{item.label}
+								</a>
+							),
+						)}
 						<a
-							href="#services"
-							className="text-gray-700 hover:text-blue-600 transition font-medium"
+							href={isHome ? "#contact" : "/#contact"}
+							className="accent-button px-6 py-2.5 rounded-lg transition font-medium shadow-md shadow-blue-950/30"
 						>
-							Services
-						</a>
-						<a
-							href="#about"
-							className="text-gray-700 hover:text-blue-600 transition font-medium"
-						>
-							About
-						</a>
-						<a
-							href="#process"
-							className="text-gray-700 hover:text-blue-600 transition font-medium"
-						>
-							Process
-						</a>
-						<Link
-							to="/portfolio"
-							className="text-gray-700 hover:text-blue-600 transition font-medium"
-						>
-							Portfolio
-						</Link>
-						<a
-							href="#contact"
-							className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-lg hover:shadow-lg hover:shadow-blue-500/30 transition font-medium"
-						>
-							Get Started
+							Start a Project
 						</a>
 					</div>
 
 					<button
 						onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-						className="lg:hidden text-gray-900"
+						className="lg:hidden text-white transition-colors duration-300 text-sm font-semibold tracking-[0.18em] uppercase"
 					>
-						{mobileMenuOpen ? (
-							<FiX className="w-6 h-6" />
-						) : (
-							<FiMenu className="w-6 h-6" />
-						)}
+						{mobileMenuOpen ? "Close" : "Menu"}
 					</button>
 				</div>
 			</div>
 
 			{mobileMenuOpen && (
-				<div className="lg:hidden bg-white border-t border-gray-200 shadow-xl">
+				<div className="lg:hidden bg-[var(--bg-elevated)] border-t border-[var(--border-soft)] shadow-xl">
 					<div className="px-6 py-6 space-y-4">
+						{navItems.map((item) =>
+							item.type === "link" ? (
+								<Link
+									key={item.label}
+									to={item.href}
+									className="block text-slate-300 hover:text-white transition font-medium"
+									onClick={() => setMobileMenuOpen(false)}
+								>
+									{item.label}
+								</Link>
+							) : (
+								<a
+									key={item.label}
+									href={item.href}
+									className="block text-slate-300 hover:text-white transition font-medium"
+									onClick={() => setMobileMenuOpen(false)}
+								>
+									{item.label}
+								</a>
+							),
+						)}
 						<a
-							href="#services"
-							className="block text-gray-700 hover:text-blue-600 transition font-medium"
+							href={isHome ? "#contact" : "/#contact"}
+							className="block accent-button px-6 py-3 rounded-lg text-center font-medium"
+							onClick={() => setMobileMenuOpen(false)}
 						>
-							Services
-						</a>
-						<a
-							href="#about"
-							className="block text-gray-700 hover:text-blue-600 transition font-medium"
-						>
-							About
-						</a>
-						<a
-							href="#process"
-							className="block text-gray-700 hover:text-blue-600 transition font-medium"
-						>
-							Process
-						</a>
-						<a
-							href="#portfolio"
-							className="block text-gray-700 hover:text-blue-600 transition font-medium"
-						>
-							Portfolio
-						</a>
-						<a
-							href="#contact"
-							className="block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg text-center font-medium"
-						>
-							Get Started
+							Start a Project
 						</a>
 					</div>
 				</div>

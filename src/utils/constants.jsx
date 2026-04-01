@@ -1,101 +1,76 @@
-import { BsCpu, BsGraphUp, BsPalette, BsRocket } from "react-icons/bs";
-import {
-	FiCode,
-	FiLayout,
-	FiTarget,
-	FiTrendingUp,
-	FiUsers,
-	FiZap,
-} from "react-icons/fi";
-import { Link } from "react-router-dom";
-
 export const services = [
 	{
-		icon: <FiCode className="w-7 h-7" />,
+		eyebrow: "Web Delivery",
 		title: "Web Design & Development",
 		description:
-			"Custom, high-performance websites built with modern frameworks like React, Vue, and Next.js.",
+			"We build websites and web applications that help your business look professional, feel easy to trust, and perform well day to day.",
 		features: [
-			"Full-Stack Development",
-			"Responsive Design",
-			"API Integration",
-			"Performance Optimization",
+			"Corporate websites",
+			"Responsive design",
+			"CMS and content updates",
+			"Performance optimisation",
 		],
-		color: "blue",
 	},
 	{
-		icon: <BsCpu className="w-7 h-7" />,
+		eyebrow: "Technical Support",
 		title: "Business IT & Tech Solutions",
 		description:
-			"Enterprise-grade IT infrastructure, cloud solutions, and digital transformation consulting.",
+			"We help you put the right systems in place so your team can work more smoothly and depend on tools that actually support the business.",
 		features: [
-			"Cloud Migration",
-			"System Architecture",
-			"DevOps & CI/CD",
-			"Tech Consulting",
+			"Process review",
+			"System setup",
+			"Operations support",
+			"Technical advisory",
 		],
-		color: "purple",
 	},
 	{
-		icon: <FiTrendingUp className="w-7 h-7" />,
+		eyebrow: "Marketing Operations",
 		title: "Social Media Management",
 		description:
-			"Data-driven social strategies that build brand authority and drive measurable engagement.",
+			"We help your brand stay active, consistent, and well presented so your audience keeps seeing the right message in the right way.",
 		features: [
-			"Content Strategy",
-			"Analytics & Insights",
-			"Paid Campaigns",
-			"Community Growth",
+			"Editorial planning",
+			"Account management",
+			"Campaign coordination",
+			"Performance reporting",
 		],
-		color: "pink",
 	},
 	{
-		icon: <BsPalette className="w-7 h-7" />,
+		eyebrow: "Brand Foundation",
 		title: "Branding & Identity Design",
 		description:
-			"Strategic brand development that creates lasting impressions and competitive differentiation.",
+			"We create brand systems that make your business easier to recognise, easier to remember, and more confident in every interaction.",
 		features: [
-			"Brand Strategy",
-			"Logo & Identity",
-			"Brand Guidelines",
-			"Marketing Collateral",
+			"Identity direction",
+			"Visual standards",
+			"Collateral design",
+			"Brand consistency",
 		],
-		color: "indigo",
 	},
 	{
-		icon: <FiLayout className="w-7 h-7" />,
+		eyebrow: "Product Experience",
 		title: "UI/UX Design",
 		description:
-			"User-centered design that combines aesthetics with functionality for optimal experiences.",
+			"We design interfaces that feel clear, smooth, and easy to use, so people enjoy the experience and trust the product faster.",
 		features: [
-			"User Research",
-			"Wireframing & Prototyping",
-			"Usability Testing",
-			"Design Systems",
+			"Journey mapping",
+			"Wireframes",
+			"Interface systems",
+			"Usability refinement",
 		],
-		color: "cyan",
 	},
 	{
-		icon: <BsGraphUp className="w-7 h-7" />,
+		eyebrow: "Decision Support",
 		title: "Data Analysis Services",
 		description:
-			"Professional data insights through statistical analysis, reporting, and decision-support analytics.",
+			"We turn raw data into clear insight, so you can make smarter decisions with more confidence and less guesswork.",
 		features: [
-			"Frequency Analysis",
-			"Rank Analysis",
-			"Pivot Tables",
-			"Regression Analysis",
-			"Descriptive Statistics",
+			"Data cleaning",
+			"Dashboards and reports",
+			"Trend analysis",
+			"Presentation-ready outputs",
 		],
-		color: "emerald",
 	},
-];
-
-export const stats = [
-	{ number: "5+", label: "Projects Delivered", icon: <FiTarget /> },
-	{ number: "98%", label: "Client Satisfaction", icon: <FiUsers /> },
-	{ number: "24/7", label: "Support Available", icon: <FiZap /> },
-	{ number: "3+", label: "Years Experience", icon: <BsRocket /> },
 ];
 
 export const testimonials = [
@@ -103,29 +78,29 @@ export const testimonials = [
 		name: "Aine Joram Jones",
 		role: "CEO, Jope Forwarders",
 		content:
-			"Maverick Digital Hub transformed our digital presence completely. Their technical expertise and design sensibility are unmatched.",
+			"Maverick Digital Hub helped us present the business much better online. The process felt smooth, professional, and easy to trust.",
 		avatar: "AJ",
 	},
 	{
 		name: "Aine Joram Jones",
 		role: "MD, Kainiu Investments Limited",
 		content:
-			"The team's ability to understand complex business requirements and translate them into elegant solutions is impressive.",
+			"They understood what the business needed, communicated well, and delivered something that felt right for where we wanted to go.",
 		avatar: "DC",
 	},
 	{
 		name: "Byoreko",
 		role: "Byoreko Holding Limited",
 		content:
-			"Working with Maverick was a game-changer. They delivered beyond expectations and continue to support our growth.",
+			"The final result felt polished and reliable, and the support throughout the project made the whole experience much easier.",
 		avatar: "B",
 	},
 	{
 		name: "Akandwanaho Ceaser",
-		role: "CEO, Azalea cleaning and Property Management",
+		role: "CEO, Azalea Cleaning and Property Management",
 		content:
-			"Working with Maverick was a game-changer. They delivered beyond expectations and continue to support our growth.",
-		avatar: "B",
+			"Our site now reflects the business far better. The team stayed responsive and kept everything clear from start to finish.",
+		avatar: "AC",
 	},
 ];
 
@@ -157,9 +132,9 @@ export const projects = [
 		category: "web",
 		tags: ["Web Design", "Development", "UI/UX"],
 		description:
-			"A website redesign and development project for a sales company dealing in motorcycle and tricycle assembling.",
+			"A redesign and development project for a sales company that needed a clearer, stronger online presence.",
 		image: "./kainiu.png",
-		color: "from-red-500 to-white-500",
+		color: "from-[#1c4d87] to-[#162233]",
 		stats: {
 			duration: "3 months",
 			tech: "React, Node.js",
@@ -173,9 +148,9 @@ export const projects = [
 		category: "web",
 		tags: ["Web Design", "Development", "UI/UX"],
 		description:
-			"A clearing and forwarding company website showcasing their services and client testimonials.",
+			"A company website built to present services clearly and help potential clients trust the business faster.",
 		image: "./jope.png",
-		color: "from-blue-500 to-white-500",
+		color: "from-[#234f8f] to-[#182535]",
 		stats: {
 			duration: "2 months",
 			tech: "Figma, React, Tailwindcss",
@@ -189,9 +164,9 @@ export const projects = [
 		category: "web",
 		tags: ["Web Design", "Development", "UI/UX"],
 		description:
-			"Complete brand identity and website for a cleaning and property management company.",
+			"A full brand and website project designed to give the business a more polished and credible presentation.",
 		image: "./azalea.png",
-		color: "from-white-500 to-blue-500",
+		color: "from-[#203d6b] to-[#151d28]",
 		stats: {
 			duration: "1 month",
 			deliverables: "Logo, Guidelines",
@@ -205,9 +180,9 @@ export const projects = [
 		category: "web",
 		tags: ["Web Design", "UI/UX"],
 		description:
-			"Kainiu Esteemed dealer website for motorcycle and tricycle sales and services.",
+			"A business website created to showcase products and services in a way that feels clear, confident, and trustworthy.",
 		image: "./byoreko.png",
-		color: "from-amber-500 to-blue-500",
+		color: "from-[#274f8d] to-[#1a2431]",
 		stats: {
 			duration: "4 months",
 			tech: "Vue.js, D3.js",

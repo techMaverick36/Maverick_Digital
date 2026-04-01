@@ -1,185 +1,123 @@
-import React from "react";
-import { stats, techStack } from "../utils/constants";
-import { FiArrowRight } from "react-icons/fi";
-import { Link } from "react-router-dom";
-
 const Hero = () => {
 	return (
-		<section className="relative pt-32 pb-24 px-6 overflow-hidden bg-gradient-to-br from-slate-100 via-slate-200 to-blue-100">
-			{/* Background Glow */}
-			<div className="absolute inset-0">
-				<div className="absolute top-16 left-10 w-[28rem] h-[28rem] bg-blue-700/10 rounded-full blur-3xl animate-pulse"></div>
+		<section className="relative overflow-hidden pt-36 pb-28 px-6">
+			{/* Background atmosphere */}
+			<div className="absolute inset-0 pointer-events-none">
+				<div className="glow-orb absolute top-[-4rem] left-[-6rem] h-[36rem] w-[36rem] rounded-full bg-[rgba(33,74,132,0.16)] blur-[80px]" />
 				<div
-					className="absolute bottom-16 right-10 w-[32rem] h-[32rem] bg-indigo-700/10 rounded-full blur-3xl animate-pulse"
-					style={{ animationDelay: "1s" }}
-				></div>
+					className="glow-orb absolute -bottom-32 -right-24 h-120 w-120 rounded-full bg-[rgba(33,74,132,0.13)] blur-[70px]"
+					style={{ animationDelay: "3s" }}
+				/>
+				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[20rem] w-[40rem] rounded-full bg-[rgba(27,67,119,0.07)] blur-[90px]" />
+				<div
+					className="absolute inset-0 opacity-[0.035]"
+					style={{
+						backgroundImage:
+							"linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+						backgroundSize: "64px 64px",
+					}}
+				/>
 			</div>
 
-			{/* Floating Portrait */}
+			<div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-[1.2fr_0.8fr] gap-12 items-center">
+				{/* Left column */}
+				<div className="space-y-8">
+					<span className="section-label animate-fade-up">
+						Digital Strategy, Design, and Delivery
+					</span>
 
-			{/* Tech Stack Floating Elements */}
-			<div className="absolute inset-0 overflow-hidden pointer-events-none">
-				{techStack.map((tech, index) => (
-					<div
-						key={index}
-						className="absolute opacity-[0.10] hover:opacity-25 transition-opacity duration-300"
-						style={{
-							left: `${10 + ((index * 5.5) % 90)}%`,
-							top: `${10 + ((index * 6) % 80)}%`,
-							animation: `float ${25 + (index % 8)}s ease-in-out infinite`,
-							animationDelay: `${index * 0.5}s`,
-						}}
-					>
-						<div className="bg-gradient-to-br from-blue-700 to-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold shadow-xl shadow-indigo-900/20 whitespace-nowrap">
-							{tech}
-						</div>
-					</div>
-				))}
-			</div>
-
-			{/* Hero Content */}
-			<div className="relative max-w-7xl mx-auto">
-				<div className="text-center max-w-4xl mx-auto">
-					<div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-blue-700 text-sm font-semibold mb-8 animate-fade-in">
-						<span className="w-2 h-2 bg-blue-600 rounded-full animate-pulse raleway"></span>
-						Enterprise-Grade Digital Solutions
+					<div className="space-y-5 animate-fade-up-1">
+						<h1 className="text-5xl md:text-6xl font-semibold leading-tight roboto_condensed text-balance">
+							Websites and digital branding that help your business look sharp,
+							feel trustworthy, and win more attention.
+						</h1>
+						<p className="max-w-2xl text-lg leading-8 text-(--text-secondary) text-balance">
+							At Maverick Digital Hub, we create websites, brand systems, and
+							digital experiences that make it easier for people to trust what
+							you do and choose your business with confidence.
+						</p>
 					</div>
 
-					<h1 className="text-5xl md:text-8xl font-bold mb-8 leading-tight text-slate-900 animate-fade-in-up roboto_condensed">
-						Building the Future of
-						<span className="block bg-gradient-to-r from-blue-700 via-indigo-700 to-purple-700 bg-clip-text text-transparent">
-							Digital Excellence
-						</span>
-					</h1>
-
-					<p
-						className="text-xl md:text-2xl text-slate-600 mb-12 leading-relaxed animate-fade-in-up"
-						style={{ animationDelay: "0.2s" }}
-					>
-						We partner with forward-thinking organizations to craft world-class
-						digital products, combining strategy, design, engineering, and
-						data-driven execution.
-					</p>
-
-					<div
-						className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
-						style={{ animationDelay: "0.4s" }}
-					>
+					<div className="flex flex-col sm:flex-row gap-4 animate-fade-up-2">
 						<a
 							href="#contact"
-							className="group bg-gradient-to-r from-blue-700 to-indigo-700 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl hover:shadow-blue-700/30 transition-all flex items-center justify-center gap-2"
+							className="accent-button rounded-lg px-7 py-3.5 font-semibold transition text-center"
 						>
-							Start Your Project
-							<FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+							Start a Project
 						</a>
-
-						<Link
-							to="/portfolio"
-							className="border-2 border-slate-300 bg-white px-8 py-4 rounded-lg font-semibold hover:border-blue-700 hover:text-blue-700 transition-all text-slate-700"
+						<a
+							href="#services"
+							className="secondary-button rounded-lg px-7 py-3.5 font-semibold transition text-center"
 						>
-							View Our Work
-						</Link>
+							Review Services
+						</a>
+					</div>
+
+					<div className="grid sm:grid-cols-3 gap-4 pt-3 animate-fade-up-3">
+						{[
+							{ value: "Websites", label: "Designed to present your business clearly and professionally" },
+							{ value: "Branding", label: "Built to make your business look consistent and memorable" },
+							{ value: "Campaigns", label: "Planned to attract attention and turn interest into action" },
+						].map((item) => (
+							<div key={item.value} className="surface-panel rounded-2xl p-5 card-glow">
+								<div className="text-sm uppercase tracking-[0.18em] text-(--text-muted)">
+									{item.value}
+								</div>
+								<p className="mt-3 text-sm leading-6 text-(--text-secondary)">
+									{item.label}
+								</p>
+							</div>
+						))}
 					</div>
 				</div>
 
-				{/* Stats */}
-				<div
-					className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 animate-fade-in-up"
-					style={{ animationDelay: "0.6s" }}
-				>
-					{stats.map((stat, index) => (
-						<div
-							key={index}
-							className="bg-white/80 backdrop-blur-sm border border-slate-200 rounded-xl p-6 text-center hover:shadow-lg transition-shadow"
-						>
-							<div className="flex justify-center mb-3 text-blue-700">
-								{React.cloneElement(stat.icon, { className: "w-8 h-8" })}
+				{/* Right column */}
+				<div className="relative animate-fade-up-2">
+					<div className="absolute inset-6 rounded-[2rem] bg-[rgba(33,74,132,0.16)] blur-[50px]" />
+					<div className="surface-panel relative overflow-hidden rounded-[2rem] p-4">
+						<div className="overflow-hidden rounded-[1.5rem] border border-(--border-soft)">
+							<img
+								src="/martin.jpeg"
+								alt="Maverick Digital Hub team lead"
+								className="h-[32rem] w-full object-cover object-top"
+								style={{ filter: "brightness(0.82) saturate(0.9)" }}
+							/>
+						</div>
+						<div className="mt-4 grid sm:grid-cols-2 gap-4">
+							<div className="rounded-2xl bg-[rgba(255,255,255,0.025)] border border-(--border-soft) p-5 transition-all duration-300 hover:border-(--border-strong) hover:bg-[rgba(255,255,255,0.035)]">
+								<div className="text-[11px] uppercase tracking-[0.22em] text-(--text-muted)">
+									Founder
+								</div>
+								<div className="mt-3 text-base font-semibold text-white uppercase tracking-[0.14em] leading-snug">
+									MARTIN SSEMUGABI
+								</div>
+								<p className="mt-3 text-sm leading-6 text-(--text-secondary)">
+									I started Maverick Digital Hub to help businesses show up
+									better online and communicate their value with confidence.
+								</p>
 							</div>
-							<div className="text-4xl font-bold bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent mb-2">
-								{stat.number}
-							</div>
-							<div className="text-sm text-slate-600 font-medium">
-								{stat.label}
+							<div className="rounded-2xl bg-[rgba(255,255,255,0.025)] border border-(--border-soft) p-5 transition-all duration-300 hover:border-(--border-strong) hover:bg-[rgba(255,255,255,0.035)]">
+								<div className="text-[11px] uppercase tracking-[0.22em] text-(--text-muted)">
+									Approach
+								</div>
+								<div className="mt-3 text-base font-semibold text-white leading-snug">
+									Structured planning and clean execution
+								</div>
+								<p className="mt-3 text-sm leading-6 text-(--text-secondary)">
+									You can expect clear communication, thoughtful design
+									decisions, and support that continues after the launch.
+								</p>
 							</div>
 						</div>
-					))}
-				</div>
-				<div className="absolute -right-40 top-32 hidden md:block pointer-events-none">
-					<div className="relative w-[370px] h-[480px] hero-float group">
-						<div className="absolute inset-0 bg-blue-700/20 blur-3xl rounded-3xl opacity-60 group-hover:opacity-80 transition-all"></div>
-
-						<img
-							src="./person2.png"
-							alt="portrait"
-							className="relative w-full h-full object-cover rounded-3xl shadow-2xl shadow-blue-900/10 group-hover:shadow-blue-900/20 transition-transform duration-500"
-						/>
 					</div>
 				</div>
 			</div>
 
-			{/* Animations */}
-			<style jsx>{`
-				@keyframes float {
-					0%,
-					100% {
-						transform: translate(0, 0) rotate(0deg);
-					}
-					25% {
-						transform: translate(10px, -20px) rotate(2deg);
-					}
-					50% {
-						transform: translate(-10px, -40px) rotate(-2deg);
-					}
-					75% {
-						transform: translate(10px, -20px) rotate(1deg);
-					}
-				}
-
-				@keyframes heroFloat {
-					0%,
-					100% {
-						transform: translateY(0px);
-					}
-					50% {
-						transform: translateY(-18px);
-					}
-				}
-
-				.hero-float {
-					animation: heroFloat 6.5s ease-in-out infinite;
-					transition: transform 0.4s ease;
-				}
-
-				.hero-float:hover {
-					transform: translateY(-25px) scale(1.02);
-				}
-
-				@keyframes fade-in {
-					from {
-						opacity: 0;
-					}
-					to {
-						opacity: 1;
-					}
-				}
-				@keyframes fade-in-up {
-					from {
-						opacity: 0;
-						transform: translateY(30px);
-					}
-					to {
-						opacity: 1;
-						transform: translateY(0);
-					}
-				}
-
-				.animate-fade-in {
-					animation: fade-in 1s ease-out;
-				}
-				.animate-fade-in-up {
-					animation: fade-in-up 1s ease-out;
-				}
-			`}</style>
+			{/* Bottom section bleed */}
+			<div
+				className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+				style={{ background: "linear-gradient(to bottom, transparent, rgba(22, 26, 32, 0.6))" }}
+			/>
 		</section>
 	);
 };

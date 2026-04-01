@@ -1,99 +1,159 @@
-import React from "react";
-import { services } from "../utils/constants";
-import { FiCheck } from "react-icons/fi";
+import { useState } from "react";
+import { services, techStack } from "../utils/constants";
+
+const tabs = ["Services", "Technologies", "Industries"];
+
+const industries = [
+	"E-Commerce & Retail",
+	"Finance & Banking",
+	"Healthcare",
+	"Real Estate",
+	"Education & Training",
+	"Logistics & Forwarding",
+	"Hospitality & Tourism",
+	"Public Sector & NGOs",
+	"Manufacturing",
+];
+
+const cardGradients = [
+	"from-[#1b2430] to-[#151a21]",
+	"from-[#1d2734] to-[#171c23]",
+	"from-[#1c2330] to-[#161b21]",
+	"from-[#202938] to-[#161a20]",
+	"from-[#1a2230] to-[#151a1f]",
+	"from-[#1c2635] to-[#171c22]",
+];
 
 const Services = () => {
+	const [activeTab, setActiveTab] = useState("Services");
+
 	return (
-		<section
-			id="services"
-			className="relative py-28 px-6 bg-white overflow-hidden"
-		>
-			{/* Floating Cartoon */}
-			<div className="absolute left-10 bottom-80 hidden md:block pointer-events-none">
-				<div className="relative w-[380px] h-[500px] hero-float group animate-[float_6s_ease-in-out_infinite]">
-					{/* Glow backdrop */}
-					<div className="absolute  inset-0 bg-blue-600/30 blur-3xl rounded-3xl opacity-70 group-hover:opacity-90 transition-all"></div>
-
-					{/* Main Image */}
-					<img
-						src="./person4.png"
-						alt="portrait"
-						className="relative w-full object-cover rounded-3xl shadow-[0_20px_60px_rgba(0,60,255,0.15)] group-hover:shadow-[0_25px_80px_rgba(0,60,255,0.25)] transition-transform duration-700 group-hover:scale-[1.03]"
-					/>
-				</div>
-			</div>
-			<div className="absolute right-10 top-80 hidden md:block pointer-events-none">
-				<div className="relative w-[380px] h-[500px] hero-float group animate-[float_6s_ease-in-out_infinite]">
-					{/* Glow backdrop */}
-					<div className="absolute  inset-0 bg-blue-600/30 blur-3xl rounded-3xl opacity-70 group-hover:opacity-90 transition-all"></div>
-
-					{/* Main Image */}
-					<img
-						src="./person6.png"
-						alt="portrait"
-						className="relative w-full object-cover rounded-3xl shadow-[0_20px_60px_rgba(0,60,255,0.15)] group-hover:shadow-[0_25px_80px_rgba(0,60,255,0.25)] transition-transform duration-700 group-hover:scale-[1.03]"
-					/>
-				</div>
-			</div>
-
-			<div className="max-w-7xl mx-auto relative z-10">
-				{/* Section Header */}
-				<div className="text-center mb-20">
-					<div className="inline-block px-5 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4 shadow-sm raleway">
-						What We Offer
-					</div>
-					<h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 leading-tight roboto-condensed">
-						Comprehensive Digital Services
-					</h2>
-					<p className="text-xl text-gray-600 max-w-3xl mx-auto">
-						End-to-end solutions designed to accelerate your digital
-						transformation and drive measurable business growth.
-					</p>
-				</div>
-
-				{/* Services Grid */}
-				<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-					{services.map((service, index) => (
-						<div
-							key={index}
-							className="group bg-white border-2 border-gray-100 rounded-2xl p-8 hover:border-blue-500 hover:shadow-2xl shadow-sm transition-all duration-300 hover:-translate-y-3 backdrop-blur-sm"
-						>
-							<div
-								className={`bg-gradient-to-br from-${service.color}-500/10 to-${service.color}-600/10 w-16 h-16 rounded-xl flex items-center justify-center mb-6 text-${service.color}-600 group-hover:scale-110 transition-transform shadow-inner`}
-							>
-								{service.icon}
-							</div>
-
-							<h3 className="text-2xl font-bold mb-4 text-gray-900 raleway">
-								{service.title}
-							</h3>
-
-							<p className="text-gray-600 mb-6 leading-relaxed">
-								{service.description}
-							</p>
-
-							<ul className="space-y-3">
-								{service.features.map((feature, idx) => (
-									<li
-										key={idx}
-										className="flex items-center gap-3 text-sm text-gray-700"
-									>
-										<div
-											className={`w-6 h-6 rounded-full bg-${service.color}-100 flex items-center justify-center flex-shrink-0 shadow-sm`}
-										>
-											<FiCheck
-												className={`text-${service.color}-600 w-3.5 h-3.5`}
-											/>
-										</div>
-										{feature}
-									</li>
-								))}
-							</ul>
+		<>
+			<div className="section-divider" />
+			<section
+				id="services"
+				className="py-24 px-6"
+				style={{ background: "linear-gradient(160deg, #17202c 0%, #131820 100%)" }}
+			>
+				<div className="max-w-7xl mx-auto">
+					<div className="flex flex-col md:flex-row md:items-start gap-8 mb-12">
+						<div className="md:w-1/2">
+							<span className="section-label mb-5">Services</span>
+							<h2 className="text-4xl md:text-5xl font-semibold text-white leading-tight roboto_condensed text-balance mt-5">
+								Services that help your business look better, work better, and
+								reach more people.
+							</h2>
 						</div>
-					))}
+						<div className="md:w-1/2 flex items-center">
+							<div className="border-l-2 border-(--border-strong) pl-5">
+								<p className="text-(--text-secondary) text-base leading-relaxed">
+									Whether you need a stronger website, clearer branding, or
+									better digital support, we focus on work that makes your
+									business easier to trust and easier to choose.
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div className="flex gap-8 border-b border-white/10 mb-10">
+						{tabs.map((tab) => (
+							<button
+								key={tab}
+								onClick={() => setActiveTab(tab)}
+								className={`pb-3 text-sm font-semibold tracking-wide transition-all relative ${
+									activeTab === tab
+										? "text-white"
+										: "text-slate-500 hover:text-slate-300"
+								}`}
+							>
+								{tab}
+								{activeTab === tab && (
+									<span className="absolute bottom-0 left-0 w-full h-0.5 bg-(--accent-strong) rounded-full shadow-[0_0_8px_rgba(43,94,168,0.6)]" />
+								)}
+							</button>
+						))}
+					</div>
+
+					{activeTab === "Services" && (
+						<div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+							{services.map((service, index) => (
+								<div
+									key={index}
+									className="group relative rounded-2xl overflow-hidden border border-(--border-soft) card-glow"
+									style={{ minHeight: "320px" }}
+								>
+									<div
+										className={`absolute inset-0 bg-linear-to-br ${cardGradients[index % cardGradients.length]} opacity-95`}
+									/>
+									{/* Top accent bar */}
+									<div className="absolute top-0 left-0 w-16 h-0.5 bg-linear-to-r from-(--accent-strong) to-transparent" />
+									{/* Hover inner glow */}
+									<div
+										className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+										style={{ background: "radial-gradient(ellipse at top left, rgba(33,74,132,0.1), transparent 65%)" }}
+									/>
+
+									<div className="relative z-10 p-7 h-full flex flex-col justify-between">
+										<div>
+											<div className="text-xs uppercase tracking-[0.2em] text-(--text-muted) mb-4">
+												{service.eyebrow}
+											</div>
+											<h3 className="text-xl font-semibold text-white mb-3 leading-snug raleway">
+												{service.title}
+											</h3>
+											<p className="text-(--text-secondary) text-sm leading-relaxed">
+												{service.description}
+											</p>
+										</div>
+
+										<div>
+											<ul className="mt-6 space-y-2 text-sm text-(--text-secondary)">
+												{service.features.map((feature) => (
+													<li key={feature} className="border-t border-white/6 pt-2">
+														{feature}
+													</li>
+												))}
+											</ul>
+											<div className="mt-6 text-sm font-semibold text-[#a8c0ea]">
+												Let&apos;s shape the right scope for your business.
+											</div>
+										</div>
+									</div>
+								</div>
+							))}
+						</div>
+					)}
+
+					{activeTab === "Technologies" && (
+						<div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
+							{techStack.map((tech, i) => (
+								<div
+									key={i}
+									className="flex flex-col items-center justify-center py-5 px-3 rounded-xl border border-(--border-soft) hover:border-(--border-strong) hover:shadow-[0_4px_20px_rgba(33,74,132,0.18)] transition-all duration-300 cursor-default"
+									style={{ background: "var(--bg-elevated)" }}
+								>
+									<span className="text-white text-sm font-semibold text-center">{tech}</span>
+								</div>
+							))}
+						</div>
+					)}
+
+					{activeTab === "Industries" && (
+						<div className="grid md:grid-cols-3 gap-5">
+							{industries.map((industry) => (
+								<div
+									key={industry}
+									className="px-6 py-5 rounded-xl border border-(--border-soft) hover:border-(--border-strong) hover:shadow-[0_4px_20px_rgba(33,74,132,0.18)] transition-all duration-300"
+									style={{ background: "var(--bg-elevated)" }}
+								>
+									<span className="text-white font-semibold">{industry}</span>
+								</div>
+							))}
+						</div>
+					)}
 				</div>
-			</div>
-		</section>
+			</section>
+		</>
 	);
 };
 
