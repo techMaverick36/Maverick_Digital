@@ -4,6 +4,7 @@ import Hero from "../components/Hero";
 import Services from "../components/Services";
 import Footer from "../components/Footer";
 import { testimonials } from "../utils/constants";
+import Seo from "../components/Seo";
 
 export default function AgencyWebsite() {
 	const [activeTestimonial, setActiveTestimonial] = useState(0);
@@ -67,6 +68,11 @@ export default function AgencyWebsite() {
 
 	return (
 		<div className="text-white min-h-screen montserrat theme-shell">
+			<Seo
+				title="Web Design, Branding and Digital Solutions"
+				description="Maverick Digital Hub helps businesses in Kampala and beyond build polished websites, stronger branding, and credible digital experiences."
+				path="/"
+			/>
 			<Navbar />
 			<Hero />
 			<Services />

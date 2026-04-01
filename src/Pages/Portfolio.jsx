@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { projects } from "../utils/constants";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import Seo from "../components/Seo";
 
 export default function PortfolioPage() {
 	const [activeFilter, setActiveFilter] = useState("all");
@@ -19,6 +20,11 @@ export default function PortfolioPage() {
 
 	return (
 		<div className="theme-shell text-white min-h-screen montserrat">
+			<Seo
+				title="Portfolio"
+				description="Explore Maverick Digital Hub portfolio projects in web design and digital delivery for businesses that want a clearer, more credible online presence."
+				path="/portfolio"
+			/>
 			<Navbar />
 
 			<section className="relative pt-32 pb-16 px-6 overflow-hidden">
