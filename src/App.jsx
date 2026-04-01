@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import "./index.css";
 import Portfolio from "./Pages/Portfolio";
+import ScrollToTop from "./components/ScrollToTop";
 // import AboutUsPage from "./Pages/About";
 // import ServicesPage from "./Pages/Services";
 // import ProductsPage from "./Pages/Product.jsx";
@@ -14,6 +15,7 @@ import Portfolio from "./Pages/Portfolio";
 const App = () => {
 	return (
 		<Router>
+			<ScrollToTop />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/portfolio" element={<Portfolio />} />

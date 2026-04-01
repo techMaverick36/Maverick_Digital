@@ -40,9 +40,7 @@ const Navbar = ({ lightBg = false }) => {
 			<div className="max-w-7xl mx-auto px-6 py-5">
 				<div className="flex items-center justify-between">
 					<div className="flex items-center gap-3">
-						<div className="w-10 h-10 rounded-lg flex items-center justify-center border border-[var(--border-strong)] bg-[rgba(33,74,132,0.18)]">
-							<span className="text-white font-semibold text-base">M</span>
-						</div>
+						
 						<Link
 							to={"/"}
 							className={`text-xl md:text-2xl font-semibold tracking-tight roboto_condensed ${useDarkText ? "text-white" : "text-white"}`}
@@ -52,31 +50,21 @@ const Navbar = ({ lightBg = false }) => {
 					</div>
 
 					<div className="hidden lg:flex items-center space-x-8">
-						{navItems.map((item) =>
-							item.type === "link" ? (
-								<Link
-									key={item.label}
-									to={item.href}
-									className="transition font-medium text-slate-300 hover:text-white"
-								>
-									{item.label}
-								</Link>
-							) : (
-								<a
-									key={item.label}
-									href={item.href}
-									className="transition font-medium text-slate-300 hover:text-white"
-								>
-									{item.label}
-								</a>
-							),
-						)}
-						<a
-							href={isHome ? "#contact" : "/#contact"}
+						{navItems.map((item) => (
+							<Link
+								key={item.label}
+								to={item.href}
+								className="transition font-medium text-slate-300 hover:text-white"
+							>
+								{item.label}
+							</Link>
+						))}
+						<Link
+							to="/#contact"
 							className="accent-button px-6 py-2.5 rounded-lg transition font-medium shadow-md shadow-blue-950/30"
 						>
 							Start a Project
-						</a>
+						</Link>
 					</div>
 
 					<button
@@ -91,34 +79,23 @@ const Navbar = ({ lightBg = false }) => {
 			{mobileMenuOpen && (
 				<div className="lg:hidden bg-[var(--bg-elevated)] border-t border-[var(--border-soft)] shadow-xl">
 					<div className="px-6 py-6 space-y-4">
-						{navItems.map((item) =>
-							item.type === "link" ? (
-								<Link
-									key={item.label}
-									to={item.href}
-									className="block text-slate-300 hover:text-white transition font-medium"
-									onClick={() => setMobileMenuOpen(false)}
-								>
-									{item.label}
-								</Link>
-							) : (
-								<a
-									key={item.label}
-									href={item.href}
-									className="block text-slate-300 hover:text-white transition font-medium"
-									onClick={() => setMobileMenuOpen(false)}
-								>
-									{item.label}
-								</a>
-							),
-						)}
-						<a
-							href={isHome ? "#contact" : "/#contact"}
+						{navItems.map((item) => (
+							<Link
+								key={item.label}
+								to={item.href}
+								className="block text-slate-300 hover:text-white transition font-medium"
+								onClick={() => setMobileMenuOpen(false)}
+							>
+								{item.label}
+							</Link>
+						))}
+						<Link
+							to="/#contact"
 							className="block accent-button px-6 py-3 rounded-lg text-center font-medium"
 							onClick={() => setMobileMenuOpen(false)}
 						>
 							Start a Project
-						</a>
+						</Link>
 					</div>
 				</div>
 			)}

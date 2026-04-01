@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
 	return (
 		<footer
@@ -39,11 +41,11 @@ const Footer = () => {
 							Services
 						</h4>
 						<ul className="space-y-3 text-(--text-secondary) text-sm">
-							<li><a href="/#services" className="hover:text-white transition-colors duration-200">Web Development</a></li>
-							<li><a href="/#services" className="hover:text-white transition-colors duration-200">UI/UX Design</a></li>
-							<li><a href="/#services" className="hover:text-white transition-colors duration-200">Branding</a></li>
-							<li><a href="/#services" className="hover:text-white transition-colors duration-200">Digital Marketing</a></li>
-							<li><a href="/#services" className="hover:text-white transition-colors duration-200">IT Solutions</a></li>
+							<li><Link to="/#services" className="hover:text-white transition-colors duration-200">Web Development</Link></li>
+							<li><Link to="/#services" className="hover:text-white transition-colors duration-200">UI/UX Design</Link></li>
+							<li><Link to="/#services" className="hover:text-white transition-colors duration-200">Branding</Link></li>
+							<li><Link to="/#services" className="hover:text-white transition-colors duration-200">Digital Marketing</Link></li>
+							<li><Link to="/#services" className="hover:text-white transition-colors duration-200">IT Solutions</Link></li>
 						</ul>
 					</div>
 
@@ -52,11 +54,11 @@ const Footer = () => {
 							Company
 						</h4>
 						<ul className="space-y-3 text-(--text-secondary) text-sm">
-							<li><a href="/#about" className="hover:text-white transition-colors duration-200">About</a></li>
-							<li><a href="/portfolio" className="hover:text-white transition-colors duration-200">Portfolio</a></li>
-							<li><a href="/#process" className="hover:text-white transition-colors duration-200">Process</a></li>
-							<li><a href="/#contact" className="hover:text-white transition-colors duration-200">Contact</a></li>
-							<li><a href="/#contact" className="hover:text-white transition-colors duration-200">Start a Project</a></li>
+							<li><Link to="/#about" className="hover:text-white transition-colors duration-200">About</Link></li>
+							<li><Link to="/portfolio" className="hover:text-white transition-colors duration-200">Portfolio</Link></li>
+							<li><Link to="/#process" className="hover:text-white transition-colors duration-200">Process</Link></li>
+							<li><Link to="/#contact" className="hover:text-white transition-colors duration-200">Contact</Link></li>
+							<li><Link to="/#contact" className="hover:text-white transition-colors duration-200">Start a Project</Link></li>
 						</ul>
 					</div>
 				</div>
