@@ -4,6 +4,7 @@ import Home from "./Pages/Home";
 import "./index.css";
 import Portfolio from "./Pages/Portfolio";
 import ScrollToTop from "./components/ScrollToTop";
+import { ThemeProvider } from "./context/ThemeContext";
 // import AboutUsPage from "./Pages/About";
 // import ServicesPage from "./Pages/Services";
 // import ProductsPage from "./Pages/Product.jsx";
@@ -14,13 +15,15 @@ import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
 	return (
-		<Router>
-			<ScrollToTop />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/portfolio" element={<Portfolio />} />
-			</Routes>
-		</Router>
+		<ThemeProvider>
+			<Router>
+				<ScrollToTop />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/portfolio" element={<Portfolio />} />
+				</Routes>
+			</Router>
+		</ThemeProvider>
 	);
 };
 

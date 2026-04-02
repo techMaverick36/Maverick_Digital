@@ -3,17 +3,23 @@ const Hero = () => {
 		<section className="relative overflow-hidden pt-36 pb-28 px-6">
 			{/* Background atmosphere */}
 			<div className="absolute inset-0 pointer-events-none">
-				<div className="glow-orb absolute top-[-4rem] left-[-6rem] h-[36rem] w-[36rem] rounded-full bg-[rgba(33,74,132,0.16)] blur-[80px]" />
 				<div
-					className="glow-orb absolute -bottom-32 -right-24 h-120 w-120 rounded-full bg-[rgba(33,74,132,0.13)] blur-[70px]"
-					style={{ animationDelay: "3s" }}
+					className="glow-orb absolute -top-16 -left-24 h-144 w-xl rounded-full blur-[80px]"
+					style={{ background: "var(--glow-orb-1)" }}
 				/>
-				<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-[20rem] w-[40rem] rounded-full bg-[rgba(27,67,119,0.07)] blur-[90px]" />
 				<div
-					className="absolute inset-0 opacity-[0.035]"
+					className="glow-orb absolute -bottom-32 -right-24 h-120 w-120 rounded-full blur-[70px]"
+					style={{ background: "var(--glow-orb-2)", animationDelay: "3s" }}
+				/>
+				<div
+					className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-80 w-160 rounded-full blur-[90px]"
+					style={{ background: "var(--glow-orb-3)" }}
+				/>
+				<div
+					className="absolute inset-0 opacity-[0.6]"
 					style={{
 						backgroundImage:
-							"linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)",
+							"linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)",
 						backgroundSize: "64px 64px",
 					}}
 				/>
@@ -27,11 +33,14 @@ const Hero = () => {
 					</span>
 
 					<div className="space-y-5 animate-fade-up-1">
-						<h1 className="text-5xl md:text-6xl font-semibold leading-tight roboto_condensed text-balance">
+						<h1
+							className="text-5xl md:text-6xl font-semibold leading-tight roboto_condensed text-balance"
+							style={{ color: "var(--text-primary)" }}
+						>
 							Websites and digital branding that help your business look sharp,
 							feel trustworthy, and win more attention.
 						</h1>
-						<p className="max-w-2xl text-lg leading-8 text-(--text-secondary) text-balance">
+						<p className="max-w-2xl text-lg leading-8 text-balance" style={{ color: "var(--text-secondary)" }}>
 							At Maverick Digital Hub, we create websites, brand systems, and
 							digital experiences that make it easier for people to trust what
 							you do and choose your business with confidence.
@@ -60,10 +69,13 @@ const Hero = () => {
 							{ value: "Campaigns", label: "Planned to attract attention and turn interest into action" },
 						].map((item) => (
 							<div key={item.value} className="surface-panel rounded-2xl p-5 card-glow">
-								<div className="text-sm uppercase tracking-[0.18em] text-(--text-muted)">
+								<div
+									className="text-sm uppercase tracking-[0.18em]"
+									style={{ color: "var(--text-muted)" }}
+								>
 									{item.value}
 								</div>
-								<p className="mt-3 text-sm leading-6 text-(--text-secondary)">
+								<p className="mt-3 text-sm leading-6" style={{ color: "var(--text-secondary)" }}>
 									{item.label}
 								</p>
 							</div>
@@ -73,37 +85,80 @@ const Hero = () => {
 
 				{/* Right column */}
 				<div className="relative animate-fade-up-2">
-					<div className="absolute inset-6 rounded-[2rem] bg-[rgba(33,74,132,0.16)] blur-[50px]" />
-					<div className="surface-panel relative overflow-hidden rounded-[2rem] p-4">
-						<div className="overflow-hidden rounded-[1.5rem] border border-(--border-soft)">
+					<div
+						className="absolute inset-6 rounded-4xl blur-[50px]"
+						style={{ background: "var(--glow-orb-1)" }}
+					/>
+					<div className="surface-panel relative overflow-hidden rounded-4xl p-4">
+						<div className="overflow-hidden rounded-3xl border" style={{ borderColor: "var(--border-soft)" }}>
 							<img
 								src="/martin.jpeg"
 								alt="Maverick Digital Hub team lead"
-								className="h-[32rem] w-full object-cover object-top"
-								style={{ filter: "brightness(0.82) saturate(0.9)" }}
+								className="h-128 w-full object-cover object-top"
+								style={{ filter: "var(--hero-img-filter)" }}
 							/>
 						</div>
 						<div className="mt-4 grid sm:grid-cols-2 gap-4">
-							<div className="rounded-2xl bg-[rgba(255,255,255,0.025)] border border-(--border-soft) p-5 transition-all duration-300 hover:border-(--border-strong) hover:bg-[rgba(255,255,255,0.035)]">
-								<div className="text-[11px] uppercase tracking-[0.22em] text-(--text-muted)">
+							<div
+								className="rounded-2xl border p-5 transition-all duration-300"
+								style={{
+									background: "var(--card-surface)",
+									borderColor: "var(--border-soft)",
+								}}
+								onMouseEnter={e => {
+									e.currentTarget.style.borderColor = "var(--border-strong)";
+									e.currentTarget.style.background = "var(--card-surface-hover)";
+								}}
+								onMouseLeave={e => {
+									e.currentTarget.style.borderColor = "var(--border-soft)";
+									e.currentTarget.style.background = "var(--card-surface)";
+								}}
+							>
+								<div
+									className="text-[11px] uppercase tracking-[0.22em]"
+									style={{ color: "var(--text-muted)" }}
+								>
 									Founder
 								</div>
-								<div className="mt-3 text-base font-semibold text-white uppercase tracking-[0.14em] leading-snug">
+								<div
+									className="mt-3 text-base font-semibold uppercase tracking-[0.14em] leading-snug"
+									style={{ color: "var(--text-primary)" }}
+								>
 									MARTIN SSEMUGABI
 								</div>
-								<p className="mt-3 text-sm leading-6 text-(--text-secondary)">
+								<p className="mt-3 text-sm leading-6" style={{ color: "var(--text-secondary)" }}>
 									I started Maverick Digital Hub to help businesses show up
 									better online and communicate their value with confidence.
 								</p>
 							</div>
-							<div className="rounded-2xl bg-[rgba(255,255,255,0.025)] border border-(--border-soft) p-5 transition-all duration-300 hover:border-(--border-strong) hover:bg-[rgba(255,255,255,0.035)]">
-								<div className="text-[11px] uppercase tracking-[0.22em] text-(--text-muted)">
+							<div
+								className="rounded-2xl border p-5 transition-all duration-300"
+								style={{
+									background: "var(--card-surface)",
+									borderColor: "var(--border-soft)",
+								}}
+								onMouseEnter={e => {
+									e.currentTarget.style.borderColor = "var(--border-strong)";
+									e.currentTarget.style.background = "var(--card-surface-hover)";
+								}}
+								onMouseLeave={e => {
+									e.currentTarget.style.borderColor = "var(--border-soft)";
+									e.currentTarget.style.background = "var(--card-surface)";
+								}}
+							>
+								<div
+									className="text-[11px] uppercase tracking-[0.22em]"
+									style={{ color: "var(--text-muted)" }}
+								>
 									Approach
 								</div>
-								<div className="mt-3 text-base font-semibold text-white leading-snug">
+								<div
+									className="mt-3 text-base font-semibold leading-snug"
+									style={{ color: "var(--text-primary)" }}
+								>
 									Structured planning and clean execution
 								</div>
-								<p className="mt-3 text-sm leading-6 text-(--text-secondary)">
+								<p className="mt-3 text-sm leading-6" style={{ color: "var(--text-secondary)" }}>
 									You can expect clear communication, thoughtful design
 									decisions, and support that continues after the launch.
 								</p>
@@ -116,7 +171,7 @@ const Hero = () => {
 			{/* Bottom section bleed */}
 			<div
 				className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
-				style={{ background: "linear-gradient(to bottom, transparent, rgba(22, 26, 32, 0.6))" }}
+				style={{ background: "linear-gradient(to bottom, transparent, var(--hero-bleed-color))" }}
 			/>
 		</section>
 	);
