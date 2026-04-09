@@ -133,7 +133,7 @@ export const projects = [
 		tags: ["Web Design", "Development", "UI/UX"],
 		description:
 			"A redesign and development project for a sales company that needed a clearer, stronger online presence.",
-		image: "./kainiu.png",
+		image: "./kainiu.jpg",
 		color: "from-[#1c4d87] to-[#162233]",
 		stats: {
 			duration: "3 months",
@@ -149,14 +149,14 @@ export const projects = [
 		tags: ["Web Design", "Development", "UI/UX"],
 		description:
 			"A company website built to present services clearly and help potential clients trust the business faster.",
-		image: "./jope.png",
+		image: "./jope.jpg",
 		color: "from-[#234f8f] to-[#182535]",
 		stats: {
 			duration: "2 months",
 			tech: "Figma, React, Tailwindcss",
 			impact: "10k+ Users",
 		},
-		link: "https://jopeforwarders.com/",
+		link: "https://www.jopeforwardersug.com/",
 	},
 	{
 		id: 3,
@@ -165,7 +165,7 @@ export const projects = [
 		tags: ["Web Design", "Development", "UI/UX"],
 		description:
 			"A full brand and website project designed to give the business a more polished and credible presentation.",
-		image: "./azalea.png",
+		image: "./azalea.jpg",
 		color: "from-[#203d6b] to-[#151d28]",
 		stats: {
 			duration: "1 month",
@@ -181,13 +181,45 @@ export const projects = [
 		tags: ["Web Design", "UI/UX"],
 		description:
 			"A business website created to showcase products and services in a way that feels clear, confident, and trustworthy.",
-		image: "./byoreko.png",
+		image: "./byoreko.jpg",
 		color: "from-[#274f8d] to-[#1a2431]",
 		stats: {
 			duration: "4 months",
 			tech: "Vue.js, D3.js",
 			impact: "95% User Satisfaction",
 		},
-		link: "https://byoreko.com/",
+		link: "https://www.byorekoholdingsltd.com/",
+	},
+	{
+		id: 5,
+		title: "Acts of Love Empowerment Foundation",
+		category: "web",
+		tags: ["Web Design", "Development", "NGO"],
+		description:
+			"A website built for a community-driven foundation focused on empowering people of all ages through outreach and support programs.",
+		image: "./actsoflove.jpg",
+		color: "from-[#8b1c1c] to-[#1e1010]",
+		stats: {
+			duration: "2 weeks",
+			tech: "React, Tailwind CSS",
+			impact: "50+ Reachouts",
+		},
+		link: "https://actsofloveempowerment.org/",
+	},
+	{
+		id: 6,
+		title: "High Flyer Trading Limited",
+		category: "web",
+		tags: ["Web Design", "Development", "CMS"],
+		description:
+			"An e-commerce website for a home appliance retailer, built with a fully integrated CMS to make product and content management seamless.",
+		image: "./highflyer.jpg",
+		color: "from-[#0d7377] to-[#0a2233]",
+		stats: {
+			duration: "4 weeks",
+			tech: "React, Tailwind CSS, CMS",
+			impact: "95% Satisfaction",
+		},
+		link: "https://highflyertadingltd.com/",
 	},
 ];
