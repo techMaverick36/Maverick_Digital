@@ -1,57 +1,54 @@
 import { Link } from "react-router-dom";
+import { FiArrowUpRight } from "react-icons/fi";
 
-/* Footer always uses a dark background regardless of theme.
-   All text colours are declared as explicit values, not CSS variables. */
+/* Footer always uses a dark surface regardless of theme. */
 const Footer = () => {
 	return (
-		<footer
-			className="relative pt-14 pb-10 px-6"
-			style={{ background: "var(--bg-footer)", color: "#f4f7fb" }}
-		>
+		<footer className="relative pt-20 pb-8 px-6 overflow-hidden" style={{ background: "var(--bg-footer)" }}>
 			{/* Top accent rule */}
-			<div className="footer-cap absolute top-0 left-0 right-0" />
-
-			{/* Subtle inner glow at top */}
 			<div
-				className="absolute top-0 left-0 right-0 h-32 pointer-events-none"
-				style={{ background: "radial-gradient(ellipse at 50% 0%, rgba(33,74,132,0.12), transparent 70%)" }}
+				className="absolute top-0 left-0 right-0 h-px"
+				style={{ background: "linear-gradient(90deg, transparent, rgba(56,189,248,0.55), transparent)" }}
+			/>
+			<div
+				className="absolute -top-24 left-1/2 -translate-x-1/2 h-56 w-[36rem] rounded-full blur-[110px] pointer-events-none"
+				style={{ background: "rgba(14,165,233,0.13)" }}
+				aria-hidden="true"
 			/>
 
 			<div className="relative z-10 max-w-7xl mx-auto">
-				<div className="grid md:grid-cols-4 gap-12 mb-12">
+				<div className="grid md:grid-cols-4 gap-12 mb-16">
 					<div className="md:col-span-2">
-						<div className="flex items-center gap-3 mb-5">
-							<div
-								className="w-10 h-10 rounded-lg flex items-center justify-center"
-								style={{
-									border: "1px solid rgba(69,105,168,0.45)",
-									background: "rgba(33,74,132,0.2)",
-								}}
+						<div className="flex items-center gap-2.5 mb-6">
+							<span
+								className="display flex h-9 w-9 items-center justify-center rounded-xl text-base font-bold text-white"
+								style={{ background: "linear-gradient(120deg, #0ea5e9, #0369a1)" }}
 							>
-								<span className="font-semibold text-base text-white">M</span>
-							</div>
-							<span className="text-xl font-semibold roboto_condensed tracking-tight text-white">
-								Maverick Digital Hub
+								M
+							</span>
+							<span className="display text-lg font-semibold tracking-tight text-white">
+								Maverick<span style={{ color: "#38bdf8" }}>.</span>
 							</span>
 						</div>
-						<p className="leading-relaxed mb-6 max-w-sm" style={{ color: "#b7c0ce" }}>
+						<p className="leading-relaxed mb-6 max-w-sm text-[#aebccb]">
 							Maverick Digital Hub helps businesses look more polished online
 							through thoughtful websites, stronger branding, and digital work
 							that feels clear and credible.
 						</p>
-						<p className="text-sm uppercase tracking-[0.18em]" style={{ color: "#8792a3" }}>
-							Kampala, Uganda
-						</p>
+						<a
+							href="mailto:mavericktech750@gmail.com"
+							className="group inline-flex items-center gap-2 text-sm font-medium text-[#7dd3fc] hover:text-white transition-colors duration-200"
+						>
+							mavericktech750@gmail.com
+							<FiArrowUpRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+						</a>
 					</div>
 
 					<div>
-						<h4
-							className="font-semibold text-sm uppercase tracking-[0.14em] mb-5"
-							style={{ color: "#8792a3" }}
-						>
+						<h4 className="font-semibold text-xs uppercase tracking-[0.18em] mb-5 text-[#7a8ba0]">
 							Services
 						</h4>
-						<ul className="space-y-3 text-sm" style={{ color: "#b7c0ce" }}>
+						<ul className="space-y-3 text-sm text-[#aebccb]">
 							<li><Link to="/#services" className="hover:text-white transition-colors duration-200">Web Development</Link></li>
 							<li><Link to="/#services" className="hover:text-white transition-colors duration-200">UI/UX Design</Link></li>
 							<li><Link to="/#services" className="hover:text-white transition-colors duration-200">Branding</Link></li>
@@ -61,13 +58,10 @@ const Footer = () => {
 					</div>
 
 					<div>
-						<h4
-							className="font-semibold text-sm uppercase tracking-[0.14em] mb-5"
-							style={{ color: "#8792a3" }}
-						>
+						<h4 className="font-semibold text-xs uppercase tracking-[0.18em] mb-5 text-[#7a8ba0]">
 							Company
 						</h4>
-						<ul className="space-y-3 text-sm" style={{ color: "#b7c0ce" }}>
+						<ul className="space-y-3 text-sm text-[#aebccb]">
 							<li><Link to="/#about" className="hover:text-white transition-colors duration-200">About</Link></li>
 							<li><Link to="/portfolio" className="hover:text-white transition-colors duration-200">Portfolio</Link></li>
 							<li><Link to="/#process" className="hover:text-white transition-colors duration-200">Process</Link></li>
@@ -77,12 +71,26 @@ const Footer = () => {
 					</div>
 				</div>
 
+				{/* Big wordmark */}
 				<div
-					className="pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-3 text-sm"
-					style={{ borderColor: "rgba(255,255,255,0.08)", color: "#8792a3" }}
+					className="display select-none text-center font-bold leading-none tracking-tight text-[16vw] md:text-[9rem] lg:text-[11rem]"
+					style={{
+						background: "linear-gradient(180deg, rgba(56,189,248,0.20), rgba(56,189,248,0.02))",
+						backgroundClip: "text",
+						WebkitBackgroundClip: "text",
+						color: "transparent",
+					}}
+					aria-hidden="true"
+				>
+					MAVERICK
+				</div>
+
+				<div
+					className="mt-4 pt-8 border-t flex flex-col sm:flex-row items-center justify-between gap-3 text-sm text-[#7a8ba0]"
+					style={{ borderColor: "rgba(255,255,255,0.08)" }}
 				>
 					<p>&copy; 2026 Maverick Digital Hub. All rights reserved.</p>
-					<p className="text-xs uppercase tracking-[0.14em]">Kampala, Uganda</p>
+					<p className="text-xs uppercase tracking-[0.16em]">Kampala, Uganda</p>
 				</div>
 			</div>
 		</footer>

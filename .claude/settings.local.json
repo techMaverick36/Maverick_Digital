@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "WebFetch(domain:actsofloveempowerment.org)"
+      "WebFetch(domain:actsofloveempowerment.org)",
+      "Bash(python 'C:\\\\Users\\\\user/.claude/skills/ui-ux-pro-max/scripts/search.py' 'digital agency portfolio creative premium modern' --design-system -p 'Maverick Digital Hub')",
+      "Bash(py 'C:\\\\Users\\\\user/.claude/skills/ui-ux-pro-max/scripts/search.py' 'digital agency portfolio creative premium modern' --design-system -p 'Maverick Digital Hub')",
+      "PowerShell(py \"$env:USERPROFILE\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\\\\search.py\" \"digital agency portfolio creative premium modern bold\" --design-system -p \"Maverick Digital Hub\")",
+      "PowerShell($files = @\\(\"src\\\\components\\\\Footer.jsx\",\"src\\\\Pages\\\\Home.jsx\",\"src\\\\Pages\\\\Portfolio.jsx\"\\); foreach \\($f in $files\\) { $p = \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\$f\"; $c = [IO.File]::ReadAllText\\($p\\); $c = $c.Replace\\('#8181a0','#7a8ba0'\\).Replace\\('#b6b6d0','#aebccb'\\).Replace\\('rgba\\(129,140,248,0.22\\), rgba\\(129,140,248,0.02\\)','rgba\\(56,189,248,0.20\\), rgba\\(56,189,248,0.02\\)'\\).Replace\\('#1e1b4b','#0b1e33'\\); [IO.File]::WriteAllText\\($p, $c\\) }; \"done\")",
+      "PowerShell(npm run lint)",
+      "PowerShell(npm run build)"
     ]
   }
 }
