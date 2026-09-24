@@ -95,13 +95,6 @@ export const testimonials = [
 			"The final result felt polished and reliable, and the support throughout the project made the whole experience much easier.",
 		avatar: "B",
 	},
-	{
-		name: "Akandwanaho Ceaser",
-		role: "CEO, Azalea Cleaning and Property Management",
-		content:
-			"Our site now reflects the business far better. The team stayed responsive and kept everything clear from start to finish.",
-		avatar: "AC",
-	},
 ];
 
 export const techStack = [
@@ -133,7 +126,8 @@ export const projects = [
 		tags: ["Web Design", "Development", "UI/UX"],
 		description:
 			"A redesign and development project for a sales company that needed a clearer, stronger online presence.",
-		image: "./kainiu.jpg",
+		image: "/kainiu.jpg",
+		thumb: "/thumbs/kainiu.jpg",
 		color: "from-[#1c4d87] to-[#162233]",
 		stats: {
 			duration: "3 months",
@@ -149,30 +143,14 @@ export const projects = [
 		tags: ["Web Design", "Development", "UI/UX"],
 		description:
 			"A company website built to present services clearly and help potential clients trust the business faster.",
-		image: "./jope.jpg",
+		image: "/jope.jpg",
+		thumb: "/thumbs/jope.jpg",
 		color: "from-[#234f8f] to-[#182535]",
 		stats: {
-			duration: "2 months",
+			duration: "2 weeks",
 			tech: "Figma, React, Tailwindcss",
-			impact: "10k+ Users",
 		},
 		link: "https://www.jopeforwardersug.com/",
-	},
-	{
-		id: 3,
-		title: "Azalea Cleaning & Property Management",
-		category: "web",
-		tags: ["Web Design", "Development", "UI/UX"],
-		description:
-			"A full brand and website project designed to give the business a more polished and credible presentation.",
-		image: "./azalea.jpg",
-		color: "from-[#203d6b] to-[#151d28]",
-		stats: {
-			duration: "1 month",
-			deliverables: "Logo, Guidelines",
-			impact: "Award Winner",
-		},
-		link: "https://azalea-flame.vercel.app/",
 	},
 	{
 		id: 4,
@@ -181,14 +159,34 @@ export const projects = [
 		tags: ["Web Design", "UI/UX"],
 		description:
 			"A business website created to showcase products and services in a way that feels clear, confident, and trustworthy.",
-		image: "./byoreko.jpg",
+		image: "/byoreko.jpg",
+		thumb: "/thumbs/byoreko.jpg",
 		color: "from-[#274f8d] to-[#1a2431]",
 		stats: {
-			duration: "4 months",
-			tech: "Vue.js, D3.js",
+			duration: "4 weeks",
+			tech: "Figma, React, Tailwindcss",
 			impact: "95% User Satisfaction",
 		},
 		link: "https://www.byorekoholdingsltd.com/",
+	},
+	{
+		id: 9,
+		title: "Galaxy Pet Store",
+		category: "web",
+		tags: ["Web Design", "Development", "E-Commerce"],
+		description:
+			"A website and online shop for a Kampala pet store, with product listings and cart, grooming and boarding service booking, and click-to-call.",
+		image: "/galaxypet.jpg",
+		thumb: "/thumbs/galaxypet.jpg",
+		/* second screen, shown as an inset on the portfolio page */
+		detail: "/galaxypet-shop.jpg",
+		/* TODO: add duration, tech and impact once confirmed */
+		stats: {
+			duration: "4 weeks",
+			tech: "Figma, React, Tailwindcss",
+			impact: "95% User Satisfaction",
+		},
+		link: "https://galaxypetstoreug.com/",
 	},
 	{
 		id: 5,
@@ -197,7 +195,8 @@ export const projects = [
 		tags: ["Web Design", "Development", "NGO"],
 		description:
 			"A website built for a community-driven foundation focused on empowering people of all ages through outreach and support programs.",
-		image: "./actsoflove.jpg",
+		image: "/actsoflove.jpg",
+		thumb: "/thumbs/actsoflove.jpg",
 		color: "from-[#8b1c1c] to-[#1e1010]",
 		stats: {
 			duration: "2 weeks",
@@ -207,13 +206,44 @@ export const projects = [
 		link: "https://actsofloveempowerment.org/",
 	},
 	{
+		id: 7,
+		title: "RAC Gadgets",
+		category: "web",
+		tags: ["Web Design", "Development", "UI/UX"],
+		description:
+			"A website for a gadget and repair business, with unboxing and repair videos, services, customer reviews, and one-tap WhatsApp chat.",
+		image: "/racgadgets.jpg",
+		thumb: "/thumbs/racgadgets.jpg",
+		/* TODO: add duration, tech and impact once confirmed */
+		stats: {},
+		link: "https://racgadgets.com/",
+	},
+	{
+		id: 8,
+		title: "StudyInChinaNow",
+		category: "web",
+		tags: ["Web Design", "Development", "Education"],
+		description:
+			"A scholarship platform that helps African students apply to accredited Chinese universities, with scholarship listings, requirements, and a guided application path.",
+		image: "/studyinchina.jpg",
+		thumb: "/thumbs/studyinchina.jpg",
+		/* TODO: add duration, tech and impact once confirmed */
+		stats: {
+			duration: "4 weeks",
+			tech: "Figma, React, Tailwindcss",
+			impact: "95% User Satisfaction",
+		},
+		link: "https://studyinchinanow.com/",
+	},
+	{
 		id: 6,
 		title: "High Flyer Trading Limited",
 		category: "web",
 		tags: ["Web Design", "Development", "CMS"],
 		description:
 			"An e-commerce website for a home appliance retailer, built with a fully integrated CMS to make product and content management seamless.",
-		image: "./highflyer.jpg",
+		image: "/highflyer.jpg",
+		thumb: "/thumbs/highflyer.jpg",
 		color: "from-[#0d7377] to-[#0a2233]",
 		stats: {
 			duration: "4 weeks",

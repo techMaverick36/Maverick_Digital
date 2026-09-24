@@ -1,7 +1,13 @@
 import { useEffect, useRef } from "react";
 
-/* Fades content in on first scroll into view. Delay is in ms. */
-const Reveal = ({ children, delay = 0, className = "" }) => {
+/*
+ * Adds `.is-in` the first time the element scrolls into view.
+ * `fade` applies the default opacity/translate/blur entrance; turn it off when
+ * a child (e.g. `.img-wipe`) owns the entrance. `delay` (ms) staggers siblings
+ * and is inherited by children through the `--d` custom property.
+ */
+const Reveal = ({ as = "div", delay = 0, fade = true, className = "", style, children, ...rest }) => {
+	const Tag = as;
 	const ref = useRef(null);
 
 	useEffect(() => {
@@ -10,20 +16,25 @@ const Reveal = ({ children, delay = 0, className = "" }) => {
 		const observer = new IntersectionObserver(
 			([entry]) => {
 				if (entry.isIntersecting) {
-					el.classList.add("in-view");
+					el.classList.add("is-in");
 					observer.disconnect();
 				}
 			},
-			{ threshold: 0.12, rootMargin: "0px 0px -40px 0px" }
+			{ threshold: 0.15, rootMargin: "0px 0px -8% 0px" }
 		);
 		observer.observe(el);
 		return () => observer.disconnect();
 	}, []);
 
 	return (
-		<div ref={ref} className={`reveal ${className}`} style={delay ? { transitionDelay: `${delay}ms` } : undefined}>
+		<Tag
+			ref={ref}
+			className={`${fade ? "reveal " : ""}${className}`}
+			style={delay ? { "--d": `${delay}ms`, ...style } : style}
+			{...rest}
+		>
 			{children}
-		</div>
+		</Tag>
 	);
 };
 

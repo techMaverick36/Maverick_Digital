@@ -13,7 +13,8 @@
 			content="Maverick Digital Hub, web design Uganda, branding Kampala, SEO, UI UX design, digital agency"
 		/>
 		<meta name="robots" content="index, follow" />
-		<meta name="theme-color" content="#161a20" />
+		<meta name="theme-color" content="#f3f6f9" media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content="#0b1118" media="(prefers-color-scheme: dark)" />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Maverick Digital Hub" />
 		<meta
@@ -33,12 +34,19 @@
 			name="twitter:description"
 			content="Thoughtful websites, stronger branding, and digital work that helps businesses look polished and credible online."
 		/>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
-			rel="stylesheet"
-		/>
+		<script>
+			/* Apply the theme before first paint so there is no light/dark flash. */
+			(function () {
+				try {
+					var t = localStorage.getItem("mdh-theme");
+					if (t !== "dark" && t !== "light") {
+						t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+					}
+					if (t === "dark") document.documentElement.classList.add("dark");
+					document.documentElement.style.colorScheme = t;
+				} catch (e) {}
+			})();
+		</script>
 		<title>Maverick Digital Hub | Web Design, Branding and Digital Solutions</title>
 	</head>
 	<body>

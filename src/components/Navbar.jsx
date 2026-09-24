@@ -1,121 +1,122 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { FiSun, FiMoon, FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
-import { useTheme } from "../context/ThemeContext";
+import { ArrowUpRight, List, Moon, Sun, X } from "@phosphor-icons/react";
+import { useTheme } from "../context/theme";
 
 const Navbar = () => {
-	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const [menuOpen, setMenuOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
-	const location = useLocation();
-	const isHome = location.pathname === "/";
+	const sentinel = useRef(null);
+	const { pathname } = useLocation();
+	const isHome = pathname === "/";
 	const { theme, toggle } = useTheme();
 
 	const navItems = [
-		{ label: "Home", href: "/" },
+		{ label: "Home", href: "/", current: isHome },
 		{ label: "Services", href: isHome ? "#services" : "/#services" },
 		{ label: "About", href: isHome ? "#about" : "/#about" },
 		{ label: "Process", href: isHome ? "#process" : "/#process" },
-		{ label: "Portfolio", href: "/portfolio" },
+		{ label: "Portfolio", href: "/portfolio", current: pathname === "/portfolio" },
 	];
 
+	/* Scrolled state from an observer on a sentinel at the top of the page (no scroll listener). */
 	useEffect(() => {
-		const handleScroll = () => setScrolled(window.scrollY > 40);
-		handleScroll();
-		window.addEventListener("scroll", handleScroll, { passive: true });
-		return () => window.removeEventListener("scroll", handleScroll);
+		const el = sentinel.current;
+		if (!el) return;
+		const observer = new IntersectionObserver(([entry]) => setScrolled(!entry.isIntersecting));
+		observer.observe(el);
+		return () => observer.disconnect();
 	}, []);
 
+	useEffect(() => {
+		if (!menuOpen) return;
+		const onKey = (e) => e.key === "Escape" && setMenuOpen(false);
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [menuOpen]);
+
+	const ThemeIcon = theme === "dark" ? Sun : Moon;
+	const themeLabel = theme === "dark" ? "Switch to light theme" : "Switch to dark theme";
+
 	return (
-		<nav
-			className="fixed w-full z-50 transition-all duration-300"
-			style={
-				scrolled || mobileMenuOpen
-					? {
-							background: "var(--navbar-bg)",
-							borderBottom: "1px solid var(--navbar-border)",
-							backdropFilter: "blur(16px)",
-							WebkitBackdropFilter: "blur(16px)",
-						}
-					: { borderBottom: "1px solid transparent" }
-			}
-		>
-			<div className="max-w-7xl mx-auto px-6">
-				<div className="flex items-center justify-between h-[72px]">
-					<Link to="/" className="flex items-center gap-2.5 group">
-						<span
-							className="display flex h-9 w-9 items-center justify-center rounded-xl text-base font-bold text-white transition-transform duration-300 group-hover:rotate-[-8deg]"
-							style={{ background: "var(--accent-gradient)" }}
-						>
-							M
-						</span>
-						<span className="display text-lg font-semibold tracking-tight" style={{ color: "var(--text-primary)" }}>
-							Maverick<span style={{ color: "var(--accent)" }}>.</span>
-						</span>
+		<>
+			<div ref={sentinel} aria-hidden="true" className="absolute top-0 left-0 h-6 w-px" />
+			<a href="#main" className="skip-link">
+				Skip to content
+			</a>
+
+			<header
+				className="nav-shell fixed inset-x-0 top-0 z-40 border-b border-transparent"
+				data-scrolled={scrolled || menuOpen}
+			>
+				<nav
+					className="mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8"
+					style={{ height: "var(--nav-h)" }}
+					aria-label="Primary"
+				>
+					<Link to="/" className="text-[1.05rem] font-semibold tracking-[-0.02em]" style={{ color: "var(--ink)" }}>
+						Maverick Digital Hub
 					</Link>
 
-					<div className="hidden lg:flex items-center gap-9">
+					<ul className="hidden lg:flex items-center gap-8">
 						{navItems.map((item) => (
-							<Link key={item.label} to={item.href} className="nav-link">
-								{item.label}
-							</Link>
+							<li key={item.label}>
+								<Link to={item.href} className="nav-link" aria-current={item.current ? "page" : undefined}>
+									{item.label}
+								</Link>
+							</li>
 						))}
-					</div>
+					</ul>
 
-					<div className="hidden lg:flex items-center gap-3">
-						<button onClick={toggle} className="theme-toggle" aria-label="Toggle theme">
-							{theme === "dark" ? <FiSun size={16} /> : <FiMoon size={16} />}
+					<div className="flex items-center gap-1.5">
+						<button type="button" onClick={toggle} className="icon-btn" aria-label={themeLabel} title={themeLabel}>
+							<ThemeIcon size={19} />
 						</button>
-						<Link to="/#contact" className="btn-primary px-6 py-2.5 text-sm">
-							Start a Project
-							<FiArrowUpRight className="btn-arrow" size={16} />
+						<Link to="/#contact" className="btn btn-primary btn-sm ml-2 hidden lg:inline-flex">
+							Start a project
+							<ArrowUpRight size={15} weight="bold" className="arrow" />
 						</Link>
-					</div>
-
-					<div className="lg:hidden flex items-center gap-3">
-						<button onClick={toggle} className="theme-toggle" aria-label="Toggle theme">
-							{theme === "dark" ? <FiSun size={16} /> : <FiMoon size={16} />}
-						</button>
 						<button
-							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-							className="theme-toggle"
-							aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-							aria-expanded={mobileMenuOpen}
+							type="button"
+							onClick={() => setMenuOpen((o) => !o)}
+							className="icon-btn lg:hidden"
+							aria-label={menuOpen ? "Close menu" : "Open menu"}
+							aria-expanded={menuOpen}
+							aria-controls="mobile-menu"
 						>
-							{mobileMenuOpen ? <FiX size={18} /> : <FiMenu size={18} />}
+							{menuOpen ? <X size={20} /> : <List size={20} />}
 						</button>
 					</div>
-				</div>
-			</div>
+				</nav>
 
-			{mobileMenuOpen && (
 				<div
-					className="lg:hidden border-t"
-					style={{ background: "var(--bg-elevated)", borderColor: "var(--border-soft)" }}
+					id="mobile-menu"
+					className="mobile-menu absolute inset-x-0 top-full border-t px-5 pb-8 pt-4 lg:hidden"
+					data-open={menuOpen}
+					style={{ borderColor: "var(--line)", background: "var(--bg)" }}
 				>
-					<div className="px-6 py-6 space-y-1">
-						{navItems.map((item, i) => (
-							<Link
-								key={item.label}
-								to={item.href}
-								className="display block py-3 text-2xl font-medium animate-fade-up"
-								style={{ color: "var(--text-primary)", animationDelay: `${i * 50}ms` }}
-								onClick={() => setMobileMenuOpen(false)}
-							>
-								{item.label}
-							</Link>
+					<ul className="flex flex-col">
+						{navItems.map((item) => (
+							<li key={item.label}>
+								<Link
+									to={item.href}
+									onClick={() => setMenuOpen(false)}
+									aria-current={item.current ? "page" : undefined}
+									className="block py-3 text-[1.6rem] font-semibold tracking-[-0.03em]"
+									style={{ color: item.current ? "var(--ink)" : "var(--ink-2)" }}
+								>
+									{item.label}
+								</Link>
+							</li>
 						))}
-						<Link
-							to="/#contact"
-							className="btn-primary w-full px-6 py-3.5 mt-4 text-base"
-							onClick={() => setMobileMenuOpen(false)}
-						>
-							Start a Project
-							<FiArrowUpRight className="btn-arrow" size={18} />
-						</Link>
-					</div>
+					</ul>
+					<Link to="/#contact" onClick={() => setMenuOpen(false)} className="btn btn-primary mt-6 w-full">
+						Start a project
+						<ArrowUpRight size={16} weight="bold" className="arrow" />
+					</Link>
 				</div>
-			)}
-		</nav>
+			</header>
+		</>
 	);
 };
 

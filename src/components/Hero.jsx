@@ -1,130 +1,90 @@
-import { FiArrowUpRight, FiMapPin } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from "@phosphor-icons/react";
+import { projects } from "../utils/constants";
 
-const stats = [
-	{ value: "10+", label: "Projects delivered" },
-	{ value: "6+", label: "Industries served" },
-	{ value: "1 day", label: "Average response" },
-];
+const lead = ["Websites", "that", "make", "your", "business"];
+const emphasis = ["easy", "to", "trust."];
+
+
+/* Two columns of real client sites, split so neighbours differ. */
+const colA = projects.filter((_, i) => i % 2 === 0);
+const colB = projects.filter((_, i) => i % 2 === 1);
+
+function ReelColumn({ items, direction }) {
+	/* Rendered twice so translateY(-50%) loops seamlessly. */
+	const loop = [...items, ...items];
+	return (
+		<div className={`reel-col ${direction === "down" ? "reel-down" : ""}`}>
+			{loop.map((p, i) => (
+				<img
+					key={`${p.id}-${i}`}
+					src={p.thumb}
+					alt={i < items.length ? `${p.title} website` : ""}
+					aria-hidden={i >= items.length || undefined}
+					width="900"
+					height="482"
+					className="reel-shot"
+				/>
+			))}
+		</div>
+	);
+}
 
 const Hero = () => {
 	return (
-		<section className="relative overflow-hidden pt-36 pb-20 px-6">
-			{/* Background atmosphere */}
-			<div className="absolute inset-0 pointer-events-none">
-				<div
-					className="float-slow absolute -top-24 -left-24 h-[28rem] w-[28rem] rounded-full blur-[110px]"
-					style={{ background: "var(--orb-1)" }}
-				/>
-				<div
-					className="float-slower absolute top-40 -right-32 h-[26rem] w-[26rem] rounded-full blur-[110px]"
-					style={{ background: "var(--orb-2)" }}
-				/>
-				<div
-					className="absolute bottom-0 left-1/3 h-72 w-96 rounded-full blur-[120px]"
-					style={{ background: "var(--orb-3)" }}
-				/>
-				<div
-					className="absolute inset-0"
-					style={{
-						backgroundImage:
-							"linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px)",
-						backgroundSize: "72px 72px",
-						maskImage: "radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%)",
-						WebkitMaskImage: "radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%)",
-					}}
-				/>
-			</div>
-
-			<div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-[1.15fr_0.85fr] gap-14 items-center">
-				{/* Left column */}
-				<div>
-					<span className="section-label animate-fade-up">Available for new projects</span>
-
+		<section
+			className="relative overflow-x-clip px-5 md:px-8"
+			style={{ paddingTop: "calc(var(--nav-h) + 3rem)", paddingBottom: "3rem" }}
+			aria-labelledby="hero-title"
+		>
+			<div className="mx-auto grid max-w-7xl items-center gap-12 lg:min-h-[min(calc(100dvh-var(--nav-h)-6rem),720px)] lg:grid-cols-12 lg:gap-8">
+				<div className="relative z-10 lg:col-span-7">
 					<h1
-						className="display animate-fade-up-1 mt-7 text-5xl md:text-6xl xl:text-7xl font-bold leading-[1.05] text-balance"
-						style={{ color: "var(--text-primary)" }}
+						id="hero-title"
+						className="h-display text-[2.6rem] sm:text-5xl lg:text-[2.85rem] xl:text-[3.65rem] 2xl:text-[4rem]"
+						style={{ color: "var(--ink)" }}
 					>
-						Digital experiences that make your business{" "}
-						<span className="grad-text">impossible to ignore.</span>
+						{lead.map((w, i) => (
+							<span key={w + i}>
+								<span className="enter inline-block" style={{ "--d": `${i * 55}ms` }}>
+									{w}
+								</span>{" "}
+							</span>
+						))}
+						<em className="accent">
+							{emphasis.map((w, i) => (
+								<span key={w + i}>
+									<span className="enter inline-block pb-1" style={{ "--d": `${(lead.length + i) * 55}ms` }}>
+										{w}
+									</span>
+									{i < emphasis.length - 1 ? " " : ""}
+								</span>
+							))}
+						</em>
 					</h1>
 
-					<p
-						className="animate-fade-up-2 mt-6 max-w-xl text-lg leading-8"
-						style={{ color: "var(--text-secondary)" }}
-					>
-						Maverick Digital Hub designs websites, brand systems, and digital
-						experiences that make people trust what you do — and choose you with
-						confidence.
+					<p className="lede enter mt-6 text-lg md:text-xl" style={{ "--d": "480ms" }}>
+					We create strategic websites, brand identities, and digital campaigns that build credibility and drive growth.
 					</p>
 
-					<div className="animate-fade-up-3 mt-9 flex flex-col sm:flex-row gap-4">
-						<a href="#contact" className="btn-primary px-8 py-4 text-base">
-							Start a Project
-							<FiArrowUpRight className="btn-arrow" size={18} />
+					<div className="enter mt-9 flex flex-wrap items-center gap-x-7 gap-y-4" style={{ "--d": "560ms" }}>
+						<a href="#contact" className="btn btn-primary">
+							Start a project
+							<ArrowUpRight size={16} weight="bold" className="arrow" />
 						</a>
-						<a href="#services" className="btn-ghost px-8 py-4 text-base">
-							Explore Services
-						</a>
-					</div>
-
-					<div
-						className="animate-fade-up-4 mt-12 grid grid-cols-3 gap-6 border-t pt-8 max-w-lg"
-						style={{ borderColor: "var(--border-soft)" }}
-					>
-						{stats.map((stat) => (
-							<div key={stat.label}>
-								<div className="display text-3xl md:text-4xl font-bold" style={{ color: "var(--text-primary)" }}>
-									{stat.value}
-								</div>
-								<div className="mt-1 text-xs md:text-sm" style={{ color: "var(--text-muted)" }}>
-									{stat.label}
-								</div>
-							</div>
-						))}
+						<Link to="/portfolio" className="link-arrow">
+							See the work
+							<ArrowUpRight size={15} className="arrow" />
+						</Link>
 					</div>
 				</div>
 
-				{/* Right column — portrait card */}
-				<div className="relative animate-fade-up-2 max-w-md mx-auto lg:max-w-none w-full">
-					<div
-						className="absolute -inset-4 rounded-[2.5rem] rotate-3 opacity-70"
-						style={{ background: "var(--accent-gradient)", filter: "blur(2px)" }}
-						aria-hidden="true"
-					/>
-					<div
-						className="relative overflow-hidden rounded-[2.25rem] border"
-						style={{ background: "var(--bg-elevated)", borderColor: "var(--border-soft)" }}
-					>
-						<img
-							src="/martin.jpeg"
-							alt="Martin Ssemugabi, founder of Maverick Digital Hub"
-							className="h-[26rem] md:h-[30rem] w-full object-cover object-top"
-							style={{ filter: "var(--hero-img-filter)" }}
-							width="480"
-							height="480"
-						/>
-						<div className="p-6">
-							<div className="flex items-start justify-between gap-4">
-								<div>
-									<div className="text-[11px] uppercase tracking-[0.22em]" style={{ color: "var(--text-muted)" }}>
-										Founder
-									</div>
-									<div className="display mt-1.5 text-lg font-semibold" style={{ color: "var(--text-primary)" }}>
-										Martin Ssemugabi
-									</div>
-								</div>
-								<span
-									className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium"
-									style={{ background: "var(--tag-bg)", color: "var(--tag-text)" }}
-								>
-									<FiMapPin size={12} />
-									Kampala, UG
-								</span>
-							</div>
-							<p className="mt-3 text-sm leading-6" style={{ color: "var(--text-secondary)" }}>
-								&ldquo;I started Maverick Digital Hub to help businesses show up
-								better online and communicate their value with confidence.&rdquo;
-							</p>
+				{/* Perspective wall of shipped client sites; bleeds past the grid on the right */}
+				<div className="enter relative lg:col-span-5 lg:-mr-[12vw]" style={{ "--d": "250ms" }}>
+					<div className="reel" aria-label="Websites we have launched" role="img">
+						<div className="reel-plane">
+							<ReelColumn items={colA} direction="up" />
+							<ReelColumn items={colB} direction="down" />
 						</div>
 					</div>
 				</div>

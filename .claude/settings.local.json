@@ -7,7 +7,30 @@
       "PowerShell(py \"$env:USERPROFILE\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\\\\search.py\" \"digital agency portfolio creative premium modern bold\" --design-system -p \"Maverick Digital Hub\")",
       "PowerShell($files = @\\(\"src\\\\components\\\\Footer.jsx\",\"src\\\\Pages\\\\Home.jsx\",\"src\\\\Pages\\\\Portfolio.jsx\"\\); foreach \\($f in $files\\) { $p = \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\$f\"; $c = [IO.File]::ReadAllText\\($p\\); $c = $c.Replace\\('#8181a0','#7a8ba0'\\).Replace\\('#b6b6d0','#aebccb'\\).Replace\\('rgba\\(129,140,248,0.22\\), rgba\\(129,140,248,0.02\\)','rgba\\(56,189,248,0.20\\), rgba\\(56,189,248,0.02\\)'\\).Replace\\('#1e1b4b','#0b1e33'\\); [IO.File]::WriteAllText\\($p, $c\\) }; \"done\")",
       "PowerShell(npm run lint)",
-      "PowerShell(npm run build)"
+      "PowerShell(npm run build)",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.claude\\\\skills\" -Directory | Select-Object Name; if \\(Test-Path \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\.claude\\\\skills\"\\) { Get-ChildItem \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\.claude\\\\skills\" -Directory | Select-Object Name })",
+      "PowerShell(Get-ChildItem \"$env:USERPROFILE\\\\.claude\\\\skills\\\\synced\" -Recurse -Filter SKILL.md | Select-Object FullName; Get-ChildItem \"$env:USERPROFILE\\\\.claude\\\\skills\\\\impeccable\" | Select-Object Name; Get-ChildItem \"$env:USERPROFILE\\\\.claude\\\\plugins\" -Recurse -Filter SKILL.md -ErrorAction SilentlyContinue | Where-Object { $_.FullName -match 'taste|emil|kowal' } | Select-Object FullName)",
+      "PowerShell(npm install @phosphor-icons/react motion @fontsource-variable/geist @fontsource-variable/geist-mono 2>&1)",
+      "PowerShell($p = Get-Content C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\package.json -Raw | ConvertFrom-Json; $p.dependencies | Format-List; Test-Path C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\node_modules\\\\@fontsource-variable\\\\geist\\\\index.css; Get-ChildItem C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\node_modules\\\\@fontsource-variable\\\\geist | Select-Object -ExpandProperty Name)",
+      "Bash(sed -i 's/className=\"reveal lg:col-span-4/className=\"reveal-child lg:col-span-4/; s/className=\"reveal mt-6\"/className=\"reveal-child mt-6\"/' src/Pages/Portfolio.jsx)",
+      "Bash(sed -i 's/\\\\t\\\\.enter,\\\\n\\\\t\\\\.reveal {/X/' src/index.css)",
+      "Bash(grep -n \"^\\\\t\\\\.enter,$\" src/index.css)",
+      "PowerShell(npm uninstall react-icons 2>&1)",
+      "PowerShell(npm run lint 2>&1)",
+      "PowerShell(npm run lint 2>&1 | Where-Object { $_ -notmatch 'baseline-browser-mapping|npm.ps1|NODE_EXE|~~~|CategoryInfo|FullyQualifiedErrorId' } | Select-Object -Last 15; \"--- build ---\"; npm run build 2>&1 | Select-Object -Last 8)",
+      "Bash(sed -i 's#^/\\\\* ── Base ── \\\\*/$#/* Everything below lives in the components layer so Tailwind utilities \\(hidden, lg:flex, min-h-0...\\) still win. */\\\\n@layer components {\\\\n\\\\n/* ── Base ── */#' src/index.css)",
+      "Bash(printf '\\\\n} /* end @layer components */\\\\n')",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; Get-ChildItem \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\" -File | Sort-Object LastWriteTime -Descending | Select-Object -First 8 | ForEach-Object { $dim = \"\"; if \\($_.Extension -match 'jpe?g|png|webp'\\) { try { $i = [System.Drawing.Image]::FromFile\\($_.FullName\\); $dim = \"$\\($i.Width\\)x$\\($i.Height\\)\"; $i.Dispose\\(\\) } catch { $dim = \"?\" } }; \"{0}  {1}  {2}KB  {3}\" -f $_.Name, $dim, [math]::Round\\($_.Length/1KB\\), $_.LastWriteTime })",
+      "WebFetch(domain:racgadgets.com)",
+      "WebFetch(domain:studyinchinanow.com)",
+      "PowerShell(npm run lint 2>&1 | Where-Object { $_ -match 'error|warning|problem' -and $_ -notmatch 'baseline' }; \"lint done\"; npm run build 2>&1 | Select-Object -Last 2)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; foreach \\($n in \"person\",\"person2\",\"person3\",\"person4\",\"person5\",\"person6\"\\) { $b = New-Object System.Drawing.Bitmap \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\\\\$n.png\"; $c = $b.GetPixel\\(5,5\\); $m = $b.GetPixel\\([int]\\($b.Width/2\\), 20\\); \"{0}: {1}x{2}  pixelFormat={3}  corner\\(a={4},rgb={5},{6},{7}\\)  topMid\\(a={8}\\)\" -f $n, $b.Width, $b.Height, $b.PixelFormat, $c.A, $c.R, $c.G, $c.B, $m.A; $b.Dispose\\(\\) })",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; foreach \\($n in \"person4\",\"person5\",\"person6\",\"person\"\\) { $b = New-Object System.Drawing.Bitmap \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\\\\$n.png\"; $pts = @\\(@\\(150,700\\),@\\(880,700\\),@\\(200,300\\),@\\(850,1000\\),@\\(512,1480\\)\\); $s = \\($pts | ForEach-Object { $p = $b.GetPixel\\($_[0],$_[1]\\); \"\\($\\($_[0]\\),$\\($_[1]\\)\\)a=$\\($p.A\\)\" }\\) -join \"  \"; \"{0}: {1}\" -f $n, $s; $b.Dispose\\(\\) })",
+      "PowerShell(Remove-Item -LiteralPath \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\\\\cartoons\\\\desk.png\" -Confirm:$false; Remove-Item -LiteralPath \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\\\\cartoons\\\\phone.png\" -Confirm:$false; Get-ChildItem -LiteralPath \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\\\\cartoons\" | ForEach-Object { \"{0}  {1}KB\" -f $_.Name, [math]::Round\\($_.Length/1KB\\) })",
+      "PowerShell(npm run lint 2>&1 | Where-Object { $_ -match 'error|warning|problem' -and $_ -notmatch 'baseline' }; \"lint done\")",
+      "PowerShell(npm run build 2>&1)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; Get-ChildItem \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\" -File | Sort-Object LastWriteTime -Descending | Select-Object -First 6 | ForEach-Object { $dim = \"\"; if \\($_.Extension -match 'jpe?g|png|webp'\\) { try { $i = [System.Drawing.Image]::FromFile\\($_.FullName\\); $dim = \"$\\($i.Width\\)x$\\($i.Height\\)\"; $i.Dispose\\(\\) } catch { $dim = \"?\" } }; \"{0}  {1}  {2}KB\" -f $_.Name, $dim, [math]::Round\\($_.Length/1KB\\) })",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)"
     ]
   }
 }

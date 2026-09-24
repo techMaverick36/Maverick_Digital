@@ -1,32 +1,37 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { ThemeContext } from "./theme";
 
-const ThemeContext = createContext(null);
+const STORAGE_KEY = "mdh-theme";
 
-export function ThemeProvider({ children }) {
-	const [theme, setTheme] = useState(() => {
-		const stored = localStorage.getItem("mdh-theme");
-		return stored === "dark" ? "dark" : "light";
-	});
-
-	useEffect(() => {
-		const root = document.documentElement;
-		if (theme === "dark") {
-			root.classList.add("dark");
-		} else {
-			root.classList.remove("dark");
-		}
-		localStorage.setItem("mdh-theme", theme);
-	}, [theme]);
-
-	const toggle = () => setTheme((t) => (t === "dark" ? "light" : "dark"));
-
-	return (
-		<ThemeContext.Provider value={{ theme, toggle }}>
-			{children}
-		</ThemeContext.Provider>
-	);
+/* Stored choice wins; otherwise follow the OS setting. */
+function initialTheme() {
+	try {
+		const stored = localStorage.getItem(STORAGE_KEY);
+		if (stored === "dark" || stored === "light") return stored;
+	} catch {
+		/* storage unavailable (private mode) */
+	}
+	return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-export function useTheme() {
-	return useContext(ThemeContext);
+export function ThemeProvider({ children }) {
+	const [theme, setTheme] = useState(initialTheme);
+
+	useEffect(() => {
+		document.documentElement.classList.toggle("dark", theme === "dark");
+		document.documentElement.style.colorScheme = theme;
+	}, [theme]);
+
+	const toggle = () =>
+		setTheme((t) => {
+			const next = t === "dark" ? "light" : "dark";
+			try {
+				localStorage.setItem(STORAGE_KEY, next);
+			} catch {
+				/* storage unavailable */
+			}
+			return next;
+		});
+
+	return <ThemeContext.Provider value={{ theme, toggle }}>{children}</ThemeContext.Provider>;
 }

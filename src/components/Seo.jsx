@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const FALLBACK_SITE_URL = "https://your-domain.com";
+const FALLBACK_SITE_URL = "https://maverickdigitalhub.com";
 const SITE_NAME = "Maverick Digital Hub";
 const DEFAULT_IMAGE = "/logo.png";
 
