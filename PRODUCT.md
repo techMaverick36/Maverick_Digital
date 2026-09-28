@@ -18,7 +18,7 @@ It is also the studio's portfolio: real shipped client work is the main proof.
 
 ## Positioning
 
-A founder-led studio where clients talk directly to Martin Ssemugabi (founder), with real, live client websites across Ugandan businesses as proof. Pricing is shown openly (projects start from UGX 1,000,000) to set expectations and filter out unserious enquiries.
+A founder-led, partner-backed studio: Martin Ssemugabi (founder) leads every project and stays the single point of contact, bringing in trusted partner developers and designers on larger builds (owner confirmed, 2026-09-28). Real, live client websites across Ugandan businesses are the proof. Pricing is shown openly (projects start from UGX 1,000,000) to set expectations and filter out unserious enquiries.
 
 ## Operating Context
 
@@ -44,7 +44,7 @@ A founder-led studio where clients talk directly to Martin Ssemugabi (founder), 
 ## Evidence on Hand
 
 - Live client websites with screenshots in `public/` and `public/thumbs/`: Kainiu Investments, JOPE Forwarders, Byoreko Holdings, Galaxy Pet Store, Acts of Love Empowerment Foundation, RAC Gadgets, StudyInChinaNow, High Flyer Trading.
-- Project stats (duration, tech, impact) exist in `src/utils/constants.jsx` for Kainiu, JOPE, Byoreko, Acts of Love, High Flyer; none yet for Galaxy, RAC, StudyInChinaNow.
+- Project facts in `src/utils/constants.jsx`: duration, tech, and a `delivered` line (what the site does). Result percentages were removed on 2026-09-28 because they were unsourced and repeated (four projects claimed ~95% satisfaction). Only reinstate a result with its source and timeframe.
 - Three client testimonials in `src/utils/constants.jsx` (two attributed to the same name; owner to confirm).
 - Founder headshot `public/Martin2.jpeg`; 3D cartoon illustrations of the founder in `public/cartoons/`.
 - Mood photography supplied by the owner in `public/photos/` (from `public/Image1-4.jpg`; Image1 and Image2 are AI-generated and had a Gemini watermark, cropped out). Illustrative only: not photos of Maverick's own team or office.

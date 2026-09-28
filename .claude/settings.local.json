@@ -50,7 +50,12 @@
       "Bash(grep -n \"SectionHead\\\\|on-paper\\\\|\\\\\\\\\\\\\\\\u2019\\\\|’\" src/components/Booking.jsx)",
       "PowerShell(Set-Location \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\"; & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" detect --json src/index.css src/components src/Pages 2>&1 | Out-String | Select-Object -First 1 | ForEach-Object { if \\($_.Length -gt 6000\\) { $_.Substring\\(0, 6000\\) } else { $_ } })",
       "Bash(sed -i 's/rounded-\\\\[28px\\\\] px-5 py-24 md:px-10 md:py-32/rounded-[28px] px-5 pb-24 pt-32 md:px-10 md:pb-32 md:pt-40/' src/Pages/NotFound.jsx)",
-      "Bash(xargs sed -i 's/var\\(--blue\\)/var\\(--azure\\)/g; s/var\\(--r\\)\\\\]/var\\(--r-input\\)]/g; s/var\\(--r\\)\"/var\\(--r-input\\)\"/g')"
+      "Bash(xargs sed -i 's/var\\(--blue\\)/var\\(--azure\\)/g; s/var\\(--r\\)\\\\]/var\\(--r-input\\)]/g; s/var\\(--r\\)\"/var\\(--r-input\\)\"/g')",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\"; & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" detect --json src/components src/Pages 2>&1 | Out-String; \"exit=$LASTEXITCODE\"; & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" critique-storage slug \"src/Pages/Home.jsx\" 2>&1)",
+      "Bash(awk '/title:/{t=$0} /impact:/{print t \" => \" $0}' src/utils/constants.jsx)",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\"; $body = \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-user-Desktop-Dev-Maverick-Digital\\\\08dc6643-3152-486e-8332-b9922f4f8c53\\\\scratchpad\\\\critique-body.md\"; $env:IMPECCABLE_CRITIQUE_META = '{\"target\":\"critique and review yourself \\(home page\\)\",\"total_score\":30,\"max_score\":40,\"na_heuristics\":\"\",\"p0_count\":0,\"p1_count\":2}'; & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" critique-storage write \"src/Pages/Home.jsx\" $body 2>&1; & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" critique-storage trend \"src/Pages/Home.jsx\" 5 2>&1 | Out-String; Remove-Item -LiteralPath $body -Confirm:$false; \"temp removed\")",
+      "Bash(node \"/c/Users/user/AppData/Local/Temp/claude/C--Users-user-Desktop-Dev-Maverick-Digital/08dc6643-3152-486e-8332-b9922f4f8c53/scratchpad/fix-constants.cjs\")",
+      "Bash(node \"/c/Users/user/AppData/Local/Temp/claude/C--Users-user-Desktop-Dev-Maverick-Digital/08dc6643-3152-486e-8332-b9922f4f8c53/scratchpad/fix-copy.cjs\")"
     ]
   }
 }

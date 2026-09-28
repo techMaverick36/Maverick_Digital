@@ -3,14 +3,20 @@ import { Section, SectionHead } from "./Section";
 import { testimonials } from "../utils/constants";
 import { BUSINESS } from "../utils/business";
 
+/* Only reviews the client has approved (drafts carry `approved: false`), and one quote
+   per person (two quotes under the same name read like placeholder text). */
+const reviews = testimonials
+	.filter((t) => t.content?.trim() && t.approved !== false)
+	.filter((t, i, all) => all.findIndex((o) => o.name === t.name) === i);
+
 /* Subtle by request: the clients' words and names only. */
 const Testimonials = () => {
 	return (
 		<Section id="clients" labelledBy="clients-title">
 			<SectionHead id="clients-title" label="Client reviews" title="What our clients" highlight="say." align="stack" />
 
-			<div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-				{testimonials.map((t) => (
+			<div className={`mt-12 grid gap-4 md:grid-cols-2 ${reviews.length >= 3 ? "lg:grid-cols-3" : "lg:max-w-4xl"}`}>
+				{reviews.map((t) => (
 					<figure key={`${t.name}-${t.role}`} className="card flex flex-col p-7">
 						<Quotes size={28} weight="fill" style={{ color: "var(--azure)" }} aria-hidden="true" />
 						<blockquote className="mt-4 text-[1.05rem] leading-relaxed" style={{ color: "var(--ink)" }}>

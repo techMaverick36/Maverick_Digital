@@ -7,7 +7,7 @@ const CaseSheet = ({ project, eager = false }) => {
 		["Scope", project.tags.join(", ")],
 		["Delivered in", stats.duration],
 		["Built with", stats.tech],
-		["Result", stats.impact],
+		["Delivered", project.delivered],
 	].filter(([, v]) => v);
 
 	return (
@@ -49,7 +49,7 @@ const CaseSheet = ({ project, eager = false }) => {
 						{facts.map(([label, value]) => (
 							<tr key={label}>
 								<th scope="row">{label}</th>
-								<td className={label === "Result" ? "num font-semibold" : undefined} style={label === "Result" ? { color: "var(--azure-ink)" } : { color: "var(--ink)" }}>
+								<td className={label === "Delivered" ? "num font-semibold" : undefined} style={label === "Delivered" ? { color: "var(--azure-ink)" } : { color: "var(--ink)" }}>
 									{value}
 								</td>
 							</tr>

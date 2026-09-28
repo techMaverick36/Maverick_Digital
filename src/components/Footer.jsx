@@ -2,11 +2,10 @@ import { Link, useLocation } from "react-router-dom";
 import { ArrowUpRight } from "@phosphor-icons/react";
 import { BUSINESS, mailHref, telHref, whatsappHref } from "../utils/business";
 import ActionBar from "./ActionBar";
+import BackToTop from "./BackToTop";
 
 const pageLinks = [
-	{ label: "Services", hash: "services" },
-	{ label: "About", hash: "about" },
-	{ label: "Work", hash: "work" },
+
 	{ label: "Pricing", hash: "pricing" },
 	{ label: "How it works", hash: "process" },
 	{ label: "FAQ", hash: "faq" },
@@ -110,6 +109,7 @@ const Footer = () => {
 				</div>
 			</footer>
 			<ActionBar />
+			<BackToTop />
 		</>
 	);
 };

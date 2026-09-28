@@ -19,9 +19,9 @@ const Services = () => {
 			<SectionHead
 				id="services-title"
 				label="What we do"
-				title="Everything your business needs to"
-				highlight="win online."
-				lede="Most clients start with a website, then add branding or ongoing support as they grow. One team, one point of contact."
+				title="Five services,"
+				highlight="one point of contact."
+				lede="Most clients start with a website, then add branding or ongoing support as they grow. Pick a service to book a free consultation about it."
 			/>
 
 			<ul className="mt-14 border-b" style={{ borderColor: "var(--rule)" }}>

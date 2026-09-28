@@ -8,11 +8,15 @@ export const FAQ = [
 	},
 	{
 		q: "How long does it take?",
-		a: "It depends on the scope. Our past projects have taken between two weeks and four months. We agree a timeline with you before we start.",
+		a: "It depends on the scope. Our past projects have taken between two weeks and three months. We agree a timeline with you before we start.",
 	},
 	{
 		q: "What happens during the free consultation?",
 		a: `A 30-minute call or meeting with ${BUSINESS.founder}. We talk about your business, your goals and your budget, and recommend what makes sense for you. There is no obligation.`,
+	},
+	{
+		q: "Who will work on my project?",
+		a: `${BUSINESS.founder} leads every project personally, from the first call to launch. On larger builds he brings in trusted partner developers and designers, and he stays your single point of contact throughout.`,
 	},
 	{
 		q: "Do I need my content and photos ready?",

@@ -73,7 +73,7 @@ const Navbar = () => {
 
 						<div className="flex items-center gap-2">
 							<Link to={to("book")} className="btn btn-azure btn-sm group hidden sm:inline-flex">
-								Book a consultation
+								Book a free consultation
 								<span className="btn-disc" aria-hidden="true">
 									<ArrowUpRight size={15} weight="bold" />
 								</span>
@@ -99,7 +99,7 @@ const Navbar = () => {
 						data-open={menuOpen}
 					>
 						<ul>
-							{[...links, { label: "Book a consultation", hash: "book" }].map((l) => (
+							{[...links, { label: "Book a free consultation", hash: "book" }].map((l) => (
 								<li key={l.hash}>
 									<Link to={to(l.hash)} onClick={close} className="flex items-center justify-between border-b py-4 text-lg font-semibold" style={{ borderColor: "var(--rule)", color: "var(--ink)" }}>
 										{l.label}

@@ -7,9 +7,33 @@ import { onBookingRequest } from "../utils/bookingEvents";
 
 const SERVICES = ["Website", "Branding", "UI/UX design", "Social media", "Online shop or system", "IT support", "Not sure yet"];
 const BUDGETS = ["UGX 1,000,000 to 2,000,000", "UGX 2,000,000 to 5,000,000", "UGX 5,000,000 and above", "Not sure yet"];
-const STEPS = ["What and how", "When", "Your details"];
+const STEPS = ["Topic", "When and how", "Your details"];
 
 const emptyDetails = { fullname: "", company: "", phone: "", email: "", budget: "", notes: "" };
+
+/* Draft kept for this browser session only (day and time are not kept: slots go stale). */
+const DRAFT_KEY = "mdh-booking-draft";
+const readDraft = () => {
+	try {
+		return JSON.parse(sessionStorage.getItem(DRAFT_KEY)) ?? {};
+	} catch {
+		return {};
+	}
+};
+const writeDraft = (draft) => {
+	try {
+		sessionStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+	} catch {
+		/* storage unavailable (private mode): the form still works, it just is not kept */
+	}
+};
+const clearDraft = () => {
+	try {
+		sessionStorage.removeItem(DRAFT_KEY);
+	} catch {
+		/* ignore */
+	}
+};
 
 function validateDetails(d) {
 	const errors = {};
@@ -70,11 +94,12 @@ function Field({ id, label, optional, error, children }) {
 const Booking = () => {
 	const days = useMemo(() => upcomingDays(8), []);
 	const [step, setStep] = useState(0);
-	const [service, setService] = useState("");
-	const [callType, setCallType] = useState(CALL_TYPES[0].label);
+	const [draft] = useState(readDraft);
+	const [service, setService] = useState(draft.service ?? "");
+	const [callType, setCallType] = useState(draft.callType ?? CALL_TYPES[0].label);
 	const [dayKey, setDayKey] = useState(days[0]?.key ?? "");
 	const [hour, setHour] = useState(null);
-	const [details, setDetails] = useState(emptyDetails);
+	const [details, setDetails] = useState({ ...emptyDetails, ...draft.details });
 	const [errors, setErrors] = useState({});
 	const [receipt, setReceipt] = useState(null);
 	const headingRef = useRef(null);
@@ -92,6 +117,10 @@ const Booking = () => {
 			}),
 		[]
 	);
+
+	useEffect(() => {
+		writeDraft({ service, callType, details });
+	}, [service, callType, details]);
 
 	/* Move focus to the step heading on every step change (not on first load). */
 	useEffect(() => {
@@ -128,10 +157,13 @@ const Booking = () => {
 		const message = bookingMessage({ reference, day, hour, service, callType, details });
 		const wa = whatsappHref(message);
 		window.open(wa, "_blank", "noopener,noreferrer");
-		setReceipt({ reference, wa, calendar: googleCalendarLink({ day, hour, service, callType }) });
+		const mail = `${mailHref(`Consultation request ${reference}`)}&body=${encodeURIComponent(message)}`;
+		clearDraft();
+		setReceipt({ reference, wa, mail, calendar: googleCalendarLink({ day, hour, service, callType }) });
 	};
 
 	const reset = () => {
+		clearDraft();
 		setReceipt(null);
 		setStep(0);
 		setService("");
@@ -144,7 +176,7 @@ const Booking = () => {
 		<Section id="book" tone="navy" labelledBy="book-title">
 			<SectionHead
 				id="book-title"
-				label="Book a consultation"
+				label="Free consultation"
 				title="Let’s talk about"
 				highlight="your business."
 				lede={`Pick a time for a free 30-minute consultation with ${BUSINESS.founder.split(" ")[0]}. It takes under a minute, and there is no obligation.`}
@@ -271,6 +303,12 @@ const Booking = () => {
 										Add to my calendar
 									</a>
 								</div>
+								<p className="mt-5 text-[0.95rem]" style={{ color: "var(--ink-2)" }}>
+									No WhatsApp?{" "}
+									<a href={receipt.mail} className="link">
+										Send by email instead
+									</a>
+								</p>
 								<button type="button" onClick={reset} className="link mt-6 text-[0.95rem]">
 									Book a different time
 								</button>
@@ -307,17 +345,6 @@ const Booking = () => {
 											</p>
 										)}
 
-										<h4 className="mt-8 text-sm font-medium" style={{ color: "var(--ink)" }}>
-											How should we meet?
-										</h4>
-										<div role="group" aria-label="Meeting format" className="mt-3 grid gap-2 sm:grid-cols-3">
-											{CALL_TYPES.map((c) => (
-												<button key={c.id} type="button" className="option" aria-pressed={callType === c.label} onClick={() => setCallType(c.label)}>
-													{callType === c.label && <Check size={16} weight="bold" aria-hidden="true" />}
-													{c.label}
-												</button>
-											))}
-										</div>
 									</div>
 								)}
 
@@ -330,7 +357,22 @@ const Booking = () => {
 											Times are East Africa Time. {BUSINESS.founder.split(" ")[0]} confirms every booking personally.
 										</p>
 
-										<div role="radiogroup" aria-label="Day" className="mt-5 flex gap-2 overflow-x-auto pb-2">
+										<h4 className="mt-6 text-sm font-medium" style={{ color: "var(--ink)" }}>
+											How should we meet?
+										</h4>
+										<div role="group" aria-label="Meeting format" className="mt-3 grid gap-2 sm:grid-cols-3">
+											{CALL_TYPES.map((c) => (
+												<button key={c.id} type="button" className="option" aria-pressed={callType === c.label} onClick={() => setCallType(c.label)}>
+													{callType === c.label && <Check size={16} weight="bold" aria-hidden="true" />}
+													{c.label}
+												</button>
+											))}
+										</div>
+
+										<h4 className="mt-7 text-sm font-medium" style={{ color: "var(--ink)" }}>
+											Pick a day and time
+										</h4>
+										<div role="radiogroup" aria-label="Day" className="mt-3 flex gap-2 overflow-x-auto pb-2">
 											{days.map((d) => (
 												<button
 													key={d.key}

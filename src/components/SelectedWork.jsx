@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "@phosphor-icons/react";
+import { ArrowUpRight, CheckCircle } from "@phosphor-icons/react";
 import { Section, SectionHead } from "./Section";
 import { projects } from "../utils/constants";
 
@@ -8,12 +8,17 @@ import { projects } from "../utils/constants";
 const FEATURED_IDS = [5, 1, 6, 2, 7];
 const featured = FEATURED_IDS.map((id) => projects.find((p) => p.id === id)).filter(Boolean);
 
+/* What was delivered, as a light line of type. Unsourced result figures were removed
+   (a corporate buyer reads identical percentages as invented). */
 const ResultPill = ({ project }) => (
-	<span
-		className="num inline-flex items-center rounded-full px-3 py-1 text-[0.85rem] font-semibold"
-		style={{ background: "var(--azure)", color: "var(--on-azure)" }}
-	>
-		{project.stats?.impact ?? "Live site"}
+	<span className="flex items-center gap-2.5">
+		<CheckCircle size={20} weight="fill" style={{ color: "var(--azure)" }} aria-hidden="true" />
+		<span className="leading-tight">
+			<span className="block text-[0.72rem] font-medium" style={{ color: "var(--on-navy-3)" }}>
+				Delivered
+			</span>
+			<span className="block text-[0.95rem] font-semibold text-white">{project.delivered ?? "A live website"}</span>
+		</span>
 	</span>
 );
 
@@ -37,7 +42,7 @@ const WorkCard = ({ project, wide = false }) => (
 		</div>
 		<div className={wide ? "px-3 pb-4 pt-5 md:p-4" : "flex flex-1 flex-col px-3 pb-3 pt-5"}>
 			<p className="text-sm" style={{ color: "var(--on-navy-3)" }}>
-				{project.tags.join(" / ")}
+				{project.tags.join(", ")}
 			</p>
 			<h3 className={`mt-2 font-semibold tracking-[-0.025em] text-white ${wide ? "text-3xl md:text-4xl" : "text-xl"}`}>{project.title}</h3>
 			{wide && (

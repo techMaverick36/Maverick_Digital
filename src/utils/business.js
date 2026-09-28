@@ -7,6 +7,8 @@
 export const BUSINESS = {
 	name: "Maverick Digital Hub",
 	founder: "Martin Ssemugabi",
+	/* TODO: switch to a domain address (e.g. hello@maverickdigitalhub.com). A Gmail address on a
+	   company site is one of the first things a corporate buyer reads as "not a real company". */
 	email: "mavericktech750@gmail.com",
 	phones: [
 		{ display: "+256 770 302 731", tel: "+256770302731" },

@@ -34,7 +34,7 @@ const Questions = () => {
 						<div className="p-7">
 							<h3 className="text-2xl font-semibold tracking-[-0.025em] text-white">Still deciding?</h3>
 							<p className="lede mt-2 !text-base">
-								Tell {first} what you have in mind. You will get honest advice, whether or not we end up working together.
+								Tell us what you have in mind. You will get honest advice, whether or not we end up working together.
 							</p>
 							<div className="mt-6 grid gap-2.5">
 								<a href="#book" className="btn btn-azure group justify-between">

@@ -18,7 +18,6 @@ const reasons = [
 ];
 
 const About = () => {
-	const first = BUSINESS.founder.split(" ")[0];
 	return (
 		<Section id="about" labelledBy="about-title">
 			<div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
@@ -44,20 +43,20 @@ const About = () => {
 					<div className="float-card absolute left-4 top-4 flex items-center gap-3 px-4 py-3" style={{ "--d": "0ms" }}>
 						<img src="/brand-mark.png" alt="" width="28" height="28" className="h-7 w-7" />
 						<p className="text-sm font-semibold leading-tight" style={{ color: "var(--ink)" }}>
-							You speak to {first},
+							Founder-led,
 							<br />
 							<span className="font-normal" style={{ color: "var(--ink-3)" }}>
-								not a sales team
+								partner-backed
 							</span>
 						</p>
 					</div>
 				</div>
 
 				<div className="lg:col-span-6">
-					<SectionHead id="about-title" label="About us" title="A founder-led studio you can" highlight="actually reach." align="stack" />
+					<SectionHead id="about-title" label="About us" title="A founder-led studio with the" highlight="team to deliver." align="stack" />
 					<p className="lede mt-6">
 						{BUSINESS.name} was started by {BUSINESS.founder} to help Ugandan businesses show up online with the same
-						quality they bring to their work. Small enough to know your business, organised enough to deliver.
+						quality they bring to their work. Martin leads every project personally, and brings in trusted partner developers and designers on larger builds, so you keep one point of contact whatever the size of the job.
 					</p>
 
 					<ul className="mt-8 grid gap-5">
@@ -78,7 +77,7 @@ const About = () => {
 
 					<div className="mt-10 flex flex-wrap items-center gap-5">
 						<a href="#book" className="btn btn-navy group">
-							Meet {first} on a free call
+							Book a free consultation
 							<span className="btn-disc" aria-hidden="true">
 								<ArrowUpRight size={17} weight="bold" />
 							</span>

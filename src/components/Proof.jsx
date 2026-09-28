@@ -19,7 +19,7 @@ const Proof = () => {
 		{ figure: String(projects.length), unit: "", label: "Client websites live today, each one open to inspect." },
 		{ figure: "5", unit: "", label: "Services under one roof, from website to brand to IT." },
 		{ figure: "1M", unit: "UGX", label: "Starting fee, always confirmed in a written quote." },
-		{ figure: "1", unit: "day", label: "Reply time for every enquiry, from the founder." },
+		{ figure: "1", unit: "day", label: "Reply time for every enquiry." },
 	];
 
 	return (
@@ -43,9 +43,9 @@ const Proof = () => {
 
 			<Section tone="navy" labelledBy="statement">
 				<p id="statement" className="max-w-4xl text-[1.7rem] font-semibold leading-[1.25] tracking-[-0.025em] md:text-[2.6rem]">
-					<span className="text-white">We partner with Ugandan business owners who want to be taken seriously,</span>{" "}
+					<span className="text-white">One point of contact, one written quote, and a website you are proud to send to clients.</span>{" "}
 					<span style={{ color: "var(--on-navy-3)" }}>
-						and build the websites, brands and systems that help customers find them, trust them and get in touch.
+						Martin leads every project from the first call to launch day, brings in trusted partners on larger builds, and we stay on after launch for support.
 					</span>
 				</p>
 
@@ -53,9 +53,22 @@ const Proof = () => {
 					{stats.map((s) => (
 						<li key={s.label} className="flex min-h-[210px] flex-col justify-between rounded-[20px] p-6" style={{ background: "var(--navy-2)" }}>
 							<p className="num text-6xl font-bold leading-none tracking-[-0.045em] text-white">
-								{s.unit === "UGX" && <span className="mr-1 align-top text-lg font-semibold tracking-normal" style={{ color: "var(--azure)" }}>UGX</span>}
+								{s.unit === "UGX" && (
+									<>
+										<span className="align-top text-lg font-semibold tracking-normal" style={{ color: "var(--azure)" }}>
+											UGX
+										</span>{" "}
+									</>
+								)}
 								{s.figure}
-								{s.unit === "day" && <span className="ml-1.5 text-2xl font-semibold tracking-normal" style={{ color: "var(--azure)" }}>day</span>}
+								{s.unit === "day" && (
+									<>
+										{" "}
+										<span className="text-2xl font-semibold tracking-normal" style={{ color: "var(--azure)" }}>
+											day
+										</span>
+									</>
+								)}
 							</p>
 							<p className="mt-8 text-[0.95rem] leading-snug" style={{ color: "var(--on-navy-2)" }}>
 								{s.label}

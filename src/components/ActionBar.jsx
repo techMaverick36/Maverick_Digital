@@ -22,7 +22,7 @@ const ActionBar = () => {
 					</a>
 					<Link to={bookTo} className="btn btn-navy btn-sm btn-plain !min-h-[48px] !px-2 !gap-1.5">
 						<CalendarCheck size={18} weight="bold" aria-hidden="true" />
-						Book a call
+						Book free call
 					</Link>
 				</div>
 			</nav>

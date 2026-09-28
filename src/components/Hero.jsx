@@ -8,23 +8,27 @@ const Hero = () => {
 	return (
 		<section aria-labelledby="hero-title" className="px-3 pt-3 md:px-4">
 			<div className="on-navy relative isolate overflow-hidden rounded-[28px]" style={{ background: "var(--navy)" }}>
-				<img
-					src="/photos/hero-laptop.jpg"
-					alt=""
-					width="1200"
-					height="740"
-					fetchPriority="high"
-					className="absolute inset-0 -z-10 h-full w-full object-cover object-[70%_40%]"
-				/>
+				{/* Real client sites as the hero visual, replacing stock imagery (critique 2026-09-28).
+				    To go back to the photo: <img src="/photos/hero-laptop.jpg" alt="" className="absolute inset-0 -z-10 h-full w-full object-cover object-[70%_40%]" /> */}
+				<div aria-hidden="true" className="hero-wall absolute inset-0 -z-10">
+					<div className="hero-wall-grid">
+						{[...projects, projects[0]].slice(0, 9).map((p, i) => (
+							<img
+								key={`${p.id}-${i}`}
+								src={p.thumb}
+								alt=""
+								width="900"
+								height="482"
+								loading={i < 6 ? "eager" : "lazy"}
+								fetchPriority={i === 1 ? "high" : undefined}
+								className="block aspect-[16/10] w-full rounded-[12px] border object-cover object-top"
+								style={{ borderColor: "rgba(255,255,255,0.08)" }}
+							/>
+						))}
+					</div>
+				</div>
 				{/* navy wash: solid behind the text, photo breathing on the right */}
-				<div
-					aria-hidden="true"
-					className="absolute inset-0 -z-10"
-					style={{
-						background:
-							"linear-gradient(90deg, rgba(7,9,12,0.97) 0%, rgba(7,9,12,0.88) 38%, rgba(7,9,12,0.4) 75%, rgba(7,9,12,0.25) 100%), linear-gradient(0deg, rgba(7,9,12,0.92) 0%, rgba(7,9,12,0) 55%)",
-					}}
-				/>
+				<div aria-hidden="true" className="hero-wash absolute inset-0 -z-10" />
 
 				<div className="mx-auto grid min-h-[min(760px,calc(100dvh-7.5rem))] max-w-6xl items-end gap-10 px-5 pb-10 pt-32 md:px-10 md:pb-14 md:pt-36 lg:grid-cols-12">
 					<div className="lg:col-span-8">
@@ -34,7 +38,7 @@ const Hero = () => {
 									<img key={p.id} src={p.thumb} alt="" width="900" height="482" className="h-6 w-6 rounded-full border-2 object-cover object-top" style={{ borderColor: "var(--bg)" }} />
 								))}
 							</span>
-							<span className="num">{projects.length} live client websites</span>
+							<span className="num">Web design and branding, Kampala</span>
 						</span>
 
 						<h1 id="hero-title" className="h-hero mt-6 text-[2.6rem] text-white sm:text-6xl lg:text-[3.6rem] xl:text-[4.1rem]">
