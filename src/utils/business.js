@@ -9,7 +9,7 @@ export const BUSINESS = {
 	founder: "Martin Ssemugabi",
 	/* TODO: switch to a domain address (e.g. hello@maverickdigitalhub.com). A Gmail address on a
 	   company site is one of the first things a corporate buyer reads as "not a real company". */
-	email: "mavericktech750@gmail.com",
+	email: "info@maverickdigitalhub.com",
 	phones: [
 		{ display: "+256 770 302 731", tel: "+256770302731" },
 		{ display: "+256 745 496 783", tel: "+256745496783" },
@@ -23,16 +23,21 @@ export const BUSINESS = {
 
 	/* TODO: paste the public link to the Google Business Profile (share > copy link).
 	   Leave empty to hide every "Find us on Google" link. */
-	googleProfileUrl: "",
+	googleProfileUrl: "https://share.google/kymwrr793GjsnrHFv",
 
 	/* TODO: when a Google Calendar appointment schedule exists, paste its booking
 	   page link here; the booking panel then offers it as an extra option. */
-	calendarBookingUrl: "",
+	calendarBookingUrl: "https://calendar.app.google/hkgw9sF5sRicGuJL8",
 
 	/* TODO: match these to the hours on the Google Business Profile.
 	   day: 0 = Sunday ... 6 = Saturday. Times are East Africa Time (EAT, UTC+3). */
 	hours: [
-		{ days: [1, 2, 3, 4, 5], open: 9, close: 17, label: "Mon to Fri, 9am to 5pm" },
+		{
+			days: [1, 2, 3, 4, 5],
+			open: 9,
+			close: 17,
+			label: "Mon to Fri, 9am to 5pm",
+		},
 		{ days: [6], open: 10, close: 13, label: "Sat, 10am to 1pm" },
 	],
 	responseTime: "within one business day",
