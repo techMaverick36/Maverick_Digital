@@ -22,7 +22,13 @@ export default function PortfolioPage() {
 
 			<main id="main">
 				<section aria-labelledby="page-title" className="px-3 pt-3 md:px-4">
-					<div className="on-navy rounded-[28px] px-5 pb-14 pt-28 md:px-10 md:pb-20 md:pt-36" style={{ background: "var(--navy)" }}>
+					<div className="on-navy rounded-[28px] px-5 pb-14 pt-28 md:px-10 md:pb-20 md:pt-36" style={{
+							backgroundColor: "var(--navy)",
+							backgroundImage:
+								"linear-gradient(90deg, rgba(16,21,28,0.94) 0%, rgba(16,21,28,0.82) 55%, rgba(16,21,28,0.6) 100%), url('/photos/hero-laptop.jpg')",
+							backgroundSize: "cover",
+							backgroundPosition: "center 40%",
+						}}>
 						<div className="mx-auto max-w-6xl">
 							<Link to="/" className="link inline-flex items-center gap-1.5 text-[0.95rem]">
 								<ArrowLeft size={16} aria-hidden="true" />
