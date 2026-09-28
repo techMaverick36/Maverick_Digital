@@ -1,25 +1,24 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { ArrowUpRight, List, Moon, Sun, X } from "@phosphor-icons/react";
-import { useTheme } from "../context/theme";
+import { ArrowRight, ArrowUpRight, List, X } from "@phosphor-icons/react";
+import { BUSINESS } from "../utils/business";
+
+const links = [
+	{ label: "Services", hash: "services" },
+	{ label: "About", hash: "about" },
+	{ label: "Work", hash: "work" },
+	{ label: "Pricing", hash: "pricing" },
+	{ label: "FAQ", hash: "faq" },
+];
 
 const Navbar = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 	const sentinel = useRef(null);
 	const { pathname } = useLocation();
-	const isHome = pathname === "/";
-	const { theme, toggle } = useTheme();
+	const to = (hash) => (pathname === "/" ? `#${hash}` : `/#${hash}`);
 
-	const navItems = [
-		{ label: "Home", href: "/", current: isHome },
-		{ label: "Services", href: isHome ? "#services" : "/#services" },
-		{ label: "About", href: isHome ? "#about" : "/#about" },
-		{ label: "Process", href: isHome ? "#process" : "/#process" },
-		{ label: "Portfolio", href: "/portfolio", current: pathname === "/portfolio" },
-	];
-
-	/* Scrolled state from an observer on a sentinel at the top of the page (no scroll listener). */
+	/* Scrolled once the page moves (sentinel observer, no scroll listener). */
 	useEffect(() => {
 		const el = sentinel.current;
 		if (!el) return;
@@ -35,85 +34,87 @@ const Navbar = () => {
 		return () => window.removeEventListener("keydown", onKey);
 	}, [menuOpen]);
 
-	const ThemeIcon = theme === "dark" ? Sun : Moon;
-	const themeLabel = theme === "dark" ? "Switch to light theme" : "Switch to dark theme";
+	const close = () => setMenuOpen(false);
 
 	return (
 		<>
-			<div ref={sentinel} aria-hidden="true" className="absolute top-0 left-0 h-6 w-px" />
 			<a href="#main" className="skip-link">
 				Skip to content
 			</a>
 
-			<header
-				className="nav-shell fixed inset-x-0 top-0 z-40 border-b border-transparent"
-				data-scrolled={scrolled || menuOpen}
-			>
-				<nav
-					className="mx-auto flex max-w-7xl items-center justify-between px-5 md:px-8"
-					style={{ height: "var(--nav-h)" }}
-					aria-label="Primary"
-				>
-					<Link to="/" className="text-[1.05rem] font-semibold tracking-[-0.02em]" style={{ color: "var(--ink)" }}>
-						Maverick Digital Hub
-					</Link>
+			{/* Page-top sentinel: the nav settles to the top once the contact bar scrolls away */}
+			<div ref={sentinel} aria-hidden="true" className="pointer-events-none absolute left-0 top-0 h-12 w-px" />
 
-					<ul className="hidden lg:flex items-center gap-8">
-						{navItems.map((item) => (
-							<li key={item.label}>
-								<Link to={item.href} className="nav-link" aria-current={item.current ? "page" : undefined}>
-									{item.label}
-								</Link>
-							</li>
-						))}
-					</ul>
-
-					<div className="flex items-center gap-1.5">
-						<button type="button" onClick={toggle} className="icon-btn" aria-label={themeLabel} title={themeLabel}>
-							<ThemeIcon size={19} />
-						</button>
-						<Link to="/#contact" className="btn btn-primary btn-sm ml-2 hidden lg:inline-flex">
-							Start a project
-							<ArrowUpRight size={15} weight="bold" className="arrow" />
+			{/* Floating glass nav: hovers inside the hero panel, then floats at the top */}
+			<header className="float-nav fixed inset-x-0 top-3 z-40 px-5 md:px-8" data-scrolled={scrolled || menuOpen}>
+				<div className="relative mx-auto max-w-6xl">
+					<nav aria-label="Primary" className="nav-pill flex items-center justify-between gap-6 rounded-full pl-4 pr-2 md:pl-5" style={{ height: "var(--nav-h)" }}>
+						<Link to="/" className="flex items-center gap-2.5" aria-label={`${BUSINESS.name}, home`}>
+							<img src="/brand-mark.png" alt="" width="32" height="32" className="h-8 w-8" />
+							<span className="whitespace-nowrap text-[0.98rem] font-bold tracking-[-0.02em] md:text-[1.02rem]" style={{ color: "var(--ink)" }}>
+								Maverick <span style={{ color: "var(--azure-ink)" }}>Digital Hub</span>
+							</span>
 						</Link>
-						<button
-							type="button"
-							onClick={() => setMenuOpen((o) => !o)}
-							className="icon-btn lg:hidden"
-							aria-label={menuOpen ? "Close menu" : "Open menu"}
-							aria-expanded={menuOpen}
-							aria-controls="mobile-menu"
-						>
-							{menuOpen ? <X size={20} /> : <List size={20} />}
-						</button>
-					</div>
-				</nav>
 
-				<div
-					id="mobile-menu"
-					className="mobile-menu absolute inset-x-0 top-full border-t px-5 pb-8 pt-4 lg:hidden"
-					data-open={menuOpen}
-					style={{ borderColor: "var(--line)", background: "var(--bg)" }}
-				>
-					<ul className="flex flex-col">
-						{navItems.map((item) => (
-							<li key={item.label}>
-								<Link
-									to={item.href}
-									onClick={() => setMenuOpen(false)}
-									aria-current={item.current ? "page" : undefined}
-									className="block py-3 text-[1.6rem] font-semibold tracking-[-0.03em]"
-									style={{ color: item.current ? "var(--ink)" : "var(--ink-2)" }}
-								>
-									{item.label}
+						<ul className="hidden items-center gap-7 lg:flex">
+							{links.map((l) => (
+								<li key={l.hash}>
+									<Link to={to(l.hash)} className="nav-link">
+										{l.label}
+									</Link>
+								</li>
+							))}
+							<li>
+								<Link to="/portfolio" className="nav-link" aria-current={pathname === "/portfolio" ? "page" : undefined}>
+									Projects
 								</Link>
 							</li>
-						))}
-					</ul>
-					<Link to="/#contact" onClick={() => setMenuOpen(false)} className="btn btn-primary mt-6 w-full">
-						Start a project
-						<ArrowUpRight size={16} weight="bold" className="arrow" />
-					</Link>
+						</ul>
+
+						<div className="flex items-center gap-2">
+							<Link to={to("book")} className="btn btn-azure btn-sm group hidden sm:inline-flex">
+								Book a consultation
+								<span className="btn-disc" aria-hidden="true">
+									<ArrowUpRight size={15} weight="bold" />
+								</span>
+							</Link>
+							<button
+								type="button"
+								onClick={() => setMenuOpen((o) => !o)}
+								className="btn btn-outline btn-sm btn-plain !px-3 sm:!px-4 lg:hidden"
+								aria-label={menuOpen ? "Close menu" : "Open menu"}
+								aria-expanded={menuOpen}
+								aria-controls="site-menu"
+							>
+								{menuOpen ? <X size={18} aria-hidden="true" /> : <List size={18} aria-hidden="true" />}
+								<span className="hidden sm:inline">{menuOpen ? "Close" : "Menu"}</span>
+							</button>
+						</div>
+					</nav>
+
+					<div
+						id="site-menu"
+						className="menu-panel absolute inset-x-0 top-full mt-2 max-h-[calc(100dvh-7rem)] overflow-y-auto rounded-[24px] border px-5 pb-5 pt-1 lg:hidden"
+						style={{ borderColor: "var(--rule-strong)", background: "#0c1016", boxShadow: "var(--shadow-float)" }}
+						data-open={menuOpen}
+					>
+						<ul>
+							{[...links, { label: "Book a consultation", hash: "book" }].map((l) => (
+								<li key={l.hash}>
+									<Link to={to(l.hash)} onClick={close} className="flex items-center justify-between border-b py-4 text-lg font-semibold" style={{ borderColor: "var(--rule)", color: "var(--ink)" }}>
+										{l.label}
+										<ArrowRight size={18} aria-hidden="true" style={{ color: "var(--azure-ink)" }} />
+									</Link>
+								</li>
+							))}
+							<li>
+								<Link to="/portfolio" onClick={close} className="flex items-center justify-between py-4 text-lg font-semibold" style={{ color: "var(--ink)" }}>
+									All projects
+									<ArrowRight size={18} aria-hidden="true" style={{ color: "var(--azure-ink)" }} />
+								</Link>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</header>
 		</>

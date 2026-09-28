@@ -1,67 +1,116 @@
-import { Link } from "react-router-dom";
-import Reveal from "./Reveal";
+import { Link, useLocation } from "react-router-dom";
+import { ArrowUpRight } from "@phosphor-icons/react";
+import { BUSINESS, mailHref, telHref, whatsappHref } from "../utils/business";
+import ActionBar from "./ActionBar";
 
-const links = [
-	{ label: "Services", to: "/#services" },
-	{ label: "About", to: "/#about" },
-	{ label: "Process", to: "/#process" },
-	{ label: "Portfolio", to: "/portfolio" },
-	{ label: "Contact", to: "/#contact" },
+const pageLinks = [
+	{ label: "Services", hash: "services" },
+	{ label: "About", hash: "about" },
+	{ label: "Work", hash: "work" },
+	{ label: "Pricing", hash: "pricing" },
+	{ label: "How it works", hash: "process" },
+	{ label: "FAQ", hash: "faq" },
 ];
 
 const Footer = () => {
+	const { pathname } = useLocation();
+	const to = (hash) => (pathname === "/" ? `#${hash}` : `/#${hash}`);
+	const year = new Date().getFullYear();
+
 	return (
-		<footer className="border-t px-5 pb-10 pt-16 md:px-8" style={{ borderColor: "var(--line)" }}>
-			<div className="mx-auto max-w-7xl">
-				<div className="grid gap-10 md:grid-cols-12">
-					<div className="md:col-span-5">
-						<Link to="/" className="text-lg font-semibold tracking-[-0.02em]" style={{ color: "var(--ink)" }}>
-							Maverick Digital Hub
-						</Link>
-						<p className="mt-3 max-w-sm text-[0.95rem] leading-relaxed" style={{ color: "var(--ink-2)" }}>
-							Websites, branding, and digital work that helps businesses look polished and credible online.
-						</p>
-					</div>
+		<>
+			<footer className="on-navy px-3 pb-3 md:px-4 md:pb-4">
+				<div className="rounded-[28px] px-5 pt-16 md:px-10" style={{ background: "var(--navy)", color: "var(--on-navy-2)" }}>
+					<div className="mx-auto max-w-6xl">
+						<div className="grid gap-12 pb-14 md:grid-cols-12 md:gap-10">
+							<div className="md:col-span-5">
+								<Link to="/" className="flex items-center gap-2.5" aria-label={`${BUSINESS.name}, home`}>
+									<img src="/brand-mark.png" alt="" width="38" height="38" className="h-[38px] w-[38px]" />
+									<span className="text-lg font-bold tracking-[-0.02em] text-white">{BUSINESS.name}</span>
+								</Link>
+								<p className="mt-5 max-w-sm leading-relaxed">Websites and brands for Ugandan businesses that want to be taken seriously.</p>
+								<Link to={to("book")} className="btn btn-azure group mt-7">
+									Book a free consultation
+									<span className="btn-disc" aria-hidden="true">
+										<ArrowUpRight size={17} weight="bold" />
+									</span>
+								</Link>
+							</div>
 
-					<nav className="md:col-span-3" aria-label="Footer">
-						<ul className="grid grid-cols-2 gap-y-1 text-[0.95rem]">
-							{links.map((l) => (
-								<li key={l.label}>
-									<Link to={l.to} className="nav-link inline-block">
-										{l.label}
-									</Link>
-								</li>
-							))}
-						</ul>
-					</nav>
+							<div className="md:col-span-3">
+								<h2 className="text-sm font-semibold text-white">Contact</h2>
+								<ul className="mt-4 grid gap-2.5">
+									{BUSINESS.phones.map((p) => (
+										<li key={p.tel}>
+											<a href={telHref(p.tel)} className="num hover:text-white">
+												{p.display}
+											</a>
+										</li>
+									))}
+									<li>
+										<a href={whatsappHref()} target="_blank" rel="noopener noreferrer" className="hover:text-white">
+											WhatsApp
+										</a>
+									</li>
+									<li>
+										<a href={mailHref()} className="break-all hover:text-white">
+											{BUSINESS.email}
+										</a>
+									</li>
+								</ul>
+							</div>
 
-					<div className="text-[0.95rem] md:col-span-4" style={{ color: "var(--ink-2)" }}>
-						<a href="mailto:mavericktech750@gmail.com" className="nav-link inline-block [overflow-wrap:anywhere]">
-							mavericktech750@gmail.com
-						</a>
-						<br />
-						<a href="tel:+256770302731" className="nav-link inline-block">
-							+256 770 302 731
-						</a>
-						<p className="mt-1">Kampala, Uganda</p>
+							<div className="md:col-span-2">
+								<h2 className="text-sm font-semibold text-white">Hours</h2>
+								<ul className="mt-4 grid gap-2.5">
+									{BUSINESS.hours.map((h) => (
+										<li key={h.label}>{h.label}</li>
+									))}
+									<li>
+										{BUSINESS.city}, {BUSINESS.country}
+									</li>
+									{BUSINESS.googleProfileUrl && (
+										<li>
+											<a href={BUSINESS.googleProfileUrl} target="_blank" rel="noopener noreferrer" className="link">
+												Find us on Google
+											</a>
+										</li>
+									)}
+								</ul>
+							</div>
+
+							<nav aria-label="Footer" className="md:col-span-2">
+								<h2 className="text-sm font-semibold text-white">Company</h2>
+								<ul className="mt-4 grid gap-2.5">
+									{pageLinks.map((l) => (
+										<li key={l.hash}>
+											<Link to={to(l.hash)} className="hover:text-white">
+												{l.label}
+											</Link>
+										</li>
+									))}
+									<li>
+										<Link to="/portfolio" className="hover:text-white">
+											All projects
+										</Link>
+									</li>
+								</ul>
+							</nav>
+						</div>
+
+						<div className="flex flex-col gap-2 border-t py-6 text-sm sm:flex-row sm:justify-between" style={{ borderColor: "var(--navy-3)", color: "var(--on-navy-3)" }}>
+							<p>
+								&copy; {year} {BUSINESS.name}. All rights reserved.
+							</p>
+							<p>
+								{BUSINESS.city}, {BUSINESS.country}
+							</p>
+						</div>
 					</div>
 				</div>
-
-				{/* Signature: the wordmark rises out of a mask when the footer enters */}
-				<Reveal fade={false} className="mt-16 overflow-hidden" aria-hidden="true">
-					<p
-						className="rise-child select-none text-center text-[21vw] font-semibold leading-[0.9] tracking-[-0.065em] lg:text-[17.5rem]"
-						style={{ color: "var(--ink)" }}
-					>
-						Maverick
-					</p>
-				</Reveal>
-
-				<p className="mt-8 border-t pt-8 text-sm" style={{ borderColor: "var(--line)", color: "var(--ink-3)" }}>
-					&copy; {new Date().getFullYear()} Maverick Digital Hub. All rights reserved.
-				</p>
-			</div>
-		</footer>
+			</footer>
+			<ActionBar />
+		</>
 	);
 };
 

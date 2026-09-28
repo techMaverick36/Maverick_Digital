@@ -1,693 +1,723 @@
 @import "tailwindcss";
 
 /* ════════════════════════════════════════════════════════════
-   Maverick Digital Hub design system
-   Type:    Geist Variable (display + body), Geist Mono (numerals)
-   Color:   cool slate neutrals, ONE accent (sky, tuned to the logo blue)
-   Shape:   interactive = full pill, surfaces/images = 20px, inner = 12px
-   Motion:  custom ease-out for UI, ease-in-out for on-screen movement
-   Z-index: nav 40, mobile menu 50, grain 60
+   Maverick Digital Hub: company site
+   Dark theme (StratEdge-style): near-black page, rounded panels one step
+   lighter (hero, work, booking, footer), white type, logo azure as the one accent.
+   Type:   Plus Jakarta Sans throughout, medium-weight headlines (owner asked for StratEdge-style type)
+   Shape:  20px cards and images, full pills for actions, 12px inputs
+   Z:      action bar 30, header 40, menu 50
    ════════════════════════════════════════════════════════════ */
 
+/* Dark theme (owner's choice, StratEdge-like): near-black base, rounded
+   panels one step lighter, white type, Maverick azure as the only accent. */
 :root {
-	--bg: #f3f6f9;
-	--surface: #fbfcfd;
-	--surface-2: #e8eef3;
-	--line: rgba(11, 22, 34, 0.1);
-	--line-strong: rgba(11, 22, 34, 0.2);
+	--bg: #07090c; /* page */
+	--bg-2: #0b0f14; /* alternate sections */
+	--navy: #10151c; /* rounded section panels */
+	--navy-2: #171e27; /* raised tiles on a panel */
+	--navy-3: #25303d; /* rules and outlines on a panel */
+	--paper: #131920; /* cards */
+	--mist: var(--bg-2);
+	--mist-2: #1c2530;
 
-	--ink: #0b1622;
-	--ink-2: #3a4a5a;
-	--ink-3: #5c6c7c;
+	--ink: #ffffff;
+	--ink-2: #b6bfcc; /* 11:1 on bg */
+	--ink-3: #8b96a6; /* 6.6:1 on bg */
+	--on-navy: #ffffff;
+	--on-navy-2: #b6bfcc;
+	--on-navy-3: #8b96a6;
 
-	--accent: #3ba9f6;
-	--accent-hover: #1e96ec;
-	--on-accent: #041b2c;
-	--accent-text: #0b6db5;
-	--accent-soft: #dcecf8;
+	--azure: #1a8cf0; /* logo colour: pills, highlights, icons */
+	--azure-hover: #3a9ff3;
+	--azure-ink: #4aa8ff; /* azure as text on dark */
+	--azure-tint: rgba(26, 140, 240, 0.14);
+	--on-azure: #05080c;
 
-	--shadow: 0 1px 2px rgba(11, 34, 56, 0.05), 0 12px 32px -12px rgba(11, 34, 56, 0.14);
-	--grain-opacity: 0.035;
+	--rule: rgba(255, 255, 255, 0.08);
+	--rule-strong: rgba(255, 255, 255, 0.18);
+	--danger: #ff7a70;
 
-	--r-surface: 20px;
-	--r-inner: 12px;
+	--r-card: 20px;
+	--r-input: 12px;
+	--nav-h: 64px;
+	--shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4), 0 20px 44px -20px rgba(0, 0, 0, 0.8);
+	--shadow-float: 0 2px 6px rgba(0, 0, 0, 0.35), 0 28px 56px -18px rgba(0, 0, 0, 0.85);
 
 	--ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-	--ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
-
-	--nav-h: 68px;
-}
-
-.dark {
-	--bg: #0b1118;
-	--surface: #111922;
-	--surface-2: #17212c;
-	--line: rgba(226, 236, 245, 0.09);
-	--line-strong: rgba(226, 236, 245, 0.2);
-
-	--ink: #e6edf3;
-	--ink-2: #a7b5c2;
-	--ink-3: #7f8e9c;
-
-	--accent: #3ba9f6;
-	--accent-hover: #6cc0f9;
-	--on-accent: #041b2c;
-	--accent-text: #8ccdfb;
-	--accent-soft: #0f2432;
-
-	--shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 16px 40px -16px rgba(0, 0, 0, 0.6);
-	--grain-opacity: 0.05;
-}
-
-/* Everything below lives in the components layer so Tailwind utilities (hidden, lg:flex, min-h-0...) still win. */
-@layer components {
-
-/* ── Base ── */
-
-html {
-	scroll-behavior: smooth;
-	scroll-padding-top: calc(var(--nav-h) + 16px);
-}
-
-body {
-	margin: 0;
-	background: var(--bg);
-	color: var(--ink);
-	font-family: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
-	font-size: 1rem;
-	line-height: 1.6;
-	-webkit-font-smoothing: antialiased;
-	text-rendering: optimizeLegibility;
-}
-
-/* Fixed grain layer: breaks digital flatness without repainting on scroll. */
-body::after {
-	content: "";
-	position: fixed;
-	inset: 0;
-	z-index: 60;
-	pointer-events: none;
-	opacity: var(--grain-opacity);
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-::selection {
-	background: var(--accent);
-	color: var(--on-accent);
-}
-
-:focus-visible {
-	outline: 2px solid var(--accent-text);
-	outline-offset: 3px;
-	border-radius: 6px;
-}
-
-.mono {
-	font-family: "Geist Mono Variable", ui-monospace, monospace;
-	font-variant-numeric: tabular-nums;
-}
-
-.skip-link {
-	position: fixed;
-	top: 12px;
-	left: 12px;
-	z-index: 70;
-	padding: 0.6rem 1rem;
-	border-radius: 999px;
-	background: var(--ink);
-	color: var(--bg);
-	font-size: 0.875rem;
-	font-weight: 600;
-	transform: translateY(-160%);
-	transition: transform 200ms var(--ease-out);
-}
-
-.skip-link:focus-visible {
-	transform: translateY(0);
-}
-
-/* ── Type ── */
-
-.h-display {
-	font-weight: 600;
-	letter-spacing: -0.038em;
-	line-height: 1.04;
-	text-wrap: balance;
-	/* italic descender clearance */
-	padding-bottom: 0.06em;
-}
-
-.h-section {
-	font-weight: 600;
-	letter-spacing: -0.03em;
-	line-height: 1.1;
-	text-wrap: balance;
-	padding-bottom: 0.04em;
-}
-
-.h-display em,
-.h-section em {
-	font-style: italic;
-	font-weight: 500;
-	color: var(--ink-3);
-}
-
-.h-display em.accent {
-	color: var(--accent-text);
-}
-
-.lede {
-	color: var(--ink-2);
-	max-width: 58ch;
-	text-wrap: pretty;
-}
-
-/* ── Buttons (interactive = pill) ── */
-
-.btn {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	gap: 0.55rem;
-	min-height: 48px;
-	padding: 0 1.4rem;
-	border-radius: 999px;
-	font-weight: 560;
-	font-size: 0.95rem;
-	white-space: nowrap;
-	cursor: pointer;
-	border: 1px solid transparent;
-	transition:
-		transform 160ms var(--ease-out),
-		background-color 200ms ease,
-		border-color 200ms ease,
-		color 200ms ease;
-}
-
-.btn:active {
-	transform: scale(0.97);
-}
-
-.btn-primary {
-	background: var(--accent);
-	color: var(--on-accent);
-}
-
-.btn-outline {
-	background: transparent;
-	color: var(--ink);
-	border-color: var(--line-strong);
-}
-
-.btn-outline[aria-pressed="true"] {
-	background: var(--ink);
-	border-color: var(--ink);
-	color: var(--bg);
-}
-
-.btn-sm {
-	min-height: 40px;
-	padding: 0 1.1rem;
-	font-size: 0.875rem;
-}
-
-.btn .arrow,
-.link-arrow .arrow {
-	transition: transform 200ms var(--ease-out);
-}
-
-.link-arrow {
-	display: inline-flex;
-	align-items: center;
-	gap: 0.45rem;
-	min-height: 44px;
-	font-weight: 560;
-	color: var(--ink);
-	text-decoration: underline;
-	text-decoration-color: var(--line-strong);
-	text-underline-offset: 6px;
-	text-decoration-thickness: 1px;
-	transition: text-decoration-color 200ms ease;
-}
-
-.icon-btn {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	width: 44px;
-	height: 44px;
-	border-radius: 999px;
-	color: var(--ink-2);
-	cursor: pointer;
-	transition:
-		transform 160ms var(--ease-out),
-		background-color 200ms ease,
-		color 200ms ease;
-}
-
-.icon-btn:active {
-	transform: scale(0.94);
-}
-
-/* ── Nav ── */
-
-.nav-link {
-	position: relative;
-	padding: 0.5rem 0;
-	font-size: 0.925rem;
-	font-weight: 500;
-	color: var(--ink-2);
-	transition: color 200ms ease;
-}
-
-.nav-link::after {
-	content: "";
-	position: absolute;
-	left: 0;
-	right: 0;
-	bottom: 2px;
-	height: 1.5px;
-	background: currentColor;
-	transform: scaleX(0);
-	transform-origin: left;
-	transition: transform 240ms var(--ease-out);
-}
-
-.nav-link[aria-current="page"] {
-	color: var(--ink);
-}
-
-.nav-link[aria-current="page"]::after {
-	transform: scaleX(1);
-}
-
-.nav-shell {
-	transition:
-		background-color 240ms ease,
-		border-color 240ms ease,
-		backdrop-filter 240ms ease;
-}
-
-.nav-shell[data-scrolled="true"] {
-	background: color-mix(in srgb, var(--bg) 82%, transparent);
-	border-color: var(--line);
-	backdrop-filter: blur(14px) saturate(140%);
-	-webkit-backdrop-filter: blur(14px) saturate(140%);
-}
-
-/* Mobile menu: CSS transitions so rapid toggles retarget instead of restarting. */
-.mobile-menu {
-	opacity: 0;
-	transform: translateY(-8px);
-	visibility: hidden;
-	transition:
-		opacity 200ms var(--ease-out),
-		transform 200ms var(--ease-out),
-		visibility 0s linear 200ms;
-}
-
-.mobile-menu[data-open="true"] {
-	opacity: 1;
-	transform: none;
-	visibility: visible;
-	transition:
-		opacity 260ms var(--ease-out),
-		transform 260ms var(--ease-out),
-		visibility 0s;
-}
-
-/* ── Surfaces ── */
-
-.surface {
-	background: var(--surface);
-	border: 1px solid var(--line);
-	border-radius: var(--r-surface);
-}
-
-.input {
-	width: 100%;
-	min-height: 48px;
-	padding: 0.75rem 1rem;
-	border-radius: var(--r-inner);
-	border: 1px solid var(--line-strong);
-	background: var(--surface);
-	color: var(--ink);
-	font: inherit;
-	font-size: 1rem;
-	transition:
-		border-color 160ms ease,
-		box-shadow 160ms ease;
-}
-
-.input::placeholder {
-	color: var(--ink-3);
 }
-
-.input:focus {
-	outline: none;
-	border-color: var(--accent-text);
-	box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 28%, transparent);
-}
-
-.input[aria-invalid="true"] {
-	border-color: #c2413a;
-}
-
-.dark .input[aria-invalid="true"] {
-	border-color: #f08a82;
-}
-
-.field-error {
-	color: #b3372f;
-	font-size: 0.85rem;
-}
-
-.dark .field-error {
-	color: #f39a92;
-}
-
-/* ── Entrance (hero): @starting-style, no JS mount flag needed ── */
-
-.enter {
-	transition:
-		opacity 800ms var(--ease-out),
-		transform 800ms var(--ease-out),
-		filter 800ms var(--ease-out);
-	transition-delay: var(--d, 0ms);
-}
-
-@starting-style {
-	.enter {
-		opacity: 0;
-		transform: translateY(14px);
-		filter: blur(6px);
-	}
-}
-
-/* ── Scroll reveal (IntersectionObserver adds .is-in) ── */
-
-.reveal {
-	opacity: 0;
-	transform: translateY(18px);
-	filter: blur(4px);
-	transition:
-		opacity 700ms var(--ease-out),
-		transform 700ms var(--ease-out),
-		filter 700ms var(--ease-out);
-	transition-delay: var(--d, 0ms);
-}
-
-.reveal.is-in {
-	opacity: 1;
-	transform: none;
-	filter: none;
-}
-
-/* Same entrance, driven by an ancestor's .is-in (lets image + text sequence together). */
-.reveal-child {
-	opacity: 0;
-	transform: translateY(14px);
-	filter: blur(4px);
-	transition:
-		opacity 700ms var(--ease-out),
-		transform 700ms var(--ease-out),
-		filter 700ms var(--ease-out);
-	transition-delay: var(--d, 0ms);
-}
-
-.is-in .reveal-child {
-	opacity: 1;
-	transform: none;
-	filter: none;
-}
-
-/* Image wipe: clip from the bottom, inner image settles from a slight zoom. */
-.img-wipe {
-	clip-path: inset(0 0 100% 0 round var(--r-surface));
-	transition: clip-path 1000ms var(--ease-in-out);
-	transition-delay: var(--d, 0ms);
-}
-
-.img-wipe .settle {
-	transform: scale(1.08);
-	transition: transform 1400ms var(--ease-out);
-	transition-delay: var(--d, 0ms);
-}
-
-.is-in .img-wipe,
-.img-wipe.is-in {
-	clip-path: inset(0 0 0 0 round var(--r-surface));
-}
-
-.is-in .img-wipe .settle,
-.img-wipe.is-in .settle {
-	transform: scale(1);
-}
-
-/* Rise out of an overflow-hidden parent (footer wordmark). */
-.rise-child {
-	transform: translateY(100%);
-	transition: transform 1100ms var(--ease-out);
-}
-
-.is-in .rise-child {
-	transform: none;
-}
-
-/* ── Hero reel: the page's one marquee, a tilted wall of shipped sites ── */
-
-.reel {
-	position: relative;
-	height: 420px;
-	overflow: hidden;
-	perspective: 1600px;
-	-webkit-mask-image:
-		linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent),
-		linear-gradient(to right, #000 78%, transparent);
-	-webkit-mask-composite: source-in;
-	mask-image:
-		linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent),
-		linear-gradient(to right, #000 78%, transparent);
-	mask-composite: intersect;
-}
-
-@media (min-width: 1024px) {
-	.reel {
-		height: 660px;
-	}
-}
-
-.reel-plane {
-	display: grid;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-	gap: 18px;
-	margin-top: -10%;
-	transform: rotateX(20deg) rotateY(-14deg) rotateZ(9deg) scale(1.08);
-	transform-origin: 50% 35%;
-}
-
-.reel-col {
-	display: flex;
-	flex-direction: column;
-	animation: reel 52s linear infinite;
-	will-change: transform;
-}
-
-.reel-down {
-	animation-direction: reverse;
-	animation-delay: -26s;
-}
-
-.reel-shot {
-	display: block;
-	width: 100%;
-	height: auto;
-	margin-bottom: 18px;
-	border-radius: var(--r-inner);
-	border: 1px solid var(--line);
-	box-shadow: var(--shadow);
-}
-
-@keyframes reel {
-	to {
-		transform: translateY(-50%);
-	}
-}
-
-/* ── Scroll-lit type: words / steps brighten as they cross the middle of the viewport ── */
-
-.lit {
-	opacity: 1;
-}
-
-@supports (animation-timeline: view()) {
-	.lit {
-		opacity: 0.16;
-		animation: lit linear both;
-		animation-timeline: view();
-		animation-range: cover 30% cover 48%;
-	}
-
-	.lit-step {
-		opacity: 0.3;
-		animation-range: cover 25% cover 42%;
-	}
-
-	@keyframes lit {
-		to {
-			opacity: 1;
-		}
-	}
-}
-
-/* ── Process: rail fills as the list scrolls through (progressive enhancement) ── */
-
-.rail-fill {
-	transform-origin: top;
-	transform: scaleY(1);
-}
-
-@supports (animation-timeline: view()) {
-	.rail-fill {
-		animation: rail linear both;
-		animation-timeline: view();
-		animation-range: cover 15% cover 60%;
-	}
-
-	@keyframes rail {
-		from {
-			transform: scaleY(0);
-		}
-		to {
-			transform: scaleY(1);
-		}
-	}
-}
-
-/* ── Hover: only on devices that really hover ── */
-
-@media (hover: hover) and (pointer: fine) {
-	.btn-primary:hover {
-		background: var(--accent-hover);
-	}
-
-	.btn-outline:hover {
-		border-color: var(--ink);
-	}
-
-	.btn:hover .arrow,
-	.link-arrow:hover .arrow,
-	.group:hover .arrow {
-		transform: translate(2px, -2px);
-	}
-
-	.link-arrow:hover {
-		text-decoration-color: currentColor;
-	}
-
-	.icon-btn:hover {
-		background: var(--surface-2);
-		color: var(--ink);
-	}
-
-	.nav-link:hover {
-		color: var(--ink);
-	}
-
-	.nav-link:hover::after {
-		transform: scaleX(1);
-	}
-
-	.reel:hover .reel-col {
-		animation-play-state: paused;
-	}
-
-	.lift {
-		transition:
-			transform 300ms var(--ease-out),
-			box-shadow 300ms var(--ease-out),
-			border-color 200ms ease;
-	}
-
-	.lift:hover {
-		transform: translateY(-3px);
-		box-shadow: var(--shadow);
-		border-color: var(--line-strong);
-	}
-
-	.zoom-img img {
-		transition: transform 700ms var(--ease-out);
-	}
-
-	.group:hover .zoom-img img {
-		transform: scale(1.03);
-	}
-
-	.zoom-bg {
-		transition: transform 500ms var(--ease-out);
-	}
-
-	.group:hover .zoom-bg {
-		transform: translateY(-4px) scale(1.02);
-	}
-}
-
-/* ── Reduced motion: fewer + gentler, keep opacity for comprehension ── */
 
-@media (prefers-reduced-motion: reduce) {
+@layer base {
 	html {
-		scroll-behavior: auto;
+		color-scheme: dark;
+		scroll-behavior: smooth;
+		scroll-padding-top: calc(var(--nav-h) + 28px);
+		-webkit-text-size-adjust: 100%;
 	}
 
-	.enter,
-	.reveal,
-	.reveal-child {
+	body {
+		margin: 0;
+		background: var(--bg);
+		color: var(--ink);
+		font-family: "Plus Jakarta Sans Variable", ui-sans-serif, system-ui, sans-serif;
+		font-size: 1rem;
+		line-height: 1.6;
+		-webkit-font-smoothing: antialiased;
+		text-rendering: optimizeLegibility;
+		caret-color: var(--azure);
+		scrollbar-color: #2c3746 var(--bg);
+	}
+
+	::selection {
+		background: var(--azure);
+		color: #ffffff;
+	}
+
+	:focus-visible {
+		outline: 2px solid var(--azure);
+		outline-offset: 3px;
+		border-radius: 6px;
+	}
+
+	a {
+		text-underline-offset: 0.22em;
+		text-decoration-thickness: 1px;
+	}
+
+	h1,
+	h2,
+	h3 {
+		text-wrap: balance;
+	}
+
+	p {
+		text-wrap: pretty;
+	}
+
+	::-webkit-scrollbar {
+		width: 12px;
+		height: 12px;
+	}
+
+	::-webkit-scrollbar-track {
+		background: var(--bg);
+	}
+
+	::-webkit-scrollbar-thumb {
+		background: #2c3746;
+		border: 3px solid var(--bg);
+		border-radius: 999px;
+	}
+}
+
+@layer components {
+	.num {
+		font-variant-numeric: tabular-nums lining-nums;
+	}
+
+	.skip-link {
+		position: fixed;
+		top: 10px;
+		left: 10px;
+		z-index: 60;
+		padding: 0.6rem 1rem;
+		background: var(--navy);
+		color: #ffffff;
+		font-size: 0.875rem;
+		font-weight: 600;
+		border-radius: 999px;
+		transform: translateY(-180%);
+		transition: transform 200ms var(--ease-out);
+	}
+
+	.skip-link:focus-visible {
 		transform: none;
-		filter: none;
-		transition: opacity 300ms ease;
+	}
+
+	/* ── Type ── */
+
+	.h-hero {
+		font-weight: 560;
+		letter-spacing: -0.04em;
+		line-height: 1.04;
+	}
+
+	.h-section {
+		font-weight: 560;
+		letter-spacing: -0.035em;
+		line-height: 1.1;
+	}
+
+	.hl {
+		color: var(--azure-ink);
+	}
+
+	.on-navy .hl {
+		color: var(--azure);
+	}
+
+	.lede {
+		font-size: 1.1rem;
+		line-height: 1.7;
+		color: var(--ink-2);
+		max-width: 60ch;
+	}
+
+	.on-navy .lede {
+		color: var(--on-navy-2);
+	}
+
+	/* Section label chip (the reference class's pill label) */
+	.chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.4rem 0.85rem 0.4rem 0.45rem;
+		border-radius: 999px;
+		background: var(--azure-tint);
+		color: var(--azure-ink);
+		font-size: 0.85rem;
+		font-weight: 600;
+	}
+
+	.chip-dot {
+		width: 20px;
+		height: 20px;
+		border-radius: 999px;
+		display: grid;
+		place-items: center;
+		background: var(--azure);
+		color: var(--on-azure);
+	}
+
+	.on-navy .chip {
+		background: rgba(26, 140, 240, 0.16);
+		color: #cfe6fd;
+	}
+
+	/* ── Buttons: white pill, dark text, small azure arrow disc (owner-approved), outline ── */
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.75rem;
+		min-height: 52px;
+		padding: 0 0.5rem 0 1.4rem;
+		border-radius: 999px;
+		border: 1px solid transparent;
+		font-weight: 650;
+		font-size: 0.98rem;
+		line-height: 1;
+		white-space: nowrap;
+		cursor: pointer;
+		transition:
+			transform 160ms var(--ease-out),
+			background-color 180ms ease,
+			border-color 180ms ease,
+			color 180ms ease;
+	}
+
+	.btn:active {
+		transform: scale(0.97);
+	}
+
+	.btn:disabled {
+		opacity: 0.45;
+		cursor: not-allowed;
+		transform: none;
+	}
+
+	/* the arrow disc inside a pill */
+	.btn-disc {
+		display: grid;
+		place-items: center;
+		width: 38px;
+		height: 38px;
+		border-radius: 999px;
+		transition: transform 240ms var(--ease-out);
+	}
+
+	.btn-plain {
+		padding: 0 1.4rem;
+	}
+
+	.btn-azure {
+		background: #ffffff;
+		color: var(--on-azure);
+	}
+
+	.btn-azure .btn-disc {
+		background: var(--azure);
+		color: var(--on-azure);
+	}
+
+	.btn-navy {
+		background: #ffffff;
+		color: var(--on-azure);
+	}
+
+	.btn-navy .btn-disc {
+		background: var(--azure);
+		color: var(--on-azure);
+	}
+
+	.btn-outline {
+		background: transparent;
+		color: var(--ink);
+		border-color: var(--rule-strong);
+	}
+
+	.btn-outline .btn-disc {
+		background: var(--mist-2);
+	}
+
+	.on-navy .btn-outline {
+		color: #ffffff;
+		border-color: rgba(255, 255, 255, 0.28);
+	}
+
+	.btn-sm {
+		min-height: 44px;
+		font-size: 0.92rem;
+	}
+
+	.btn-sm .btn-disc {
+		width: 32px;
+		height: 32px;
+	}
+
+	.link {
+		color: var(--azure-ink);
+		font-weight: 600;
+		text-decoration: underline;
+		text-decoration-color: color-mix(in srgb, var(--azure-ink) 35%, transparent);
+		transition: text-decoration-color 180ms ease;
+	}
+
+	.on-navy .link {
+		color: #8cc8fb;
+	}
+
+	/* ── Header ── */
+
+	.nav-link {
+		position: relative;
+		padding: 0.5rem 0;
+		font-size: 0.95rem;
+		font-weight: 550;
+		color: var(--ink-2);
+		transition: color 180ms ease;
+	}
+
+	.nav-link[aria-current="page"] {
+		color: var(--ink);
+	}
+
+	/* Floating nav: hovers inside the hero panel, settles to the top once the page scrolls */
+	.float-nav {
+		--nav-offset: 16px; /* 16px inside the hero panel */
+		transform: translateY(var(--nav-offset));
+		transition: transform 420ms var(--ease-out);
+	}
+
+	.float-nav[data-scrolled="true"] {
+		--nav-offset: 0px;
+	}
+
+	.nav-pill {
+		background: rgba(12, 16, 22, 0.42);
+		border: 1px solid rgba(255, 255, 255, 0.12);
+		-webkit-backdrop-filter: blur(16px) saturate(150%);
+		backdrop-filter: blur(16px) saturate(150%);
+		transition:
+			background-color 300ms ease,
+			box-shadow 300ms ease,
+			border-color 300ms ease;
+	}
+
+	.float-nav[data-scrolled="true"] .nav-pill {
+		background: rgba(12, 16, 22, 0.88);
+		border-color: rgba(255, 255, 255, 0.1);
+		box-shadow: 0 18px 44px -20px rgba(0, 0, 0, 0.95);
+	}
+
+	.menu-panel {
+		opacity: 0;
+		transform: translateY(-6px);
+		visibility: hidden;
+		transition:
+			opacity 180ms var(--ease-out),
+			transform 180ms var(--ease-out),
+			visibility 0s linear 180ms;
+	}
+
+	.menu-panel[data-open="true"] {
+		opacity: 1;
+		transform: none;
+		visibility: visible;
+		transition:
+			opacity 240ms var(--ease-out),
+			transform 240ms var(--ease-out),
+			visibility 0s;
+	}
+
+	/* ── Cards ── */
+
+	.card {
+		border-radius: var(--r-card);
+		background: var(--paper);
+		border: 1px solid var(--rule);
+	}
+
+	.icon-tile {
+		display: grid;
+		place-items: center;
+		width: 52px;
+		height: 52px;
+		border-radius: 14px;
+		background: var(--azure-tint);
+		color: var(--azure-ink);
+		transition:
+			background-color 220ms ease,
+			color 220ms ease;
+	}
+
+	/* Services list (transitions live outside the hover query so they also ease out) */
+	.service-row {
+		transition: background-color 220ms ease;
+	}
+
+	.service-arrow {
+		color: var(--ink);
+		transition:
+			transform 280ms var(--ease-out),
+			background-color 220ms ease,
+			color 220ms ease,
+			border-color 220ms ease,
+			box-shadow 280ms var(--ease-out);
+	}
+
+	.service-name {
+		display: inline-block;
+		transition: transform 280ms var(--ease-out);
+	}
+
+	/* Floating proof cards: settle onto the hero photo once */
+	.float-card {
+		background: rgba(19, 25, 32, 0.86);
+		color: var(--ink);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		-webkit-backdrop-filter: blur(14px) saturate(140%);
+		backdrop-filter: blur(14px) saturate(140%);
+		border-radius: 16px;
+		box-shadow: var(--shadow-float);
+		transition:
+			transform 900ms var(--ease-out),
+			opacity 700ms var(--ease-out);
+		transition-delay: var(--d, 0ms);
 	}
 
 	@starting-style {
-		.enter {
-			transform: none;
-			filter: none;
+		.float-card {
+			opacity: 0;
+			transform: translateY(24px) scale(0.96);
 		}
 	}
 
-	.img-wipe,
-	.is-in .img-wipe {
-		clip-path: inset(0 0 0 0 round var(--r-surface));
-		transition: none;
+	/* ── Client-name marquee (the page's one marquee) ── */
+
+	.marquee {
+		display: flex;
+		overflow: hidden;
+		-webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+		mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
 	}
 
-	.img-wipe .settle {
-		transform: none;
-		transition: none;
+	.marquee-track {
+		display: flex;
+		flex-shrink: 0;
+		align-items: center;
+		gap: 3rem;
+		padding-right: 3rem;
+		animation: marquee 40s linear infinite;
 	}
 
-	.reel-col {
-		animation: none;
+	@keyframes marquee {
+		to {
+			transform: translateX(-100%);
+		}
 	}
 
-	.rise-child {
-		transform: none;
-		transition: none;
+	/* Key/value table (booking receipt, project facts) */
+	.facts {
+		width: 100%;
+		border-collapse: collapse;
 	}
 
-	.lit {
-		animation: none;
-		opacity: 1;
+	.facts th,
+	.facts td {
+		text-align: left;
+		vertical-align: top;
+		padding: 0.75rem 0;
+		border-top: 1px solid var(--rule);
 	}
 
-	.rail-fill {
-		animation: none;
-		transform: scaleY(1);
+	.facts th {
+		width: 38%;
+		padding-right: 1rem;
+		font-weight: 500;
+		color: var(--ink-3);
+		font-size: 0.9rem;
 	}
 
-	.mobile-menu,
-	.mobile-menu[data-open="true"] {
-		transform: none;
+	.on-navy .facts th,
+	.on-navy .facts td {
+		border-color: var(--navy-3);
+	}
+
+	.on-navy .facts th {
+		color: var(--on-navy-3);
+	}
+
+	/* A white card inside a navy panel returns to light-surface styling. */
+	.on-navy .on-paper {
+		color: var(--ink);
+	}
+
+	.on-navy .on-paper .btn-outline {
+		color: var(--ink);
+		border-color: var(--rule-strong);
+	}
+
+	.on-navy .on-paper .link {
+		color: var(--azure-ink);
+	}
+
+	.on-navy .on-paper .facts th,
+	.on-navy .on-paper .facts td {
+		border-color: var(--rule);
+	}
+
+	.on-navy .on-paper .facts th {
+		color: var(--ink-3);
+	}
+
+	/* ── FAQ ── */
+
+	.faq summary {
+		list-style: none;
+		cursor: pointer;
+	}
+
+	.faq summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.faq .faq-icon {
+		transition: transform 240ms var(--ease-out), background-color 200ms ease, color 200ms ease;
+	}
+
+	.faq[open] .faq-icon {
+		transform: rotate(45deg);
+		background: var(--azure);
+		color: var(--on-azure);
+	}
+
+	/* ── Booking slip ── */
+
+	.option {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		min-height: 48px;
+		padding: 0.6rem 0.95rem;
+		border: 1px solid var(--rule-strong);
+		border-radius: var(--r-input);
+		background: var(--bg-2);
+		color: var(--ink);
+		font-weight: 550;
+		text-align: left;
+		cursor: pointer;
+		transition:
+			border-color 160ms ease,
+			background-color 160ms ease,
+			color 160ms ease,
+			transform 160ms var(--ease-out);
+	}
+
+	.option:active {
+		transform: scale(0.98);
+	}
+
+	/* selected state is shown by form (fill + tick), not colour alone */
+	.option[aria-pressed="true"],
+	.option[aria-checked="true"] {
+		background: #ffffff;
+		border-color: #ffffff;
+		color: var(--on-azure);
+	}
+
+	.input {
+		width: 100%;
+		min-height: 48px;
+		padding: 0.7rem 0.95rem;
+		border: 1px solid var(--rule-strong);
+		border-radius: var(--r-input);
+		background: var(--bg-2);
+		color: var(--ink);
+		font: inherit;
+		font-size: 1rem;
+		transition:
+			border-color 160ms ease,
+			box-shadow 160ms ease;
+	}
+
+	.input::placeholder {
+		color: #6f7b8c;
+	}
+
+	.input:focus {
+		outline: none;
+		border-color: var(--azure);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--azure) 22%, transparent);
+	}
+
+	.input[aria-invalid="true"] {
+		border-color: var(--danger);
+	}
+
+	.field-error {
+		color: var(--danger);
+		font-size: 0.85rem;
+	}
+
+	.step-in {
+		animation: step-in 320ms var(--ease-out) both;
+	}
+
+	@keyframes step-in {
+		from {
+			opacity: 0;
+			transform: translateY(8px);
+			filter: blur(3px);
+		}
+	}
+
+	.action-bar {
+		padding-bottom: env(safe-area-inset-bottom);
+		box-shadow: 0 -12px 30px -18px rgba(0, 0, 0, 0.9);
+	}
+
+	/* ── Hover (real pointers only) ── */
+
+	@media (hover: hover) and (pointer: fine) {
+		.btn-azure:hover {
+			background: #e6edf5;
+		}
+
+		.btn-navy:hover {
+			background: #e6edf5;
+		}
+
+		.btn-outline:hover {
+			border-color: currentColor;
+		}
+
+		.btn:hover .btn-disc,
+		.group:hover .btn-disc {
+			transform: rotate(-45deg);
+		}
+
+		.link:hover {
+			text-decoration-color: currentColor;
+		}
+
+		.nav-link:hover {
+			color: var(--ink);
+		}
+
+		.lift {
+			transition:
+				transform 320ms var(--ease-out),
+				box-shadow 320ms var(--ease-out);
+		}
+
+		.lift:hover {
+			transform: translateY(-4px);
+			box-shadow: var(--shadow-card);
+		}
+
+		.zoom img {
+			transition: transform 700ms var(--ease-out);
+		}
+
+		.group:hover .zoom img {
+			transform: scale(1.04);
+		}
+
+		.option:hover:not([aria-pressed="true"]):not([aria-checked="true"]):not(:disabled) {
+			border-color: var(--azure);
+			background: var(--azure-tint);
+		}
+
+		.marquee:hover .marquee-track {
+			animation-play-state: paused;
+		}
+
+		/* Services list: the row lights up; the arrow becomes the azure disc used in
+		   every pill button, the icon tile fills, and the name nudges forward. */
+		.service-row:hover {
+			background: linear-gradient(90deg, rgba(26, 140, 240, 0.08), transparent 75%);
+		}
+
+		.service-row:hover .service-arrow {
+			background: var(--azure);
+			border-color: var(--azure);
+			color: var(--on-azure);
+			box-shadow: 0 0 0 6px rgba(26, 140, 240, 0.14);
+			transform: rotate(45deg);
+		}
+
+		.service-row:hover .icon-tile {
+			background: var(--azure);
+			color: var(--on-azure);
+		}
+
+		.service-row:hover .service-name {
+			transform: translateX(6px);
+		}
+	}
+
+	/* ── Reduced motion ── */
+
+	@media (prefers-reduced-motion: reduce) {
+		html {
+			scroll-behavior: auto;
+		}
+
+		.float-card,
+		.float-nav,
+		.service-name,
+		.service-arrow {
+			transition: none;
+		}
+
+		@starting-style {
+			.float-card {
+				opacity: 1;
+				transform: none;
+			}
+		}
+
+		.marquee-track,
+		.step-in {
+			animation: none;
+		}
+
+		.menu-panel,
+		.menu-panel[data-open="true"] {
+			transition: none;
+		}
 	}
 }
-
-} /* end @layer components */

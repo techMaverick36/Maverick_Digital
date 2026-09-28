@@ -1,106 +1,98 @@
-import Reveal from "./Reveal";
+import { ArrowUpRight, CheckCircle } from "@phosphor-icons/react";
+import { Section, SectionHead } from "./Section";
+import { BUSINESS } from "../utils/business";
 
-const principles = [
+const reasons = [
 	{
-		title: "Commercially focused work",
-		copy: "Everything is built around how people see your business, what they understand quickly, and what moves them to take action.",
+		title: "Work built to win you business",
+		copy: "Every page is shaped around what your customers need to see, understand and do next.",
 	},
 	{
-		title: "Structured delivery",
-		copy: "From the first conversation to launch, the process stays organised so you always know what is happening and what comes next.",
+		title: "A clear process, start to finish",
+		copy: "A written quote, agreed timelines and regular updates, so you always know where things stand.",
 	},
 	{
-		title: "Long-term reliability",
-		copy: "The goal is not just to launch something nice. It is to leave you with work you can keep using, growing, and feeling proud of.",
+		title: "Support after launch",
+		copy: "We stay with you for updates, improvements and the next stage of growth.",
 	},
-];
-
-const industries = [
-	"E-Commerce & Retail",
-	"Finance & Banking",
-	"Healthcare",
-	"Real Estate",
-	"Education & Training",
-	"Logistics & Forwarding",
-	"Hospitality & Tourism",
-	"Public Sector & NGOs",
-	"Manufacturing",
 ];
 
 const About = () => {
+	const first = BUSINESS.founder.split(" ")[0];
 	return (
-		<section id="about" className="px-5 py-24 md:px-8 md:py-32" aria-labelledby="about-title">
-			<div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-12 lg:gap-16">
-				{/* Founder */}
-				<Reveal fade={false} className="lg:col-span-5">
-					<figure className="lg:sticky lg:top-28">
-						<div className="img-wipe overflow-hidden rounded-[var(--r-surface)]">
-							<div className="settle">
-								<img
-									src="/Martin2.jpeg"
-									alt="Martin Ssemugabi, founder of Maverick Digital Hub"
-									width="1024"
-									height="1280"
-									loading="lazy"
-									className="aspect-[4/5] w-full object-cover object-[50%_20%]"
-								/>
-							</div>
-						</div>
-						<figcaption className="mt-6">
-							<blockquote className="text-lg leading-relaxed" style={{ color: "var(--ink)" }}>
-								&ldquo;I started Maverick Digital Hub to help businesses show up better online and
-								communicate their value with confidence.&rdquo;
-							</blockquote>
-							<p className="mt-3 text-sm" style={{ color: "var(--ink-3)" }}>
-								Martin Ssemugabi, Founder
-							</p>
-						</figcaption>
-					</figure>
-				</Reveal>
-
-				{/* Why */}
-				<div className="lg:col-span-7 lg:pt-4">
-					<Reveal>
-						<h2 id="about-title" className="h-section text-4xl md:text-5xl" style={{ color: "var(--ink)" }}>
-							Built for businesses that want to feel <em>polished, clear, and credible.</em>
-						</h2>
-						<p className="lede mt-6 text-lg">
-							We keep things simple and practical. You get thoughtful design, clear communication, and
-							work that actually supports the way your business operates.
+		<Section id="about" labelledBy="about-title">
+			<div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
+				{/* Photo collage */}
+				<div className="relative lg:col-span-6">
+					<img
+						src="/Martin2.jpeg"
+						alt={`${BUSINESS.founder}, founder of ${BUSINESS.name}`}
+						width="1024"
+						height="1280"
+						loading="lazy"
+						className="aspect-[4/5] w-[82%] rounded-[var(--r-card)] object-cover"
+					/>
+					<img
+						src="/photos/wireframe-sketch.jpg"
+						alt="Website wireframes sketched on paper beside a laptop"
+						width="1200"
+						height="801"
+						loading="lazy"
+						className="absolute bottom-[-6%] right-0 aspect-[4/3] w-[52%] rounded-[var(--r-card)] border-[6px] object-cover"
+						style={{ boxShadow: "var(--shadow-card)", borderColor: "var(--bg)" }}
+					/>
+					<div className="float-card absolute left-4 top-4 flex items-center gap-3 px-4 py-3" style={{ "--d": "0ms" }}>
+						<img src="/brand-mark.png" alt="" width="28" height="28" className="h-7 w-7" />
+						<p className="text-sm font-semibold leading-tight" style={{ color: "var(--ink)" }}>
+							You speak to {first},
+							<br />
+							<span className="font-normal" style={{ color: "var(--ink-3)" }}>
+								not a sales team
+							</span>
 						</p>
-					</Reveal>
+					</div>
+				</div>
 
-					<dl className="mt-14">
-						{principles.map((item, i) => (
-							<Reveal
-								key={item.title}
-								delay={i * 70}
-								className="grid gap-2 border-t py-7 md:grid-cols-[14rem_1fr] md:gap-8"
-								style={{ borderColor: "var(--line)" }}
-							>
-								<dt className="font-semibold tracking-[-0.01em]" style={{ color: "var(--ink)" }}>
-									{item.title}
-								</dt>
-								<dd className="leading-relaxed" style={{ color: "var(--ink-2)" }}>
-									{item.copy}
-								</dd>
-							</Reveal>
+				<div className="lg:col-span-6">
+					<SectionHead id="about-title" label="About us" title="A founder-led studio you can" highlight="actually reach." align="stack" />
+					<p className="lede mt-6">
+						{BUSINESS.name} was started by {BUSINESS.founder} to help Ugandan businesses show up online with the same
+						quality they bring to their work. Small enough to know your business, organised enough to deliver.
+					</p>
+
+					<ul className="mt-8 grid gap-5">
+						{reasons.map((r) => (
+							<li key={r.title} className="flex gap-4">
+								<CheckCircle size={26} weight="fill" className="shrink-0" style={{ color: "var(--azure)" }} aria-hidden="true" />
+								<div>
+									<h3 className="text-[1.1rem] font-semibold tracking-[-0.01em]" style={{ color: "var(--ink)" }}>
+										{r.title}
+									</h3>
+									<p className="mt-1 leading-relaxed" style={{ color: "var(--ink-2)" }}>
+										{r.copy}
+									</p>
+								</div>
+							</li>
 						))}
-					</dl>
+					</ul>
 
-					<Reveal className="mt-14 rounded-[var(--r-surface)] p-7 md:p-8" style={{ background: "var(--surface-2)" }}>
-						<h3 className="font-semibold" style={{ color: "var(--ink)" }}>
-							Industries we work with
-						</h3>
-						<ul className="mt-5 grid gap-x-8 gap-y-2.5 text-[0.95rem] sm:grid-cols-2 xl:grid-cols-3" style={{ color: "var(--ink-2)" }}>
-							{industries.map((industry) => (
-								<li key={industry}>{industry}</li>
-							))}
-						</ul>
-					</Reveal>
+					<div className="mt-10 flex flex-wrap items-center gap-5">
+						<a href="#book" className="btn btn-navy group">
+							Meet {first} on a free call
+							<span className="btn-disc" aria-hidden="true">
+								<ArrowUpRight size={17} weight="bold" />
+							</span>
+						</a>
+						<p className="text-sm" style={{ color: "var(--ink-3)" }}>
+							<span className="block font-semibold" style={{ color: "var(--ink)" }}>
+								{BUSINESS.founder}
+							</span>
+							Founder, {BUSINESS.name}
+						</p>
+					</div>
 				</div>
 			</div>
-		</section>
+		</Section>
 	);
 };
 

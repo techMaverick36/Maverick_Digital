@@ -1,33 +1,39 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import SelectedWork from "../components/SelectedWork";
+import Proof from "../components/Proof";
 import Services from "../components/Services";
-import Manifesto from "../components/Manifesto";
 import About from "../components/About";
+import SelectedWork from "../components/SelectedWork";
 import Process from "../components/Process";
+import Fees from "../components/Fees";
 import Testimonials from "../components/Testimonials";
-import Contact from "../components/Contact";
+import Questions from "../components/Questions";
+import Booking from "../components/Booking";
 import Footer from "../components/Footer";
 import Seo from "../components/Seo";
+import { FAQ } from "../utils/faq";
 
 export default function Home() {
 	return (
 		<>
 			<Seo
-				title="Web Design, Branding and Digital Solutions"
-				description="Maverick Digital Hub helps businesses in Kampala and beyond build polished websites, stronger branding, and credible digital experiences."
+				title="Web Design Company in Kampala"
+				description="Maverick Digital Hub designs professional websites and brands for Ugandan businesses. Websites from UGX 1,000,000. Book a free 30-minute consultation."
 				path="/"
+				faq={FAQ}
 			/>
 			<Navbar />
 			<main id="main">
 				<Hero />
-				<Manifesto />
-				<SelectedWork />
+				<Proof />
 				<Services />
 				<About />
+				<SelectedWork />
 				<Process />
+				<Fees />
 				<Testimonials />
-				<Contact />
+				<Questions />
+				<Booking />
 			</main>
 			<Footer />
 		</>

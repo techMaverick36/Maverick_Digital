@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { BUSINESS, formatUGX } from "../utils/business";
 
 const FALLBACK_SITE_URL = "https://maverickdigitalhub.com";
 const SITE_NAME = "Maverick Digital Hub";
@@ -57,7 +58,7 @@ const resolveSiteUrl = () => {
 	return FALLBACK_SITE_URL;
 };
 
-const Seo = ({ title, description, path = "/", type = "website" }) => {
+const Seo = ({ title, description, path = "/", type = "website", faq }) => {
 	useEffect(() => {
 		const siteUrl = resolveSiteUrl();
 		const canonicalUrl = `${siteUrl}${path === "/" ? "/" : path}`;
@@ -119,20 +120,36 @@ const Seo = ({ title, description, path = "/", type = "website" }) => {
 			href: canonicalUrl,
 		});
 
+		const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+		const pad = (h) => `${String(h).padStart(2, "0")}:00`;
+
+		/* Matches the Google Business Profile: keep src/utils/business.js in sync with it. */
 		upsertStructuredData("organization-schema", {
 			"@context": "https://schema.org",
-			"@type": "Organization",
+			"@type": "ProfessionalService",
 			name: SITE_NAME,
 			url: siteUrl,
-			logo: imageUrl,
-			email: "mavericktech750@gmail.com",
-			telephone: "+256770302731",
+			logo: `${siteUrl}/brand-mark.png`,
+			image: imageUrl,
+			description: "Web design, branding and digital services for businesses in Uganda.",
+			email: BUSINESS.email,
+			telephone: BUSINESS.phones[0].tel,
+			priceRange: `From ${formatUGX(BUSINESS.startingPrice)}`,
+			currenciesAccepted: BUSINESS.currency,
+			founder: { "@type": "Person", name: BUSINESS.founder },
 			address: {
 				"@type": "PostalAddress",
-				addressLocality: "Kampala",
-				addressCountry: "UG",
+				addressLocality: BUSINESS.city,
+				addressCountry: BUSINESS.countryCode,
 			},
-			sameAs: [],
+			areaServed: { "@type": "Country", name: BUSINESS.country },
+			openingHoursSpecification: BUSINESS.hours.map((h) => ({
+				"@type": "OpeningHoursSpecification",
+				dayOfWeek: h.days.map((d) => dayNames[d]),
+				opens: pad(h.open),
+				closes: pad(h.close),
+			})),
+			sameAs: BUSINESS.googleProfileUrl ? [BUSINESS.googleProfileUrl] : [],
 		});
 
 		upsertStructuredData("website-schema", {
@@ -141,7 +158,21 @@ const Seo = ({ title, description, path = "/", type = "website" }) => {
 			name: SITE_NAME,
 			url: siteUrl,
 		});
-	}, [description, path, title, type]);
+
+		if (faq?.length) {
+			upsertStructuredData("faq-schema", {
+				"@context": "https://schema.org",
+				"@type": "FAQPage",
+				mainEntity: faq.map((item) => ({
+					"@type": "Question",
+					name: item.q,
+					acceptedAnswer: { "@type": "Answer", text: item.a },
+				})),
+			});
+		} else {
+			document.head.querySelector("#faq-schema")?.remove();
+		}
+	}, [description, path, title, type, faq]);
 
 	return null;
 };

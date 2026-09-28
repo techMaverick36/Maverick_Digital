@@ -30,7 +30,27 @@
       "PowerShell(npm run lint 2>&1 | Where-Object { $_ -match 'error|warning|problem' -and $_ -notmatch 'baseline' }; \"lint done\")",
       "PowerShell(npm run build 2>&1)",
       "PowerShell(Add-Type -AssemblyName System.Drawing; Get-ChildItem \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\" -File | Sort-Object LastWriteTime -Descending | Select-Object -First 6 | ForEach-Object { $dim = \"\"; if \\($_.Extension -match 'jpe?g|png|webp'\\) { try { $i = [System.Drawing.Image]::FromFile\\($_.FullName\\); $dim = \"$\\($i.Width\\)x$\\($i.Height\\)\"; $i.Dispose\\(\\) } catch { $dim = \"?\" } }; \"{0}  {1}  {2}KB\" -f $_.Name, $dim, [math]::Round\\($_.Length/1KB\\) })",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173/)",
+      "PowerShell(& \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" context --target src/Pages/Home.jsx 2>&1)",
+      "PowerShell(& \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" concept-seed --scope direction --mode persuade 2>&1)",
+      "PowerShell(& \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" serve-question --schema 2>&1)",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\"; & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" serve-question --start --payload \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-user-Desktop-Dev-Maverick-Digital\\\\08dc6643-3152-486e-8332-b9922f4f8c53\\\\scratchpad\\\\direction.json\" 2>&1; \"exit=$LASTEXITCODE\")",
+      "PowerShell(& \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" serve-question --wait --key 94510c96 2>&1; \"exit=$LASTEXITCODE\")",
+      "PowerShell(for \\($i = 0; $i -lt 30; $i++\\) { $out = & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" serve-question --wait --key 94510c96 2>&1 | Out-String; if \\($out -notmatch 'WAITING: no answer yet'\\) { $out; \"exit=$LASTEXITCODE\"; break } })",
+      "PowerShell(& \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" concept-seed --kind pick --from ea432ce8 --scope direction --mode persuade 2>&1)",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\"; & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" surface-brief write src/Pages/Home.jsx \"C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-user-Desktop-Dev-Maverick-Digital\\\\08dc6643-3152-486e-8332-b9922f4f8c53\\\\scratchpad\\\\brief.md\" src/Pages/Portfolio.jsx 2>&1; & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" surface-brief read src/Pages/Home.jsx 2>&1 | Select-String -Pattern \"THESIS|OWN-WORLD|STORY|FIRST VIEWPORT|FORM|FINISH|ea432ce8\" | ForEach-Object { $_.Line.Substring\\(0, [Math]::Min\\(80, $_.Line.Length\\)\\) })",
+      "Bash(sed -i 's#^import { Link } from \"react-router-dom\";\\\\n##' src/components/Cover.jsx)",
+      "Bash(sed -i '/^import { Link } from \"react-router-dom\";$/d; s#<Link to=\"\\\\#book\" className=\"btn btn-primary btn-lg group\">#<a href=\"\\\\#book\" className=\"btn btn-primary btn-lg group\">#' src/components/Cover.jsx)",
+      "Bash(perl -0pi -e 's#\\(Book a free consultation\\\\n\\\\t+<ArrowRight size=\\\\{18\\\\} weight=\"bold\" className=\"arrow\" aria-hidden=\"true\" />\\\\n\\\\t+\\)</Link>#$1</a>#' src/components/Cover.jsx)",
+      "Bash(sed -i 's#height: state === \"todo\" ? 6 : 6,#height: 6,#' src/components/Booking.jsx)",
+      "PowerShell(Add-Type -AssemblyName System.Drawing; Get-ChildItem \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\" -Recurse -File | Where-Object { $_.LastWriteTime -gt \\(Get-Date\\).AddDays\\(-3\\) -and $_.Extension -match 'jpe?g|png|webp|avif' } | Sort-Object LastWriteTime -Descending | ForEach-Object { $dim = \"?\"; try { $i = [System.Drawing.Image]::FromFile\\($_.FullName\\); $dim = \"$\\($i.Width\\)x$\\($i.Height\\)\"; $i.Dispose\\(\\) } catch {}; \"{0}  {1}  {2}KB\" -f $_.FullName.Replace\\('C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\\\\public\\\\',''\\), $dim, [math]::Round\\($_.Length/1KB\\) })",
+      "PowerShell(npm install @fontsource-variable/plus-jakarta-sans --no-audit --no-fund 2>&1)",
+      "PowerShell(npm uninstall @fontsource-variable/geist @fontsource-variable/geist-mono --no-audit --no-fund 2>&1)",
+      "Bash(node -e ' *)",
+      "Bash(grep -n \"SectionHead\\\\|on-paper\\\\|\\\\\\\\\\\\\\\\u2019\\\\|’\" src/components/Booking.jsx)",
+      "PowerShell(Set-Location \"C:\\\\Users\\\\user\\\\Desktop\\\\Dev\\\\Maverick_Digital\"; & \"C:\\\\Users\\\\user\\\\.claude\\\\skills\\\\impeccable\\\\scripts\\\\impeccable.cmd\" detect --json src/index.css src/components src/Pages 2>&1 | Out-String | Select-Object -First 1 | ForEach-Object { if \\($_.Length -gt 6000\\) { $_.Substring\\(0, 6000\\) } else { $_ } })",
+      "Bash(sed -i 's/rounded-\\\\[28px\\\\] px-5 py-24 md:px-10 md:py-32/rounded-[28px] px-5 pb-24 pt-32 md:px-10 md:pb-32 md:pt-40/' src/Pages/NotFound.jsx)",
+      "Bash(xargs sed -i 's/var\\(--blue\\)/var\\(--azure\\)/g; s/var\\(--r\\)\\\\]/var\\(--r-input\\)]/g; s/var\\(--r\\)\"/var\\(--r-input\\)\"/g')"
     ]
   }
 }
