@@ -3,8 +3,8 @@ import { BUSINESS, formatUGX } from "./business";
 /* Plain-text answers: rendered on the page and reused for Google's FAQ structured data. */
 export const FAQ = [
 	{
-		q: "How much does a website cost?",
-		a: `Our websites start from ${formatUGX(BUSINESS.startingPrice)}. The final fee depends on the number of pages, the features you need and whether you also need branding. You get a written quote after the free consultation, before any work begins.`,
+		q: "How much does a website cost in Uganda?",
+		a: `Our websites start from ${formatUGX(BUSINESS.startingPrice)}. The final fee depends on the number of pages, the features you need and whether you also need branding. You get a written quote after the free consultation, before any work begins. Remember to budget for yearly costs too: your domain name, hosting and, if you want it, maintenance.`,
 	},
 	{
 		q: "How long does it take?",

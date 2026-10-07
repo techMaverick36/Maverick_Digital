@@ -1,6 +1,7 @@
-import { ArrowUpRight, CheckCircle } from "@phosphor-icons/react";
+import { CheckCircle } from "@phosphor-icons/react";
 import { Section, SectionHead } from "./Section";
 import { BUSINESS } from "../utils/business";
+import { useReveal } from "../utils/useReveal";
 
 const reasons = [
 	{
@@ -18,13 +19,14 @@ const reasons = [
 ];
 
 const About = () => {
+	const card = useReveal(0.6);
 	return (
 		<Section id="about" labelledBy="about-title">
 			<div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-16">
 				{/* Photo collage */}
 				<div className="relative lg:col-span-6">
 					<img
-						src="/Martin2.jpeg"
+						src="/Martin2.webp"
 						alt={`${BUSINESS.founder}, founder of ${BUSINESS.name}`}
 						width="1024"
 						height="1280"
@@ -32,7 +34,7 @@ const About = () => {
 						className="aspect-[4/5] w-[82%] rounded-[var(--r-card)] object-cover"
 					/>
 					<img
-						src="/photos/wireframe-sketch.jpg"
+						src="/photos/wireframe-sketch.webp"
 						alt="Website wireframes sketched on paper beside a laptop"
 						width="1200"
 						height="801"
@@ -40,8 +42,9 @@ const About = () => {
 						className="absolute bottom-[-6%] right-0 aspect-[4/3] w-[52%] rounded-[var(--r-card)] border-[6px] object-cover"
 						style={{ boxShadow: "var(--shadow-card)", borderColor: "var(--bg)" }}
 					/>
-					<div className="float-card absolute left-4 top-4 flex items-center gap-3 px-4 py-3" style={{ "--d": "0ms" }}>
-						<img src="/brand-mark.png" alt="" width="28" height="28" className="h-7 w-7" />
+					{/* settles when the collage scrolls into view, not at page load */}
+					<div ref={card} data-reveal="" className="float-card absolute left-4 top-4 flex items-center gap-3 px-4 py-3" style={{ "--d": "200ms" }}>
+						<img src="/brand-mark-96.png" alt="" width="28" height="28" className="h-7 w-7" />
 						<p className="text-sm font-semibold leading-tight" style={{ color: "var(--ink)" }}>
 							Founder-led,
 							<br />
@@ -75,13 +78,7 @@ const About = () => {
 						))}
 					</ul>
 
-					<div className="mt-10 flex flex-wrap items-center gap-5">
-						<a href="#book" className="btn btn-navy group">
-							Book a free consultation
-							<span className="btn-disc" aria-hidden="true">
-								<ArrowUpRight size={17} weight="bold" />
-							</span>
-						</a>
+					<div className="mt-10">
 						<p className="text-sm" style={{ color: "var(--ink-3)" }}>
 							<span className="block font-semibold" style={{ color: "var(--ink)" }}>
 								{BUSINESS.founder}

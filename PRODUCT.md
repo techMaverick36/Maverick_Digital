@@ -39,7 +39,7 @@ A founder-led, partner-backed studio: Martin Ssemugabi (founder) leads every pro
 
 - Name: Maverick Digital Hub. Brand colours are blue, white, and black (logo at `public/logo.png`, azure mark around #1a8cf0).
 - Voice: warm, confident, plain English that sells outcomes to business owners without jargon; no exclamation marks, no hype words.
-- Standing direction (owner's choice, 2026-09-28): the lively corporate-services standard, at the craft level of the owner's references (Biztop, Creatix and Finoza consulting templates): deep colour fields alternating with light sections, real photography, floating proof cards over photos, pill buttons, a contact bar above the nav. Executed in Maverick's own blue, white and black; never copy the references' green and lime or their layouts one to one. A quiet, all-white document look was tried and rejected as boring.
+- Standing direction (owner's choice, 2026-09-28): the lively corporate-services standard, at the craft level of the owner's references (Biztop, Creatix and Finoza consulting templates): deep colour fields alternating with light sections, real photography, floating proof cards over photos, pill buttons, a contact bar above the nav. Executed in Maverick's own blue, white and black; never copy the references' green and lime or their layouts one to one. A quiet, all-white document look was tried and rejected as boring. Executed since 2026-09-28 in the dark-only theme (see Theme): the light-section, contact-bar and photo-hero parts of this direction are superseded; its liveliness, rounded panels, pill buttons and floating proof cards stand.
 
 ## Evidence on Hand
 

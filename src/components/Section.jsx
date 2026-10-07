@@ -1,14 +1,22 @@
+import { TypeOnView } from "./Typewriter";
+
 /*
  * Page section. `tone`:
  *   paper  page black, full width
  *   mist   one step lighter, full width
  *   navy   a rounded panel inset from the viewport edges (StratEdge-style)
+ *   azure  the navy panel lit with an azure wash: the booking panel only, the page's closing beat
  */
+const PANEL_BG = {
+	navy: "var(--navy)",
+	azure: "radial-gradient(110% 90% at 100% 0%, rgba(26, 140, 240, 0.34), transparent 62%), radial-gradient(80% 70% at 0% 100%, rgba(26, 140, 240, 0.12), transparent 70%), var(--navy)",
+};
+
 export const Section = ({ id, tone = "paper", labelledBy, className = "", innerClassName = "", children }) => {
-	if (tone === "navy") {
+	if (PANEL_BG[tone]) {
 		return (
 			<section id={id} aria-labelledby={labelledBy} className={`px-3 py-3 md:px-4 ${className}`}>
-				<div className="on-navy rounded-[28px] px-5 py-20 md:px-10 md:py-24" style={{ background: "var(--navy)", color: "var(--on-navy)" }}>
+				<div className="on-navy rounded-[28px] px-5 py-20 md:px-10 md:py-24" style={{ background: PANEL_BG[tone], color: "var(--on-navy)" }}>
 					<div className={`mx-auto max-w-6xl ${innerClassName}`}>{children}</div>
 				</div>
 			</section>
@@ -39,7 +47,12 @@ export const SectionHead = ({ id, label, title, highlight, lede, align = "split"
 				{label}
 			</span>
 			<h2 id={id} className="h-section mt-5 text-[2.1rem] md:text-5xl">
-				{title} {highlight && <span className="hl">{highlight}</span>}
+				{title}{" "}
+				{highlight && (
+					<span className="hl">
+						<TypeOnView text={highlight} />
+					</span>
+				)}
 			</h2>
 		</div>
 		{lede && <p className={`lede ${align === "split" ? "md:col-span-5 md:pb-1" : "mt-5"}`}>{lede}</p>}

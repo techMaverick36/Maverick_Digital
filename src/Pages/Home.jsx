@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import Proof from "../components/Proof";
+import { Clients, Statement } from "../components/Proof";
 import Services from "../components/Services";
 import About from "../components/About";
 import SelectedWork from "../components/SelectedWork";
@@ -11,24 +11,20 @@ import Questions from "../components/Questions";
 import Booking from "../components/Booking";
 import Footer from "../components/Footer";
 import Seo from "../components/Seo";
-import { FAQ } from "../utils/faq";
+import { homeMeta } from "../seo/pages";
 
 export default function Home() {
 	return (
 		<>
-			<Seo
-				title="Web Design Company in Kampala"
-				description="Maverick Digital Hub designs professional websites and brands for Ugandan businesses. Websites from UGX 1,000,000. Book a free 30-minute consultation."
-				path="/"
-				faq={FAQ}
-			/>
+			<Seo {...homeMeta} />
 			<Navbar />
 			<main id="main">
 				<Hero />
-				<Proof />
+				<Clients />
+				<SelectedWork />
+				<Statement />
 				<Services />
 				<About />
-				<SelectedWork />
 				<Process />
 				<Fees />
 				<Testimonials />

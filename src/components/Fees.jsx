@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArrowUpRight, Check } from "@phosphor-icons/react";
 import { Section, SectionHead } from "./Section";
 import { BUSINESS, formatUGX } from "../utils/business";
@@ -48,8 +49,8 @@ const Fees = () => {
 					return (
 						<article
 							key={p.name}
-							className={`flex flex-col rounded-[var(--r-card)] border p-7 md:p-8 ${dark ? "on-navy" : ""}`}
-							style={dark ? { background: "var(--navy)", borderColor: "var(--azure)", boxShadow: "0 24px 60px -30px rgba(26, 140, 240, 0.55)" } : { background: "var(--paper)", borderColor: "var(--rule)" }}
+							className={`spot flex flex-col rounded-[var(--r-card)] border p-7 md:p-8 ${dark ? "on-navy" : ""}`}
+							style={dark ? { background: "var(--navy)", borderColor: "var(--azure)", boxShadow: "var(--shadow-card)" } : { background: "var(--paper)", borderColor: "var(--rule)" }}
 						>
 							<h3 className="text-xl font-semibold tracking-[-0.02em]" style={{ color: dark ? "#fff" : "var(--ink)" }}>
 								{p.name}
@@ -69,7 +70,7 @@ const Fees = () => {
 								</span>
 							</p>
 
-							<ul className="mt-7 grid gap-2.5">
+							<ul className="mb-9 mt-7 grid gap-2.5">
 								{p.includes.map((item) => (
 									<li key={item} className="flex items-start gap-2.5" style={{ color: dark ? "#fff" : "var(--ink)" }}>
 										<Check size={17} weight="bold" className="mt-[3px] shrink-0" style={{ color: "var(--azure)" }} aria-hidden="true" />
@@ -78,16 +79,33 @@ const Fees = () => {
 								))}
 							</ul>
 
-							<a href="#book" onClick={() => requestBooking(p.service)} className={`btn group mt-9 w-full justify-between ${dark ? "btn-azure" : "btn-navy"}`}>
-								Book a free consultation
-								<span className="btn-disc" aria-hidden="true">
-									<ArrowUpRight size={17} weight="bold" />
-								</span>
-							</a>
+							{/* One Book button on the featured package; the quoted packages get a quieter link
+							    that still preselects their topic in the booking form. */}
+							{dark ? (
+								<a href="#book" onClick={() => requestBooking(p.service)} className="btn btn-primary group mt-auto w-full justify-between">
+									Book a free consultation
+									<span className="btn-disc" aria-hidden="true">
+										<ArrowUpRight size={17} weight="bold" />
+									</span>
+								</a>
+							) : (
+								<a href="#book" onClick={() => requestBooking(p.service)} className="link group mt-auto inline-flex items-center gap-1.5 self-start">
+									Ask for a quote
+									<ArrowUpRight size={16} weight="bold" className="link-arrow" aria-hidden="true" />
+								</a>
+							)}
 						</article>
 					);
 				})}
 			</div>
+
+			<p className="mt-8 text-[0.95rem]" style={{ color: "var(--ink-2)" }}>
+				Comparing quotes?{" "}
+				<Link to="/guides/website-cost-in-uganda" className="link">
+					Read what a website really costs in Uganda
+				</Link>
+				, including the yearly costs most quotes leave out.
+			</p>
 		</Section>
 	);
 };

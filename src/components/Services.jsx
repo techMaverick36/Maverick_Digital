@@ -18,10 +18,10 @@ const Services = () => {
 		<Section id="services" tone="mist" labelledBy="services-title">
 			<SectionHead
 				id="services-title"
-				label="What we do"
-				title="Five services,"
-				highlight="one point of contact."
-				lede="Most clients start with a website, then add branding or ongoing support as they grow. Pick a service to book a free consultation about it."
+				label="Web design services in Kampala"
+				title="From your first website"
+				highlight="to ongoing support."
+				lede="Most clients start with a website, then add branding, social media or IT support as they grow. Pick a service to book a free consultation about it."
 			/>
 
 			<ul className="mt-14 border-b" style={{ borderColor: "var(--rule)" }}>

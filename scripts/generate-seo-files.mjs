@@ -27,38 +27,19 @@ const readEnvFile = (filePath) => {
 };
 
 const env = readEnvFile(envPath);
-const configuredUrl = env.VITE_SITE_URL || env.SITE_URL || "https://your-domain.com";
+/* Vercel sets VITE_SITE_URL as an environment variable; locally it comes from .env */
+const configuredUrl = process.env.VITE_SITE_URL || env.VITE_SITE_URL || env.SITE_URL || "https://maverickdigitalhub.com";
 const siteUrl = configuredUrl.replace(/\/+$/, "");
-const today = new Date().toISOString().split("T")[0];
-
-const routes = [
-	{ path: "/", changefreq: "weekly", priority: "1.0" },
-	{ path: "/portfolio", changefreq: "monthly", priority: "0.8" },
-];
-
-const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes
-	.map(
-		(route) => `  <url>
-    <loc>${siteUrl}${route.path === "/" ? "/" : route.path}</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>${route.changefreq}</changefreq>
-    <priority>${route.priority}</priority>
-  </url>`
-	)
-	.join("\n")}
-</urlset>
-`;
-
 const robotsTxt = `User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 Sitemap: ${siteUrl}/sitemap.xml
 `;
 
 fs.mkdirSync(publicDir, { recursive: true });
-fs.writeFileSync(path.join(publicDir, "sitemap.xml"), sitemapXml, "utf8");
+/* sitemap.xml is written by scripts/prerender.mjs after the build, from every page in src/seo/pages.js */
 fs.writeFileSync(path.join(publicDir, "robots.txt"), robotsTxt, "utf8");
 
 console.log(`SEO files generated for ${siteUrl}`);

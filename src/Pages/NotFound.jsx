@@ -20,7 +20,7 @@ export default function NotFound() {
 						</h1>
 						<p className="lede mt-6">The link may be old, or the page may have moved.</p>
 						<div className="mt-9 flex flex-wrap gap-3">
-							<Link to="/" className="btn btn-azure group">
+							<Link to="/" className="btn btn-primary group">
 								Back to home
 								<span className="btn-disc" aria-hidden="true">
 									<ArrowUpRight size={17} weight="bold" />

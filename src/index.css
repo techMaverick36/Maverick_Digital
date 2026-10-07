@@ -14,9 +14,10 @@
 :root {
 	--bg: #07090c; /* page */
 	--bg-2: #0b0f14; /* alternate sections */
-	--navy: #10151c; /* rounded section panels */
-	--navy-2: #171e27; /* raised tiles on a panel */
-	--navy-3: #25303d; /* rules and outlines on a panel */
+	/* Panels carry a real navy so the page has distinct grounds, not one black plane (critique 2026-10-01) */
+	--navy: #0c1a2d; /* rounded section panels */
+	--navy-2: #13253b; /* raised tiles on a panel */
+	--navy-3: #233a55; /* rules and outlines on a panel */
 	--paper: #131920; /* cards */
 	--mist: var(--bg-2);
 	--mist-2: #1c2530;
@@ -245,22 +246,13 @@
 		padding: 0 1.4rem;
 	}
 
-	.btn-azure {
+	/* the one primary action: white pill with the azure arrow disc */
+	.btn-primary {
 		background: #ffffff;
 		color: var(--on-azure);
 	}
 
-	.btn-azure .btn-disc {
-		background: var(--azure);
-		color: var(--on-azure);
-	}
-
-	.btn-navy {
-		background: #ffffff;
-		color: var(--on-azure);
-	}
-
-	.btn-navy .btn-disc {
+	.btn-primary .btn-disc {
 		background: var(--azure);
 		color: var(--on-azure);
 	}
@@ -406,36 +398,126 @@
 		transition: transform 280ms var(--ease-out);
 	}
 
-	/* Hero wall: a tilted grid of real client sites behind the dark wash */
+	/* Hero wall: a tilted grid of real client sites behind the dark wash.
+	   Signature motion: on load the sites come into focus (blur, scale and fade
+	   settle together), then on desktop the columns drift slowly in opposite
+	   directions, a living reel of the work. */
 	.hero-wall {
 		overflow: hidden;
+		animation: wall-focus 1500ms var(--ease-out) both;
 	}
 
 	.hero-wall-grid {
+		--wall-gap: 14px;
 		position: absolute;
 		top: -14%;
 		left: -20%;
 		width: 150%;
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: 14px;
+		gap: var(--wall-gap);
+		align-items: start;
 		transform: rotate(-9deg);
 		transform-origin: 50% 40%;
+		animation: wall-settle 1800ms var(--ease-out) both;
+	}
+
+	/* each column holds its set twice; the bottom padding equals the gap so -50% loops seamlessly */
+	.hero-col {
+		display: flex;
+		flex-direction: column;
+		gap: var(--wall-gap);
+		padding-bottom: var(--wall-gap);
+	}
+
+	.hero-col:nth-child(2) {
+		margin-top: -12%;
+	}
+
+	@keyframes wall-focus {
+		from {
+			opacity: 0;
+			filter: blur(12px) brightness(1.6);
+		}
+	}
+
+	/* `scale` composes with the grid's rotate, so the tilt never jumps */
+	@keyframes wall-settle {
+		from {
+			scale: 1.12;
+		}
+	}
+
+	@keyframes wall-drift {
+		to {
+			transform: translateY(-50%);
+		}
 	}
 
 	@media (min-width: 1024px) {
 		.hero-wall-grid {
+			--wall-gap: 18px;
 			top: -18%;
 			left: 44%;
 			width: 76%;
-			gap: 18px;
 		}
 	}
 
-	/* Wash over the wall: even and strong on phones (text spans the width),
-	   solid behind the text and open on the right from desktop up */
+	@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+		.hero-col {
+			animation: wall-drift 120s linear infinite;
+			will-change: transform;
+		}
+
+		.hero-col:nth-child(2) {
+			animation-duration: 150s;
+			animation-direction: reverse;
+		}
+
+		.hero-wall[data-paused="true"] .hero-col {
+			animation-play-state: paused;
+		}
+	}
+
+	/* Headline: each word rises out of its own mask, after the wall starts to focus */
+	.hero-word {
+		display: inline-block;
+		overflow: hidden;
+		vertical-align: top;
+		padding: 0 0.05em 0.14em;
+		margin: 0 -0.05em -0.14em;
+	}
+
+	.hero-word > span {
+		display: inline-block;
+		animation: word-rise 950ms var(--ease-out) both;
+		animation-delay: calc(200ms + var(--i, 0) * 55ms);
+	}
+
+	@keyframes word-rise {
+		from {
+			transform: translateY(108%);
+		}
+	}
+
+	/* Supporting hero copy: a short rise once the headline lands */
+	.hero-rise {
+		animation: hero-rise 800ms var(--ease-out) both;
+		animation-delay: var(--d, 0ms);
+	}
+
+	@keyframes hero-rise {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+	}
+
+	/* Wash over the wall: on phones open at the top so the sites show above the
+	   copy, solid where the text sits; from desktop up solid behind the text and
+	   open on the right */
 	.hero-wash {
-		background: linear-gradient(0deg, rgba(7, 9, 12, 0.92) 0%, rgba(7, 9, 12, 0.78) 100%);
+		background: linear-gradient(0deg, rgba(7, 9, 12, 0.95) 0%, rgba(7, 9, 12, 0.88) 52%, rgba(7, 9, 12, 0.5) 100%);
 	}
 
 	@media (min-width: 1024px) {
@@ -461,11 +543,60 @@
 		transition-delay: var(--d, 0ms);
 	}
 
+	/* Hero cards settle on first paint; cards marked data-reveal wait until they scroll into view */
 	@starting-style {
-		.float-card {
+		.float-card:not([data-reveal]) {
 			opacity: 0;
 			transform: translateY(24px) scale(0.96);
 		}
+	}
+
+	.motion .float-card[data-reveal]:not([data-in]) {
+		opacity: 0;
+		transform: translateY(24px) scale(0.96);
+	}
+
+	/* ── Work reveal (home cards and /portfolio sheets) ──
+	   The card rises while its screenshot wipes up from the bottom edge and
+	   settles from a slight zoom, as if the site were being pulled into view. */
+	.work-reveal {
+		transition:
+			opacity 700ms var(--ease-out),
+			transform 900ms var(--ease-out);
+		transition-delay: var(--d, 0ms);
+	}
+
+	.work-reveal .zoom {
+		clip-path: inset(0 0 0 0 round 14px);
+		transition: clip-path 1100ms var(--ease-out);
+		transition-delay: calc(var(--d, 0ms) + 120ms);
+	}
+
+	.work-reveal .zoom img {
+		transition:
+			scale 1400ms var(--ease-out) calc(var(--d, 0ms) + 120ms),
+			transform 700ms var(--ease-out);
+	}
+
+	.motion .work-reveal:not([data-in]) {
+		opacity: 0;
+		transform: translateY(32px);
+	}
+
+	.motion .work-reveal:not([data-in]) .zoom {
+		clip-path: inset(100% 0 0 0 round 14px);
+	}
+
+	.motion .work-reveal:not([data-in]) .zoom img {
+		scale: 1.14;
+	}
+
+	.work-arrow {
+		transition:
+			transform 280ms var(--ease-out),
+			background-color 220ms ease,
+			border-color 220ms ease,
+			color 220ms ease;
 	}
 
 	/* ── Client-name marquee (the page's one marquee) ── */
@@ -647,6 +778,55 @@
 		}
 	}
 
+	/* Receipt: the ring closes, the tick strokes in, then the details land row by row */
+	.booked-tick {
+		flex-shrink: 0;
+	}
+
+	.booked-ring,
+	.booked-check {
+		stroke-dasharray: 1;
+		stroke-dashoffset: 0;
+	}
+
+	.booked-ring {
+		transform: rotate(-90deg);
+		transform-origin: center;
+		transform-box: fill-box;
+		animation: draw-stroke 640ms var(--ease-out) 120ms both;
+	}
+
+	.booked-check {
+		animation: draw-stroke 380ms var(--ease-out) 620ms both;
+	}
+
+	@keyframes draw-stroke {
+		from {
+			stroke-dashoffset: 1;
+		}
+	}
+
+	.receipt-facts tr {
+		animation: step-in 420ms var(--ease-out) both;
+		animation-delay: 380ms;
+	}
+
+	.receipt-facts tr:nth-child(2) {
+		animation-delay: 440ms;
+	}
+
+	.receipt-facts tr:nth-child(3) {
+		animation-delay: 500ms;
+	}
+
+	.receipt-facts tr:nth-child(4) {
+		animation-delay: 560ms;
+	}
+
+	.receipt-facts tr:nth-child(5) {
+		animation-delay: 620ms;
+	}
+
 	/* Back to top: glass like the floating nav; fades in after the first screen */
 	.back-to-top {
 		color: #ffffff;
@@ -680,16 +860,145 @@
 	.action-bar {
 		padding-bottom: env(safe-area-inset-bottom);
 		box-shadow: 0 -12px 30px -18px rgba(0, 0, 0, 0.9);
+		transition: transform 320ms var(--ease-out);
+	}
+
+	.action-bar[data-hidden] {
+		transform: translateY(110%);
+		transition-duration: 220ms;
+	}
+
+	/* ── Typing ──
+	   Hero: the outcome word types, holds, deletes and cycles. Section headlines: the
+	   azure phrase types once on arrival. The caret is solid while typing, blinks when idle. */
+	.type-slot {
+		display: inline-grid;
+	}
+
+	.type-slot > * {
+		grid-area: 1 / 1;
+		justify-self: start;
+		white-space: nowrap;
+	}
+
+	/* Width holders: drawn from data-text so the words never enter the page text
+	   (otherwise Google reads every phrase inside the h1). */
+	.type-ghost {
+		visibility: hidden;
+	}
+
+	.type-ghost::before {
+		content: attr(data-text);
+	}
+
+	.caret {
+		display: inline-block;
+		width: 0.065em;
+		height: 0.9em;
+		margin-left: 0.06em;
+		margin-right: -0.125em; /* the caret never takes up room in the line */
+		vertical-align: -0.06em;
+		border-radius: 2px;
+		background: currentColor;
+		animation: caret-blink 1.05s steps(1) infinite;
+	}
+
+	.caret[data-typing] {
+		animation: none;
+	}
+
+	.caret[data-done] {
+		animation:
+			caret-blink 1.05s steps(1) 3,
+			caret-out 400ms ease 3.15s forwards;
+	}
+
+	@keyframes caret-blink {
+		50% {
+			opacity: 0;
+		}
+	}
+
+	@keyframes caret-out {
+		to {
+			opacity: 0;
+		}
+	}
+
+	/* Hero wall follows the pointer a little (desktop); `translate` composes with the tilt */
+	.hero-wall-grid {
+		translate: calc(var(--px, 0) * -28px) calc(var(--py, 0) * -18px);
+		transition: translate 1200ms var(--ease-out);
+	}
+
+	/* Nav: the section you are reading carries a small azure dot */
+	.nav-link::after {
+		content: "";
+		position: absolute;
+		left: 50%;
+		bottom: -2px;
+		width: 5px;
+		height: 5px;
+		margin-left: -2.5px;
+		border-radius: 999px;
+		background: var(--azure);
+		opacity: 0;
+		transform: scale(0);
+		transition:
+			opacity 220ms ease,
+			transform 320ms var(--ease-out);
+	}
+
+	.nav-link[data-active] {
+		color: var(--ink);
+	}
+
+	.nav-link[data-active]::after {
+		opacity: 1;
+		transform: none;
+	}
+
+	/* Statement: each word brightens as it scrolls into place */
+	@supports (animation-timeline: view()) {
+		.motion .scrub-w {
+			animation: scrub-in linear both;
+			animation-timeline: view();
+			animation-range: entry 40% cover 42%;
+		}
+	}
+
+	@keyframes scrub-in {
+		from {
+			opacity: 0.16;
+		}
+	}
+
+	/* Cursor light on cards (position set from main.jsx) */
+	.spot {
+		position: relative;
+		isolation: isolate;
+	}
+
+	.spot::before {
+		content: "";
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		border-radius: inherit;
+		background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(26, 140, 240, 0.16), transparent 62%);
+		opacity: 0;
+		transition: opacity 360ms ease;
+		pointer-events: none;
+	}
+
+	.link-arrow {
+		transition: transform 240ms var(--ease-out);
 	}
 
 	/* ── Hover (real pointers only) ── */
 
 	@media (hover: hover) and (pointer: fine) {
-		.btn-azure:hover {
-			background: #e6edf5;
-		}
-
-		.btn-navy:hover {
+		.btn-primary:hover {
 			background: #e6edf5;
 		}
 
@@ -697,9 +1006,25 @@
 			border-color: currentColor;
 		}
 
+		/* every ↗ arrow answers hover the same way: a quarter-turn forward to → */
 		.btn:hover .btn-disc,
 		.group:hover .btn-disc {
-			transform: rotate(-45deg);
+			transform: rotate(45deg);
+		}
+
+		.spot:hover::before {
+			opacity: 1;
+		}
+
+		.group:hover .link-arrow {
+			transform: rotate(45deg);
+		}
+
+		.group:hover .work-arrow {
+			transform: rotate(45deg);
+			background: var(--azure);
+			border-color: var(--azure);
+			color: var(--on-azure);
 		}
 
 		.link:hover {
@@ -792,13 +1117,63 @@
 		}
 
 		.marquee-track,
-		.step-in {
+		.step-in,
+		.hero-wall,
+		.hero-wall-grid,
+		.hero-word > span,
+		.hero-rise,
+		.booked-ring,
+		.booked-check,
+		.receipt-facts tr,
+		.caret {
 			animation: none;
+		}
+
+		.hero-wall-grid {
+			translate: none;
 		}
 
 		.menu-panel,
 		.menu-panel[data-open="true"] {
 			transition: none;
+		}
+
+		/* No marquee: the client names wrap in place, all of them readable */
+		.marquee {
+			-webkit-mask-image: none;
+			mask-image: none;
+		}
+
+		.marquee-track {
+			flex-wrap: wrap;
+			flex-shrink: 1;
+			gap: 0.5rem 2rem;
+			padding-right: 0;
+		}
+
+		.marquee-track[aria-hidden="true"] {
+			display: none;
+		}
+
+		/* Spatial hover and press motion goes; colour feedback and the FAQ +/× state stay */
+		.btn:active,
+		.option:active,
+		.back-to-top:active,
+		.btn:hover .btn-disc,
+		.group:hover .btn-disc,
+		.group:hover .work-arrow,
+		.group:hover .link-arrow,
+		.group:hover .zoom img,
+		.service-row:hover .service-arrow,
+		.service-row:hover .service-name,
+		.back-to-top[data-visible="true"]:hover {
+			transform: none;
+		}
+
+		.faq .faq-icon {
+			transition:
+				background-color 200ms ease,
+				color 200ms ease;
 		}
 	}
 }

@@ -4,9 +4,9 @@ import { ArrowRight, ArrowUpRight, List, X } from "@phosphor-icons/react";
 import { BUSINESS } from "../utils/business";
 
 const links = [
+	{ label: "Work", hash: "work" },
 	{ label: "Services", hash: "services" },
 	{ label: "About", hash: "about" },
-	{ label: "Work", hash: "work" },
 	{ label: "Pricing", hash: "pricing" },
 	{ label: "FAQ", hash: "faq" },
 ];
@@ -14,6 +14,7 @@ const links = [
 const Navbar = () => {
 	const [menuOpen, setMenuOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const [active, setActive] = useState(null);
 	const sentinel = useRef(null);
 	const { pathname } = useLocation();
 	const to = (hash) => (pathname === "/" ? `#${hash}` : `/#${hash}`);
@@ -26,6 +27,18 @@ const Navbar = () => {
 		observer.observe(el);
 		return () => observer.disconnect();
 	}, []);
+
+	/* Marks the section under the middle of the viewport, so the nav says where you are. */
+	useEffect(() => {
+		if (pathname !== "/") return;
+		const sections = links.map((l) => document.getElementById(l.hash)).filter(Boolean);
+		const io = new IntersectionObserver(
+			(entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
+			{ rootMargin: "-45% 0px -50% 0px" }
+		);
+		sections.forEach((s) => io.observe(s));
+		return () => io.disconnect();
+	}, [pathname]);
 
 	useEffect(() => {
 		if (!menuOpen) return;
@@ -50,7 +63,7 @@ const Navbar = () => {
 				<div className="relative mx-auto max-w-6xl">
 					<nav aria-label="Primary" className="nav-pill flex items-center justify-between gap-6 rounded-full pl-4 pr-2 md:pl-5" style={{ height: "var(--nav-h)" }}>
 						<Link to="/" className="flex items-center gap-2.5" aria-label={`${BUSINESS.name}, home`}>
-							<img src="/brand-mark.png" alt="" width="32" height="32" className="h-8 w-8" />
+							<img src="/brand-mark-96.png" alt="" width="32" height="32" className="h-8 w-8" />
 							<span className="whitespace-nowrap text-[0.98rem] font-bold tracking-[-0.02em] md:text-[1.02rem]" style={{ color: "var(--ink)" }}>
 								Maverick <span style={{ color: "var(--azure-ink)" }}>Digital Hub</span>
 							</span>
@@ -59,20 +72,25 @@ const Navbar = () => {
 						<ul className="hidden items-center gap-7 lg:flex">
 							{links.map((l) => (
 								<li key={l.hash}>
-									<Link to={to(l.hash)} className="nav-link">
+									<Link to={to(l.hash)} className="nav-link" data-active={(pathname === "/" && active === l.hash) || undefined}>
 										{l.label}
 									</Link>
 								</li>
 							))}
 							<li>
 								<Link to="/portfolio" className="nav-link" aria-current={pathname === "/portfolio" ? "page" : undefined}>
-									Projects
+									All projects
+								</Link>
+							</li>
+							<li>
+								<Link to="/guides" className="nav-link" aria-current={pathname.startsWith("/guides") ? "page" : undefined}>
+									Guides
 								</Link>
 							</li>
 						</ul>
 
 						<div className="flex items-center gap-2">
-							<Link to={to("book")} className="btn btn-azure btn-sm group hidden sm:inline-flex">
+							<Link to={to("book")} className="btn btn-primary btn-sm group hidden sm:inline-flex">
 								Book a free consultation
 								<span className="btn-disc" aria-hidden="true">
 									<ArrowUpRight size={15} weight="bold" />
@@ -108,8 +126,14 @@ const Navbar = () => {
 								</li>
 							))}
 							<li>
-								<Link to="/portfolio" onClick={close} className="flex items-center justify-between py-4 text-lg font-semibold" style={{ color: "var(--ink)" }}>
+								<Link to="/portfolio" onClick={close} className="flex items-center justify-between border-b py-4 text-lg font-semibold" style={{ borderColor: "var(--rule)", color: "var(--ink)" }}>
 									All projects
+									<ArrowRight size={18} aria-hidden="true" style={{ color: "var(--azure-ink)" }} />
+								</Link>
+							</li>
+							<li>
+								<Link to="/guides" onClick={close} className="flex items-center justify-between py-4 text-lg font-semibold" style={{ color: "var(--ink)" }}>
+									Guides
 									<ArrowRight size={18} aria-hidden="true" style={{ color: "var(--azure-ink)" }} />
 								</Link>
 							</li>

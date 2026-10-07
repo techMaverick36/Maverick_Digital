@@ -1,11 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
-import { ArrowUpRight } from "@phosphor-icons/react";
 import { BUSINESS, mailHref, telHref, whatsappHref } from "../utils/business";
 import ActionBar from "./ActionBar";
 import BackToTop from "./BackToTop";
 
 const pageLinks = [
-
+	{ label: "Book a free consultation", hash: "book" },
 	{ label: "Pricing", hash: "pricing" },
 	{ label: "How it works", hash: "process" },
 	{ label: "FAQ", hash: "faq" },
@@ -24,16 +23,10 @@ const Footer = () => {
 						<div className="grid gap-12 pb-14 md:grid-cols-12 md:gap-10">
 							<div className="md:col-span-5">
 								<Link to="/" className="flex items-center gap-2.5" aria-label={`${BUSINESS.name}, home`}>
-									<img src="/brand-mark.png" alt="" width="38" height="38" className="h-[38px] w-[38px]" />
+									<img src="/brand-mark-96.png" alt="" width="38" height="38" className="h-[38px] w-[38px]" />
 									<span className="text-lg font-bold tracking-[-0.02em] text-white">{BUSINESS.name}</span>
 								</Link>
 								<p className="mt-5 max-w-sm leading-relaxed">Websites and brands for Ugandan businesses that want to be taken seriously.</p>
-								<Link to={to("book")} className="btn btn-azure group mt-7">
-									Book a free consultation
-									<span className="btn-disc" aria-hidden="true">
-										<ArrowUpRight size={17} weight="bold" />
-									</span>
-								</Link>
 							</div>
 
 							<div className="md:col-span-3">
@@ -65,9 +58,6 @@ const Footer = () => {
 									{BUSINESS.hours.map((h) => (
 										<li key={h.label}>{h.label}</li>
 									))}
-									<li>
-										{BUSINESS.city}, {BUSINESS.country}
-									</li>
 									{BUSINESS.googleProfileUrl && (
 										<li>
 											<a href={BUSINESS.googleProfileUrl} target="_blank" rel="noopener noreferrer" className="link">
@@ -93,6 +83,11 @@ const Footer = () => {
 											All projects
 										</Link>
 									</li>
+									<li>
+										<Link to="/guides" className="hover:text-white">
+											Guides
+										</Link>
+									</li>
 								</ul>
 							</nav>
 						</div>
@@ -102,7 +97,7 @@ const Footer = () => {
 								&copy; {year} {BUSINESS.name}. All rights reserved.
 							</p>
 							<p>
-								{BUSINESS.city}, {BUSINESS.country}
+								{[BUSINESS.address?.street, BUSINESS.address?.area, BUSINESS.city, BUSINESS.country].filter(Boolean).join(", ")}
 							</p>
 						</div>
 					</div>

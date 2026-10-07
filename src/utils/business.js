@@ -15,8 +15,15 @@ export const BUSINESS = {
 		{ display: "+256 745 496 783", tel: "+256745496783" },
 	],
 	whatsapp: "256770302731",
+	/* TODO (owner): the office address exactly as it appears on the Google Business Profile
+	   (e.g. street: "Plot 12, Kira Road", area: "Kamwokya"). Google ranks local businesses partly on the
+	   name, address and phone matching everywhere: this site, Google, Apple Maps, LinkedIn, Yellow Pages Uganda.
+	   Leave empty until confirmed; the site then shows "Kampala, Uganda" only. */
+	address: { street: "", area: "" },
 	city: "Kampala",
 	country: "Uganda",
+	/* Public profiles that should be linked to this business in Google's eyes (LinkedIn, Facebook, Instagram...). */
+	profiles: [],
 	countryCode: "UG",
 	startingPrice: 1000000,
 	currency: "UGX",

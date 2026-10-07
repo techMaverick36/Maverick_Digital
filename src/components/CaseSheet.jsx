@@ -1,8 +1,12 @@
-import { ArrowUpRight } from "@phosphor-icons/react";
+import { Link } from "react-router-dom";
+import { ArrowRight, ArrowUpRight } from "@phosphor-icons/react";
+import { useReveal } from "../utils/useReveal";
 
-/* One client project: the live site beside a short facts table. */
+/* One client project: the live site beside a short facts table.
+   Same reveal as the home work cards: the sheet rises, the screenshot wipes up. */
 const CaseSheet = ({ project, eager = false }) => {
 	const { stats = {} } = project;
+	const ref = useReveal(0.15);
 	const facts = [
 		["Scope", project.tags.join(", ")],
 		["Delivered in", stats.duration],
@@ -11,7 +15,7 @@ const CaseSheet = ({ project, eager = false }) => {
 	].filter(([, v]) => v);
 
 	return (
-		<article className="card grid gap-6 p-3 md:grid-cols-12 md:items-center md:gap-10 md:p-4">
+		<article ref={ref} className="work-reveal card grid gap-6 p-3 md:grid-cols-12 md:items-center md:gap-10 md:p-4">
 			<a
 				href={project.link}
 				target="_blank"
@@ -22,7 +26,7 @@ const CaseSheet = ({ project, eager = false }) => {
 				<div className="zoom overflow-hidden rounded-[14px]">
 					<img
 						src={project.image}
-						alt={`${project.title} website`}
+						alt={`${project.title} website homepage, designed and built by Maverick Digital Hub`}
 						width="1920"
 						height="1028"
 						loading={eager ? "eager" : "lazy"}
@@ -57,13 +61,21 @@ const CaseSheet = ({ project, eager = false }) => {
 					</tbody>
 				</table>
 
-				<a href={project.link} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-sm group mt-6">
-					Visit the live site
-					<span className="btn-disc" aria-hidden="true">
-						<ArrowUpRight size={15} weight="bold" />
-					</span>
-					<span className="sr-only">(opens in a new tab)</span>
-				</a>
+				<div className="mt-6 flex flex-wrap gap-2">
+					<Link to={`/work/${project.slug}`} className="btn btn-primary btn-sm group">
+						Read the case study
+						<span className="btn-disc" aria-hidden="true">
+							<ArrowRight size={15} weight="bold" />
+						</span>
+					</Link>
+					<a href={project.link} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-sm group">
+						Visit the live site
+						<span className="btn-disc" aria-hidden="true">
+							<ArrowUpRight size={15} weight="bold" />
+						</span>
+						<span className="sr-only">(opens in a new tab)</span>
+					</a>
+				</div>
 			</div>
 		</article>
 	);
