@@ -8,7 +8,7 @@
  * preview for every link. The page body is still rendered by React as before.
  *
  * Output: dist/index.html for "/", dist/<path>.html for the rest (served at /<path>
- * thanks to "cleanUrls" in vercel.json).
+ * because Netlify serves /<path> from <path>.html).
  */
 import fs from "node:fs";
 import path from "node:path";

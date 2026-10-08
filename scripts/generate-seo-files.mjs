@@ -27,7 +27,7 @@ const readEnvFile = (filePath) => {
 };
 
 const env = readEnvFile(envPath);
-/* Vercel sets VITE_SITE_URL as an environment variable; locally it comes from .env */
+/* The host (Netlify) can set VITE_SITE_URL as an environment variable; locally it comes from .env */
 const configuredUrl = process.env.VITE_SITE_URL || env.VITE_SITE_URL || env.SITE_URL || "https://maverickdigitalhub.com";
 const siteUrl = configuredUrl.replace(/\/+$/, "");
 const robotsTxt = `User-agent: *

@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 /*
- * Runs the Vercel functions in api/ inside `npm run dev`, so booking works
- * locally without the Vercel CLI. Production uses Vercel's own runtime.
+ * Runs the API handlers in api/ inside `npm run dev`, so booking works locally.
+ * In production they run as Netlify Functions (netlify/functions).
  */
 function apiRoutes() {
   return {

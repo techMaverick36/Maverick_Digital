@@ -401,7 +401,7 @@ export default function Admin() {
 							Dashboard not connected
 						</h1>
 						<p className="mt-3">
-							Add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_PUBLISHABLE_KEY</code> to <code>.env.local</code> (and to Vercel), then restart.
+							Add <code>VITE_SUPABASE_URL</code> and <code>VITE_SUPABASE_PUBLISHABLE_KEY</code> to <code>.env.local</code> (and to Netlify), then restart.
 						</p>
 						<Link to="/" className="link mt-6 inline-block">
 							Back to the website

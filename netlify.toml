@@ -1,0 +1,9 @@
+# Netlify (where the site is hosted). Build command and publish folder are set in the Netlify UI
+# (npm run build → dist); routing is in public/_redirects; the API runs from netlify/functions.
+
+[build.environment]
+  # Netlify's secret scanner fails the build when an environment variable's value appears in the code.
+  # These two are not secret: GOOGLE_CALENDAR_ID is "primary" (a common word, e.g. btn-primary) and
+  # NOTIFY_EMAIL is the public business email. Real keys (Supabase secret, Google client secret and
+  # refresh token, Turnstile secret, CRON_SECRET) are still scanned.
+  SECRETS_SCAN_OMIT_KEYS = "GOOGLE_CALENDAR_ID,NOTIFY_EMAIL"

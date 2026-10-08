@@ -27,8 +27,8 @@ export default defineConfig([
     },
   },
   {
-    // Server code: Vercel functions and the Vite config run in Node
-    files: ['api/**/*.js', 'vite.config.js', 'scripts/**/*.mjs'],
+    // Server code: the API (Netlify Functions), build scripts and the Vite config run in Node
+    files: ['api/**/*.js', 'netlify/**/*.mjs', 'vite.config.js', 'scripts/**/*.mjs'],
     languageOptions: { globals: globals.node },
   },
 ])

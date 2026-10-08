@@ -29,7 +29,7 @@ A founder-led, partner-backed studio: Martin Ssemugabi (founder) leads every pro
 
 ## Capabilities and Constraints
 
-- Stack: existing React 19 + Vite + Tailwind v4 single-page app with React Router (`/`, `/portfolio`), deployed on Vercel with SPA rewrites.
+- Stack: React 19 + Vite + Tailwind v4 single-page app with React Router, hosted on Netlify (confirmed from response headers, 2026-10-08). Each public page gets prerendered <head> tags at build; the booking API in api/ runs as Netlify Functions (netlify/functions, routed by public/_redirects).
 - Services: Web Design & Development, Business IT & Tech Solutions, Branding & Identity Design, UI/UX Design. Social Media Management and Data Analysis are hidden for now (still in constants.jsx).
 - Pricing: starting price UGX 1,000,000 (confirmed). Package names, inclusions, and prices above the starting price are open decisions and must be confirmed by the owner.
 - Theme: dark only, StratEdge-style (owner decision 2026-09-28, after a light version read as dull): near-black base, rounded panels, white type, Maverick azure as the single accent. No theme toggle.

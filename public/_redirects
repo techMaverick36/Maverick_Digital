@@ -1,0 +1,6 @@
+# Netlify routing (the site is hosted on Netlify).
+# Real files win: each page's prerendered .html, images, sitemap.xml are served as they are.
+# The booking API (api/*.js, wrapped in netlify/functions/)
+/api/*  /.netlify/functions/:splat  200
+# Every other path is a page of the React app (e.g. /admin, /work/<slug>)
+/*      /index.html                 200
