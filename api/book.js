@@ -82,13 +82,17 @@ export async function POST(request) {
 			.neq("status", "cancelled")
 			.gte("starts_at", new Date().toISOString())
 			.or(`email.eq.${JSON.stringify(d.email)},phone_digits.eq.${phoneDigits}`),
+		/* This call also proves the Google connection works. If it does not (e.g. the refresh token
+		   was revoked), no email or invite could be sent, so the booking is not saved: the form then
+		   hands it to WhatsApp, which always reaches Martin. */
 		busyTimes(start, end)
 			.then((busy) => isBusy(dayKey, hour, busy))
 			.catch((err) => {
-				console.error("book: freeBusy", err);
-				return false; /* the unique slot index still prevents double booking */
+				console.error("book: Google unavailable, sending client to WhatsApp:", err.message);
+				return "google-down";
 			}),
 	]);
+	if (calendarBusy === "google-down") return json({ error: "Online booking is unavailable right now." }, 503);
 	if (limit.error) {
 		console.error("book: count", limit.error);
 		return json({ error: "Something went wrong on our side." }, 500);
