@@ -11,6 +11,7 @@ import { BUSINESS, formatUGX } from "../utils/business.js";
  * Fields
  *   slug, name (short), topic (booking topic, must be in SERVICES in utils/booking.js)
  *   seoTitle, seoDescription: for Google and link previews
+ *   image, imagePosition: photo behind the header (optional)
  *   title + highlight: the h1;  lede: one-sentence summary
  *   forWho: who it suits (optional);  explainer: plain-English meaning (optional)
  *   includes: [{ title, text }]: what the client gets
@@ -24,6 +25,8 @@ import { BUSINESS, formatUGX } from "../utils/business.js";
 export const servicePages = [
 	{
 		slug: "web-design",
+		image: "/photos/service-web-design.webp",
+		imagePosition: "75% center",
 		name: "Web design",
 		topic: "Website",
 		seoTitle: "Website Design and Development in Kampala",
@@ -65,6 +68,8 @@ export const servicePages = [
 	},
 	{
 		slug: "branding",
+		image: "/photos/service-branding.webp",
+		imagePosition: "65% center",
 		name: "Branding",
 		topic: "Branding",
 		seoTitle: "Logo Design and Branding in Kampala, Uganda",
@@ -95,6 +100,8 @@ export const servicePages = [
 	},
 	{
 		slug: "ui-ux-design",
+		image: "/photos/service-ui-ux-design.webp",
+		imagePosition: "center",
 		name: "UI/UX design",
 		topic: "UI/UX design",
 		seoTitle: "UI/UX Design for Apps and Customer Portals, Uganda",
@@ -123,6 +130,8 @@ export const servicePages = [
 	},
 	{
 		slug: "it-support",
+		image: "/photos/service-it-support.webp",
+		imagePosition: "center 40%",
 		name: "IT support",
 		topic: "IT support",
 		seoTitle: "Business IT Setup and Support in Kampala",

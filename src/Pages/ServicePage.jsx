@@ -11,6 +11,7 @@ import { projects } from "../utils/constants";
 import { serviceMeta } from "../seo/pages";
 import { BUSINESS, formatUGX, telHref } from "../utils/business";
 import { bookHref } from "../utils/bookingEvents";
+import { panelPhoto } from "../utils/panelPhoto";
 
 /* How every service starts: true for all of them, and the main worry it answers is "what am I committing to?" */
 const START_STEPS = [
@@ -44,7 +45,7 @@ export default function ServicePage() {
 
 			<main id="main">
 				<section aria-labelledby="page-title" className="px-3 pt-3 md:px-4">
-					<div className="on-navy rounded-[28px] px-5 pb-12 pt-28 md:px-10 md:pb-16 md:pt-36" style={{ background: "var(--navy)" }}>
+					<div className="on-navy rounded-[28px] px-5 pb-12 pt-28 md:px-10 md:pb-16 md:pt-36" style={s.image ? panelPhoto(s.image, s.imagePosition) : { background: "var(--navy)" }}>
 						<div className="mx-auto max-w-6xl">
 							<nav aria-label="Breadcrumb">
 								<ol className="flex flex-wrap items-center gap-2 text-[0.95rem]" style={{ color: "var(--on-navy-3)" }}>
