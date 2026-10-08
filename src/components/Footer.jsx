@@ -1,4 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
+import { servicePages } from "../content/services";
 import { BUSINESS, mailHref, telHref, whatsappHref } from "../utils/business";
 import ActionBar from "./ActionBar";
 import BackToTop from "./BackToTop";
@@ -21,7 +22,7 @@ const Footer = () => {
 				<div className="rounded-[28px] px-5 pt-16 md:px-10" style={{ background: "var(--navy)", color: "var(--on-navy-2)" }}>
 					<div className="mx-auto max-w-6xl">
 						<div className="grid gap-12 pb-14 md:grid-cols-12 md:gap-10">
-							<div className="md:col-span-5">
+							<div className="md:col-span-3">
 								<Link to="/" className="flex items-center gap-2.5" aria-label={`${BUSINESS.name}, home`}>
 									<img src="/brand-mark-96.png" alt="" width="38" height="38" className="h-[38px] w-[38px]" />
 									<span className="text-lg font-bold tracking-[-0.02em] text-white">{BUSINESS.name}</span>
@@ -67,6 +68,19 @@ const Footer = () => {
 									)}
 								</ul>
 							</div>
+
+							<nav aria-label="Services" className="md:col-span-2">
+								<h2 className="text-sm font-semibold text-white">Services</h2>
+								<ul className="mt-4 grid gap-2.5">
+									{servicePages.map((s) => (
+										<li key={s.slug}>
+											<Link to={`/services/${s.slug}`} className="hover:text-white">
+												{s.name}
+											</Link>
+										</li>
+									))}
+								</ul>
+							</nav>
 
 							<nav aria-label="Footer" className="md:col-span-2">
 								<h2 className="text-sm font-semibold text-white">Company</h2>

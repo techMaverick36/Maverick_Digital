@@ -12,8 +12,8 @@ let failed = 0;
 
 try {
 	const load = async (p) => (await vite.ssrLoadModule(p)).default;
-	const [Home, Portfolio, CaseStudy, Guides, Guide] = await Promise.all(
-		["/src/Pages/Home.jsx", "/src/Pages/Portfolio.jsx", "/src/Pages/CaseStudy.jsx", "/src/Pages/Guides.jsx", "/src/Pages/Guide.jsx"].map(load)
+	const [Home, Portfolio, CaseStudy, Guides, Guide, ServicePage] = await Promise.all(
+		["/src/Pages/Home.jsx", "/src/Pages/Portfolio.jsx", "/src/Pages/CaseStudy.jsx", "/src/Pages/Guides.jsx", "/src/Pages/Guide.jsx", "/src/Pages/ServicePage.jsx"].map(load)
 	);
 	const { publicPages } = await vite.ssrLoadModule("/src/seo/pages.js");
 
@@ -23,6 +23,7 @@ try {
 		["/work/:slug", CaseStudy],
 		["/guides", Guides],
 		["/guides/:slug", Guide],
+		["/services/:slug", ServicePage],
 	];
 	const render = (path) =>
 		renderToString(h(MemoryRouter, { initialEntries: [path] }, h(Routes, null, ...routes.map(([p, C]) => h(Route, { key: p, path: p, element: h(C) })))));

@@ -1,16 +1,16 @@
 import { ArrowUpRight, Browser, CursorClick, PenNib, Plugs } from "@phosphor-icons/react";
 import { Section, SectionHead } from "./Section";
 import { services } from "../utils/constants";
-import { requestBooking } from "../utils/bookingEvents";
+import { Link } from "react-router-dom";
 
 /* A calm list (owner asked for less busy): one row per service, no imagery.
    `index` points into utils/constants `services`; Social Media Management (2) and Data Analysis (5)
    are hidden for now (owner, 2026-10-08); add a row back to show one again. */
 const rows = [
-	{ index: 0, icon: Browser, book: "Website" },
-	{ index: 3, icon: PenNib, book: "Branding" },
-	{ index: 4, icon: CursorClick, book: "UI/UX design" },
-	{ index: 1, icon: Plugs, book: "IT support" },
+	{ index: 0, icon: Browser, slug: "web-design" },
+	{ index: 3, icon: PenNib, slug: "branding" },
+	{ index: 4, icon: CursorClick, slug: "ui-ux-design" },
+	{ index: 1, icon: Plugs, slug: "it-support" },
 ];
 
 const Services = () => {
@@ -21,7 +21,7 @@ const Services = () => {
 				label="Web design services in Kampala"
 				title="From your first website"
 				highlight="to ongoing support."
-				lede="Most clients start with a website, then add branding, app design or IT support as they grow. Pick a service to book a free consultation about it."
+				lede="Most clients start with a website, then add branding, app design or IT support as they grow. Pick a service to see what is included and what it costs."
 			/>
 
 			<ul className="mt-14 border-b" style={{ borderColor: "var(--rule)" }}>
@@ -30,9 +30,8 @@ const Services = () => {
 					const Icon = r.icon;
 					return (
 						<li key={s.title}>
-							<a
-								href="#book"
-								onClick={() => requestBooking(r.book)}
+							<Link
+								to={`/services/${r.slug}`}
 								className="service-row group grid items-center gap-4 border-t py-7 md:grid-cols-12 md:gap-8 md:py-8"
 								style={{ borderColor: "var(--rule)" }}
 							>
@@ -56,8 +55,7 @@ const Services = () => {
 										<ArrowUpRight size={18} weight="bold" />
 									</span>
 								</span>
-								<span className="sr-only">Book a consultation about {s.title}</span>
-							</a>
+							</Link>
 						</li>
 					);
 				})}

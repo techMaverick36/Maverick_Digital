@@ -5,6 +5,7 @@ import Portfolio from "./Pages/Portfolio";
 import CaseStudy from "./Pages/CaseStudy";
 import Guides from "./Pages/Guides";
 import Guide from "./Pages/Guide";
+import ServicePage from "./Pages/ServicePage";
 import NotFound from "./Pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -21,6 +22,7 @@ const App = () => {
 				<Route path="/work/:slug" element={<CaseStudy />} />
 				<Route path="/guides" element={<Guides />} />
 				<Route path="/guides/:slug" element={<Guide />} />
+				<Route path="/services/:slug" element={<ServicePage />} />
 				<Route
 					path="/admin"
 					element={

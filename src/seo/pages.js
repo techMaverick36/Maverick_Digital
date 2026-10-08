@@ -2,6 +2,7 @@ import { BUSINESS, formatUGX } from "../utils/business.js";
 import { projects } from "../utils/constants.jsx";
 import { FAQ } from "../utils/faq.js";
 import { guides } from "../content/guides.js";
+import { servicePages } from "../content/services.js";
 
 /*
  * Titles, descriptions, preview images and structured data for every public page.
@@ -94,12 +95,36 @@ export const guideMeta = (g) => ({
 });
 
 /* Every page that should be in the sitemap and get its own prerendered HTML. */
+export const serviceMeta = (s) => ({
+	title: s.seoTitle,
+	description: s.seoDescription,
+	path: `/services/${s.slug}`,
+	faq: s.faqs,
+	schema: (site) => [
+		crumbs(site, [["Home", "/"], [s.name, `/services/${s.slug}`]]),
+		{
+			"@context": "https://schema.org",
+			"@type": "Service",
+			name: s.seoTitle,
+			serviceType: s.name,
+			description: s.lede,
+			url: `${site}/services/${s.slug}`,
+			provider: { "@id": `${site}/#business` },
+			areaServed: { "@type": "Country", name: BUSINESS.country },
+			...(s.price
+				? { offers: { "@type": "Offer", price: s.price.from, priceCurrency: BUSINESS.currency, description: "Starting price; final price in a written quote" } }
+				: {}),
+		},
+	],
+});
+
 export const publicPages = () => [
 	{ ...homeMeta, priority: "1.0" },
 	{ ...portfolioMeta, priority: "0.8" },
 	...projects.filter((p) => p.slug).map((p) => ({ ...caseStudyMeta(p), priority: "0.7" })),
 	{ ...guidesMeta, priority: "0.8" },
 	...guides.map((g) => ({ ...guideMeta(g), priority: "0.7" })),
+	...servicePages.map((s) => ({ ...serviceMeta(s), priority: "0.9" })),
 ];
 
 const DAY_NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];

@@ -95,6 +95,17 @@ export const testimonials = [
 			"The final result felt polished and reliable, and the support throughout the project made the whole experience much easier.",
 		avatar: "B",
 	},
+	/* GOOGLE REVIEWS, copied word for word from the Google Business Profile (source: "google").
+	   Keep the name exactly as Google shows it, and add new ones as they arrive.
+	   Never copy reviews written by the owner's own account. */
+	{
+		name: "Sultans Wife",
+		source: "google",
+		rating: 5,
+		date: "2026-10-08",
+		content:
+			"I’ve had the pleasure of working with this team and I absolutely love their work. Their communication is top notch and so is their delivery time. Would recommend working with them 110%",
+	},
 	/* DRAFTS written for these clients to approve. They stay hidden on the site while
 	   `approved` is false. Send each person their draft, apply any edits they make,
 	   then set `approved: true` once they confirm it can go live with their name. */

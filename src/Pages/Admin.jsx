@@ -5,8 +5,10 @@ import {
 	CalendarBlank,
 	CircleNotch,
 	Envelope,
+	LinkSimple,
 	Phone,
 	SignOut,
+	Star,
 	VideoCamera,
 	WarningCircle,
 	WhatsappLogo,
@@ -14,6 +16,11 @@ import {
 import Seo from "../components/Seo";
 import { supabase } from "../utils/supabase";
 import { TIME_ZONE } from "../utils/booking";
+import { BUSINESS, googleReviewHref } from "../utils/business";
+
+/* Asking is fine; Google forbids offering anything in return or asking only happy clients. */
+const reviewRequest = (firstName) =>
+	`Hello ${firstName}, thank you for working with ${BUSINESS.name}. If you have a minute, would you share your experience in a short Google review? It helps other businesses find us. ${googleReviewHref()}`;
 
 const STATUS_LABELS = { confirmed: "Confirmed", done: "Done", no_show: "No-show", cancelled: "Cancelled" };
 const TABS = [
@@ -170,6 +177,12 @@ function BookingCard({ b, token, onSaved }) {
 						Join Meet
 					</a>
 				)}
+				{b.status === "done" && (
+					<a href={waLink(b.phone, reviewRequest(first))} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-plain btn-sm">
+						<Star size={16} weight="fill" style={{ color: "#f5b100" }} aria-hidden="true" />
+						Ask for a Google review
+					</a>
+				)}
 			</div>
 
 			<table className="facts mt-5 text-[0.95rem]">
@@ -273,7 +286,7 @@ function Dashboard({ session }) {
 
 	const onSaved = (updated, warning) => {
 		setRows((list) => list.map((b) => (b.id === updated.id ? updated : b)));
-		setNotice(warning ? `${updated.fullname}: ${warning}` : null);
+		setNotice(warning ? { tone: "warn", text: `${updated.fullname}: ${warning}` } : null);
 	};
 	const shown = groups[tab];
 
@@ -291,7 +304,16 @@ function Dashboard({ session }) {
 						</p>
 					</div>
 				</div>
-				<div className="flex gap-2">
+				<div className="flex flex-wrap gap-2">
+					{/* For past project clients who never booked through the site: paste it anywhere. */}
+					<button
+						type="button"
+						className="btn btn-outline btn-plain btn-sm"
+						onClick={() => navigator.clipboard?.writeText(googleReviewHref()).then(() => setNotice({ tone: "ok", text: "Review link copied. Paste it into a WhatsApp message or email to a client." }))}
+					>
+						<LinkSimple size={16} weight="bold" aria-hidden="true" />
+						Copy review link
+					</button>
 					<button type="button" className="btn btn-outline btn-plain btn-sm" onClick={load} disabled={loading}>
 						<ArrowClockwise size={16} weight="bold" className={loading ? "animate-spin" : undefined} aria-hidden="true" />
 						Refresh
@@ -310,10 +332,10 @@ function Dashboard({ session }) {
 			) : (
 				<>
 					{notice && (
-						<div className="card mt-8 flex items-start gap-3 p-4" role="alert" style={{ borderColor: "var(--danger)" }}>
-							<WarningCircle size={20} weight="bold" className="mt-px shrink-0" style={{ color: "var(--danger)" }} aria-hidden="true" />
+						<div className="card mt-8 flex items-start gap-3 p-4" role={notice.tone === "warn" ? "alert" : "status"} style={{ borderColor: notice.tone === "warn" ? "var(--danger)" : "var(--rule-strong)" }}>
+							{notice.tone === "warn" && <WarningCircle size={20} weight="bold" className="mt-px shrink-0" style={{ color: "var(--danger)" }} aria-hidden="true" />}
 							<p className="flex-1 text-[0.95rem]" style={{ color: "var(--ink)" }}>
-								{notice}
+								{notice.text}
 							</p>
 							<button type="button" className="link text-sm" onClick={() => setNotice(null)}>
 								Dismiss
