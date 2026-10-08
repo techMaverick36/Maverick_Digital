@@ -26,7 +26,7 @@ const packages = [
 	{
 		name: "Systems and Support",
 		for: "For online shops, customer portals and ongoing care.",
-		includes: ["Online shops and web applications", "Social media management", "Business IT setup and support"],
+		includes: ["Online shops and web applications", "Business IT setup and support", "Website maintenance and updates"],
 		fee: "Custom quote",
 		service: "Online shop or system",
 	},

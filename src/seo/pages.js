@@ -73,6 +73,7 @@ export const guideMeta = (g) => ({
 	title: g.title,
 	description: g.description,
 	path: `/guides/${g.slug}`,
+	image: `/og/guide-${g.slug}.jpg`,
 	type: "article",
 	lastmod: g.date,
 	schema: (site) => [
@@ -84,7 +85,7 @@ export const guideMeta = (g) => ({
 			description: g.description,
 			datePublished: g.date,
 			dateModified: g.date,
-			image: `${site}${DEFAULT_IMAGE}`,
+			image: `${site}/og/guide-${g.slug}.jpg`,
 			mainEntityOfPage: `${site}/guides/${g.slug}`,
 			author: { "@type": "Person", name: BUSINESS.founder },
 			publisher: { "@type": "Organization", name: SITE_NAME, logo: { "@type": "ImageObject", url: `${site}/brand-mark.png` } },
@@ -130,7 +131,7 @@ const organization = (site, image) => ({
 		{ "@type": "City", name: BUSINESS.city },
 		{ "@type": "Country", name: BUSINESS.country },
 	],
-	knowsAbout: ["Web design", "Website development", "E-commerce websites", "Branding", "UI/UX design", "Social media management"],
+	knowsAbout: ["Web design", "Website development", "E-commerce websites", "Branding", "UI/UX design", "IT support"],
 	openingHoursSpecification: BUSINESS.hours.map((h) => ({
 		"@type": "OpeningHoursSpecification",
 		dayOfWeek: h.days.map((d) => DAY_NAMES[d]),

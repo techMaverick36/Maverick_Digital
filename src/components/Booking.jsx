@@ -142,7 +142,7 @@ const Booking = () => {
 	const [step, setStep] = useState(0);
 	const [draft] = useState(readDraft);
 	/* a topic in the link (from a guide or case study) wins over the saved draft */
-	const [service, setService] = useState(() => (SERVICES.includes(topicFromUrl()) ? topicFromUrl() : (draft.service ?? "")));
+	const [service, setService] = useState(() => (SERVICES.includes(topicFromUrl()) ? topicFromUrl() : SERVICES.includes(draft.service) ? draft.service : ""));
 	const [callType, setCallType] = useState(draft.callType ?? CALL_TYPES[0].label);
 	const [dayKey, setDayKey] = useState(days[0]?.key ?? "");
 	const [hour, setHour] = useState(null);

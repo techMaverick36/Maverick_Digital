@@ -10,6 +10,7 @@ import { BUSINESS, formatUGX } from "../utils/business.js";
  *
  * Plain data, so the pages, the sitemap and the link previews all read the same text.
  * Sections: { heading, paragraphs?: [], list?: [], ordered?: true, after?: [] }.
+ * `image` sits behind the page header, on the guide card and in the link preview (public/og/guide-<slug>.jpg).
  * `topic` preselects the booking form's topic (must be one of SERVICES in utils/booking.js).
  */
 
@@ -18,6 +19,8 @@ const START = formatUGX(BUSINESS.startingPrice);
 export const guides = [
 	{
 		slug: "website-cost-in-uganda",
+		image: "/photos/hero-laptop.webp",
+		imagePosition: "70% 50%",
 		title: "How much does a website cost in Uganda?",
 		description: `What a business website costs in Uganda, what changes the price, the costs you pay every year, and what to ask before you pay a deposit. Our websites start from ${START}.`,
 		date: "2026-10-08",
@@ -90,6 +93,8 @@ export const guides = [
 	},
 	{
 		slug: "signs-your-website-is-outdated",
+		image: "/photos/office-wireframes.webp",
+		imagePosition: "center 35%",
 		title: "7 signs your company website is outdated",
 		description:
 			"Seven signs your company website is losing you customers, from slow loading on mobile data to no WhatsApp button, and what to do about each one.",
@@ -152,6 +157,8 @@ export const guides = [
 	},
 	{
 		slug: "before-you-hire-a-web-designer",
+		image: "/photos/wireframe-sketch.webp",
+		imagePosition: "center 60%",
 		title: "What to prepare before you hire a web designer",
 		description:
 			"A simple checklist for business owners in Uganda: what to decide and gather before you hire a web designer, so your website is ready sooner and costs less.",
@@ -220,6 +227,8 @@ export const guides = [
 	},
 	{
 		slug: "mobile-money-payments-on-your-website",
+		image: "/galaxypet-shop.webp",
+		imagePosition: "center top",
 		title: "Accepting Mobile Money on your website",
 		description:
 			"How businesses in Uganda can let customers pay with MTN Mobile Money and Airtel Money on their website: how it works, what you need, and what to ask a payment provider.",

@@ -20,7 +20,7 @@ export const CALL_TYPES = [
 	{ id: "office", label: "In person, Kampala" },
 ];
 
-export const SERVICES = ["Website", "Website review", "Branding", "UI/UX design", "Social media", "Online shop or system", "IT support", "Not sure yet"];
+export const SERVICES = ["Website", "Website review", "Branding", "UI/UX design", "Online shop or system", "IT support", "Not sure yet"];
 export const BUDGETS = ["UGX 1,000,000 to 2,000,000", "UGX 2,000,000 to 5,000,000", "UGX 5,000,000 and above", "Not sure yet"];
 
 /* One form for a Ugandan number, so "0770 123 456" and "+256 770 123 456" count as the same person. */

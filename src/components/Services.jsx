@@ -1,15 +1,15 @@
-import { ArrowUpRight, Browser, ChatsCircle, CursorClick, PenNib, Plugs } from "@phosphor-icons/react";
+import { ArrowUpRight, Browser, CursorClick, PenNib, Plugs } from "@phosphor-icons/react";
 import { Section, SectionHead } from "./Section";
 import { services } from "../utils/constants";
 import { requestBooking } from "../utils/bookingEvents";
 
 /* A calm list (owner asked for less busy): one row per service, no imagery.
-   `index` points into utils/constants `services`; Data Analysis (5) is hidden for now. */
+   `index` points into utils/constants `services`; Social Media Management (2) and Data Analysis (5)
+   are hidden for now (owner, 2026-10-08); add a row back to show one again. */
 const rows = [
 	{ index: 0, icon: Browser, book: "Website" },
 	{ index: 3, icon: PenNib, book: "Branding" },
 	{ index: 4, icon: CursorClick, book: "UI/UX design" },
-	{ index: 2, icon: ChatsCircle, book: "Social media" },
 	{ index: 1, icon: Plugs, book: "IT support" },
 ];
 
@@ -21,7 +21,7 @@ const Services = () => {
 				label="Web design services in Kampala"
 				title="From your first website"
 				highlight="to ongoing support."
-				lede="Most clients start with a website, then add branding, social media or IT support as they grow. Pick a service to book a free consultation about it."
+				lede="Most clients start with a website, then add branding, app design or IT support as they grow. Pick a service to book a free consultation about it."
 			/>
 
 			<ul className="mt-14 border-b" style={{ borderColor: "var(--rule)" }}>

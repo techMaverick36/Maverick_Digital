@@ -9,6 +9,7 @@ import { formatGuideDate, guides, readMinutes } from "../content/guides";
 import { guideMeta } from "../seo/pages";
 import { BUSINESS } from "../utils/business";
 import { bookHref } from "../utils/bookingEvents";
+import { panelPhoto } from "../utils/panelPhoto";
 
 const headingId = (t) => `h-${t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}`;
 
@@ -33,7 +34,7 @@ export default function Guide() {
 			<main id="main">
 				<article>
 					<header className="px-3 pt-3 md:px-4">
-						<div className="on-navy rounded-[28px] px-5 pb-12 pt-28 md:px-10 md:pb-16 md:pt-36" style={{ background: "var(--navy)" }}>
+						<div className="on-navy rounded-[28px] px-5 pb-12 pt-28 md:px-10 md:pb-16 md:pt-36" style={panelPhoto(g.image, g.imagePosition)}>
 							<div className="mx-auto max-w-3xl">
 								<nav aria-label="Breadcrumb">
 									<ol className="flex flex-wrap items-center gap-2 text-[0.95rem]" style={{ color: "var(--on-navy-3)" }}>

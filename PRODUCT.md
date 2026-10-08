@@ -12,7 +12,7 @@ Business owners and decision-makers at corporate and established businesses in U
 
 ## Product Purpose
 
-The company website for Maverick Digital Hub, a Kampala-based digital studio (web design and development, branding and identity, UI/UX, social media management, business IT solutions). It must establish trust before the first conversation and turn visitors into booked consultations, calls, or WhatsApp enquiries in a few clicks. Success is a qualified client booking a consultation.
+The company website for Maverick Digital Hub, a Kampala-based digital studio (web design and development, branding and identity, UI/UX, business IT solutions). It must establish trust before the first conversation and turn visitors into booked consultations, calls, or WhatsApp enquiries in a few clicks. Success is a qualified client booking a consultation.
 
 It is also the studio's portfolio: real shipped client work is the main proof.
 
@@ -30,7 +30,7 @@ A founder-led, partner-backed studio: Martin Ssemugabi (founder) leads every pro
 ## Capabilities and Constraints
 
 - Stack: existing React 19 + Vite + Tailwind v4 single-page app with React Router (`/`, `/portfolio`), deployed on Vercel with SPA rewrites.
-- Services: Web Design & Development, Business IT & Tech Solutions, Social Media Management, Branding & Identity Design, UI/UX Design. Data Analysis is hidden for now.
+- Services: Web Design & Development, Business IT & Tech Solutions, Branding & Identity Design, UI/UX Design. Social Media Management and Data Analysis are hidden for now (still in constants.jsx).
 - Pricing: starting price UGX 1,000,000 (confirmed). Package names, inclusions, and prices above the starting price are open decisions and must be confirmed by the owner.
 - Theme: dark only, StratEdge-style (owner decision 2026-09-28, after a light version read as dull): near-black base, rounded panels, white type, Maverick azure as the single accent. No theme toggle.
 - Open: Google Business Profile URL, business hours, star rating, typical turnaround, payment terms.
